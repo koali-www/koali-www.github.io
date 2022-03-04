@@ -26,9 +26,9 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="写在前面第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍ 比赛的时候没有做出来，环境关掉了，虽然buu有复现环境，但是由于需要竞争，buu有限制，所以把源码拿下来在本地搭。 复现打开环境，F12查看源码  访问&#x2F;file?  需要传入一个url，猜测是需要用到伪协议任意读文件。于是传入file:&#x2F;&#x2F;&#x2F;读到源码。本地的话直接知道源">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava.assets/image-20220302133247566.png">
-<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava.assets/image-20220302133312575.png">
-<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava.assets/image-20220302134240641.png">
+<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220302133247566.png">
+<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220302133312575.png">
+<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220302134240641.png">
 <meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220303215240491.png">
 <meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220303220931037.png">
 <meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220304093202982.png">
@@ -36,14 +36,14 @@
 <meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220304100044543.png">
 <meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220304100736444.png">
 <meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220304101021208.png">
-<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava.assets/image-20220302132904237.png">
+<meta property="og:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220302132904237.png">
 <meta property="article:published_time" content="2022-03-02T05:21:14.818Z">
-<meta property="article:modified_time" content="2022-03-04T02:29:49.245Z">
+<meta property="article:modified_time" content="2022-03-04T07:17:47.449Z">
 <meta property="article:author" content="k0a1i">
 <meta property="article:tag" content="web">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://koali-www.github.io/VNCTF2022-easyJava.assets/image-20220302133247566.png">
+<meta name="twitter:image" content="http://koali-www.github.io/VNCTF2022-easyJava/image-20220302133247566.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <link rel="icon" href="/assets/favicon.ico">
@@ -513,15 +513,15 @@
         <h3 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h3><p>第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍</p>
 <p>比赛的时候没有做出来，环境关掉了，虽然buu有复现环境，但是由于需要竞争，buu有限制，所以把源码拿下来在本地搭。</p>
 <h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><p>打开环境，F12查看源码</p>
-<p><img src="/VNCTF2022-easyJava.assets/image-20220302133247566.png" alt="image-20220302133247566"></p>
+<p><img src="/VNCTF2022-easyJava/image-20220302133247566.png" alt="image-20220302133247566"></p>
 <p>访问/file?</p>
-<p><img src="/VNCTF2022-easyJava.assets/image-20220302133312575.png" alt="image-20220302133312575"></p>
+<p><img src="/VNCTF2022-easyJava/image-20220302133312575.png" alt="image-20220302133312575"></p>
 <p>需要传入一个url，猜测是需要用到伪协议任意读文件。于是传入<code>file:///</code>读到源码。本地的话直接知道源码路径，就不多说了。比赛的时候是远程环境，我一开始不知道web部署在哪里，所以找了很久，最后在这个路径里找到。</p>
 <p><code>/file?url=file:///usr/local/tomcat/</code></p>
 <p>看到高表哥是通过当前运行进程去找的，这样找好像快一些，记录一下。</p>
 <p><code>/file?url=file:///proc/self/cwd/</code></p>
 <p>然后看到tomcat的目录结构，进webapps，拿到源码拿去反编译。</p>
-<p><img src="/VNCTF2022-easyJava.assets/image-20220302134240641.png" alt="image-20220302134240641"></p>
+<p><img src="/VNCTF2022-easyJava/image-20220302134240641.png" alt="image-20220302134240641"></p>
 <p>HelloWorldServlet类</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> servlet;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> entity.User;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.util.Base64;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletException;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.ServletOutputStream;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.annotation.WebServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServlet;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> util.Secr3t;</span><br><span class="line"><span class="keyword">import</span> util.SerAndDe;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebServlet(name = &quot;HelloServlet&quot;, urlPatterns = &#123;&quot;/evi1&quot;&#125;)</span></span><br><span class="line"><span class="comment">/* loaded from: HelloWorldServlet.class */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HelloWorldServlet</span> <span class="keyword">extends</span> <span class="title class_">HttpServlet</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;m4n_q1u_666&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">String</span> <span class="variable">age</span> <span class="operator">=</span> <span class="string">&quot;666&quot;</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">volatile</span> <span class="type">String</span> <span class="variable">height</span> <span class="operator">=</span> <span class="string">&quot;180&quot;</span>;</span><br><span class="line">    User user;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">init</span><span class="params">()</span> <span class="keyword">throws</span> ServletException &#123;</span><br><span class="line">        <span class="built_in">this</span>.user = <span class="keyword">new</span> <span class="title class_">User</span>(<span class="built_in">this</span>.name, <span class="built_in">this</span>.age, <span class="built_in">this</span>.height);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doGet</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">reqName</span> <span class="operator">=</span> req.getParameter(<span class="string">&quot;name&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (reqName != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="built_in">this</span>.name = reqName;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (Secr3t.check(<span class="built_in">this</span>.name)) &#123;</span><br><span class="line">            Response(resp, <span class="string">&quot;no vnctf2022!&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (Secr3t.check(<span class="built_in">this</span>.name)) &#123;</span><br><span class="line">            Response(resp, <span class="string">&quot;The Key is &quot;</span> + Secr3t.getKey());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title function_">doPost</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> ServletException, IOException &#123;</span><br><span class="line">        <span class="type">String</span> <span class="variable">key</span> <span class="operator">=</span> req.getParameter(<span class="string">&quot;key&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">text</span> <span class="operator">=</span> req.getParameter(<span class="string">&quot;base64&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (!Secr3t.getKey().equals(key) || text == <span class="literal">null</span>) &#123;</span><br><span class="line">            Response(resp, <span class="string">&quot;KeyError&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.user.equals((User) SerAndDe.deserialize(Base64.getDecoder().decode(text)))) &#123;</span><br><span class="line">            Response(resp, <span class="string">&quot;Deserialize…… Flag is &quot;</span> + Secr3t.getFlag().toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">Response</span><span class="params">(HttpServletResponse resp, String outStr)</span> <span class="keyword">throws</span> IOException &#123;</span><br><span class="line">        <span class="type">ServletOutputStream</span> <span class="variable">out</span> <span class="operator">=</span> resp.getOutputStream();</span><br><span class="line">        out.write(outStr.getBytes());</span><br><span class="line">        out.flush();</span><br><span class="line">        out.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -536,7 +536,7 @@
 
 <p>拿到key。</p>
 <ul>
-<li><input disabled="" type="checkbox"> 这里在第二次复现的时候出了一点问题。问题大概出在python的request，在发起请求之后不会自动关闭连接，如果短时间内发起请求过多的话会一直占用Httpconnnectionpool的资源，导致之后发起的请求没有办法成功连接。尝试了很多办法都没有结局，不论是加header的connection为close，还是控制session，都没有用。最后采用多线程的办法才解决。</li>
+<li><input disabled type="checkbox"> 这里在第二次复现的时候出了一点问题。问题大概出在python的request，在发起请求之后不会自动关闭连接，如果短时间内发起请求过多的话会一直占用Httpconnnectionpool的资源，导致之后发起的请求没有办法成功连接。尝试了很多办法都没有结局，不论是加header的connection为close，还是控制session，都没有用。最后采用多线程的办法才解决。</li>
 </ul>
 <p>接着往下就是反序列化，这里需要post一个key和base64，其中base64是一个User类序列化之后经过base64编码的结果。SerAndDe类里面提供了序列化和反序列化的方法封装，可以直接拿来用。</p>
 <p><img src="/VNCTF2022-easyJava/image-20220303220931037.png" alt="image-20220303220931037"></p>
@@ -548,7 +548,7 @@
 <p>这里有一个知识点，对于序列化和反序列化的时候，被<code>transient</code>修饰的变量是不会被序列化的，所以如果不作任何更改序列化出来的字符串再拿去反序列化，得到的height会是个null，这样就没有办法满足if条件，拿不到flag。所以为了反序列化出来时，这个height和<code>this.user</code>里面的height是一致的，可以通过重写writeObject方法，手动把height写进我们反序列化出来的对象里。</p>
 <p><img src="/VNCTF2022-easyJava/image-20220304094934553.png" alt="image-20220304094934553"></p>
 <ul>
-<li><p><input disabled="" type="checkbox">  这里又有一个问题，就是在User类里面重写了readObject，这一行代码存在的时候，反序列化一定会失败，但是注释掉之后是可以看到height为null的。</p>
+<li><p><input disabled type="checkbox">  这里又有一个问题，就是在User类里面重写了readObject，这一行代码存在的时候，反序列化一定会失败，但是注释掉之后是可以看到height为null的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">this</span>.height = (String) s.readObject();</span><br></pre></td></tr></table></figure></li>
 </ul>
 <p>在User类里面重写一个writeObject</p>
@@ -568,7 +568,7 @@
 <p>大功告成！</p>
 <p><img src="/VNCTF2022-easyJava/image-20220304101021208.png" alt="image-20220304101021208"></p>
 <h3 id="一些奇怪的姿势"><a href="#一些奇怪的姿势" class="headerlink" title="一些奇怪的姿势"></a>一些奇怪的姿势</h3><p>之前没有搭过tomcat，所以在搭建环境的过程中有些吃力。完整的搭建过程之后有空了在搞叭，这里用的办法是用编译好的文件替换掉tomcat自带的ROOT。</p>
-<p><img src="/VNCTF2022-easyJava.assets/image-20220302132904237.png" alt="image-20220302132904237"></p>
+<p><img src="/VNCTF2022-easyJava/image-20220302132904237.png" alt="image-20220302132904237"></p>
 <p>在做的过程中发现也可以通过这个办法骗过编译器，当然前提是需要知道类里有哪些方法，否则会出现找不到调用的方法之类的错误。</p>
 <h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p><a target="_blank" rel="noopener" href="https://www.le1a.com/posts/c1419327/">Le1a师傅的wp</a></p>
 <p>[VNCTF 2022 Official WriteUp](<a target="_blank" rel="noopener" href="https://note.tonycrane.cc/assets/images/writeups/vnctf2022/VNCTF">https://note.tonycrane.cc/assets/images/writeups/vnctf2022/VNCTF</a> 2022 Official WriteUp.pdf)</p>
@@ -583,7 +583,7 @@
             <p>Author：<a href="http://koali-www.github.io">k0a1i</a>
             <p>Link：<a href="http://koali-www.github.io/2022/03/02/VNCTF2022-easyJava/">http://koali-www.github.io/2022/03/02/VNCTF2022-easyJava/</a>
             <p>Publish date：<a href="http://koali-www.github.io/2022/03/02/VNCTF2022-easyJava/">March 2nd 2022, 1:21:14 pm</a>
-            <p>Update date：<a href="http://koali-www.github.io/2022/03/02/VNCTF2022-easyJava/">March 4th 2022, 10:29:49 am</a>
+            <p>Update date：<a href="http://koali-www.github.io/2022/03/02/VNCTF2022-easyJava/">March 4th 2022, 3:17:47 pm</a>
             <p>License：本文采用<a rel="license noopener" target="_blank" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可。转载请注明来自<a href="https://koali-www.github.io">k0a1iの临时居住地</p>
         </div>
     
