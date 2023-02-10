@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>web on k0a1i</title>
+    <link>https://example.com/tags/web/</link>
+    <description>Recent content in web on k0a1i</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/web/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>蓝帽杯2022</title>
+      <link>https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</link>
+      <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</guid>
+      <description>写在前面 很长时间没打比赛，生疏了很多。蓝帽杯的取证题很友好，好久没做出这么多题了哈哈哈哈哈哈哈哈，和pyy共同表示：虽然写了一堆水题，但是写</description>
+    </item>
+    
+    <item>
+      <title>DASCTFxSUCTF-web-writeup</title>
+      <link>https://example.com/2022/dasctfxsuctf-web-writeup/</link>
+      <pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2022/dasctfxsuctf-web-writeup/</guid>
+      <description>写在前面 DASCTF没有好好打，作业太多了一直在赶ddl。但是好像确实不是很难的样子，写不出来果然还是我太菜了&amp;hellip; 以及，希望以后</description>
+    </item>
+    
+    <item>
+      <title>从一道题学ReDos及SQL盲注</title>
+      <link>https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/</link>
+      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/</guid>
+      <description>写在前面 打虎符CTF，开头就被平台挡在外面了:D web一如既往的难，babysql看起来可做一些，就从这道题开始。此处感谢高表哥和nkk的指</description>
+    </item>
+    
+    <item>
+      <title>VNctf2022-easyJava</title>
+      <link>https://example.com/2022/vnctf2022-easyjava/</link>
+      <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2022/vnctf2022-easyjava/</guid>
+      <description>写在前面 第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍ 比赛的时候没有做</description>
+    </item>
+    
+  </channel>
+</rss>

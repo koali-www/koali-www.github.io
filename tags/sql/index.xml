@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQL on k0a1i</title>
+    <link>https://example.com/tags/sql/</link>
+    <description>Recent content in SQL on k0a1i</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/sql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从一道题学ReDos及SQL盲注</title>
+      <link>https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/</link>
+      <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/</guid>
+      <description>写在前面 打虎符CTF，开头就被平台挡在外面了:D web一如既往的难，babysql看起来可做一些，就从这道题开始。此处感谢高表哥和nkk的指</description>
+    </item>
+    
+  </channel>
+</rss>

