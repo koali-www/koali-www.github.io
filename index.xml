@@ -227,7 +227,7 @@ python2 vol.py -f memory.mem --profile=Win7SP1x64 # 指定镜像版本，方便�
     &gt;仓库&lt;/a&gt;照搬,日后有时间再慢慢改。&lt;/p&gt;
 &lt;h2 id=&#34;原主题基础上的修改&#34;&gt;原主题基础上的修改&lt;/h2&gt;
 &lt;ul&gt;
-&lt;li&gt;简单配置更改：文章最后更新时间、评论系统关闭&lt;/li&gt;
+&lt;li&gt;简单配置更改&lt;/li&gt;
 &lt;li&gt;样式微调&lt;/li&gt;
 &lt;li&gt;这个mod新增的一些页面内容是写死的，手动调成模板调用&lt;/li&gt;
 &lt;/ul&gt;
@@ -235,7 +235,8 @@ python2 vol.py -f memory.mem --profile=Win7SP1x64 # 指定镜像版本，方便�
 &lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 链接页、归档页样式更改&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 添加一些小动画&lt;/li&gt;
-&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ：想到了再说&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 添加一下评论系统（应pyy的push要求）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 想到了再说&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;记录一些四处搜刮来的文章&#34;&gt;记录一些四处搜刮来的文章&lt;/h3&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://blog.loikein.one/posts/2021-05-11-hugo-draft-management/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
