@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>jndi on k0a1i</title>
-    <link>https://example.com/tags/jndi/</link>
+    <link>https://koali-www.github.io/tags/jndi/</link>
     <description>Recent content in jndi on k0a1i</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://example.com/tags/jndi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 09 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://koali-www.github.io/tags/jndi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>蓝帽杯2022</title>
-      <link>https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</link>
+      <link>https://koali-www.github.io/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</link>
       <pubDate>Sat, 09 Jul 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://example.com/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</guid>
+      <guid>https://koali-www.github.io/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/</guid>
       <description>写在前面 很长时间没打比赛，生疏了很多。蓝帽杯的取证题很友好，好久没做出这么多题了哈哈哈哈哈哈哈哈，和pyy共同表示：虽然写了一堆水题，但是写</description>
     </item>
     

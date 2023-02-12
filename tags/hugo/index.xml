@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hugo on k0a1i</title>
-    <link>https://example.com/tags/hugo/</link>
+    <link>https://koali-www.github.io/tags/hugo/</link>
     <description>Recent content in Hugo on k0a1i</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 10 Feb 2023 00:37:33 +0800</lastBuildDate><atom:link href="https://example.com/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 10 Feb 2023 00:37:33 +0800</lastBuildDate><atom:link href="https://koali-www.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>锵锵！博客搬新家ヾ(≧▽≦*)o</title>
-      <link>https://example.com/2023/new-blog/</link>
+      <link>https://koali-www.github.io/2023/new-blog/</link>
       <pubDate>Fri, 10 Feb 2023 00:37:33 +0800</pubDate>
       
-      <guid>https://example.com/2023/new-blog/</guid>
+      <guid>https://koali-www.github.io/2023/new-blog/</guid>
       <description>欢 迎 光 临 ! 前几天突然想起自己还有个博客，虽然统共只写了四篇不成文的writeup记录，但好像也能够作为一个可以碎碎念的地方。于是吭哧吭哧开始</description>
     </item>
     

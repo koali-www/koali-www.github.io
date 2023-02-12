@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>内存取证 on k0a1i</title>
+    <link>https://koali-www.github.io/tags/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/</link>
+    <description>Recent content in 内存取证 on k0a1i</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 12 Feb 2023 21:32:29 +0800</lastBuildDate><atom:link href="https://koali-www.github.io/tags/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Volatility踩坑日记</title>
+      <link>https://koali-www.github.io/2023/volatilitydiary/</link>
+      <pubDate>Sun, 12 Feb 2023 21:32:29 +0800</pubDate>
+      
+      <guid>https://koali-www.github.io/2023/volatilitydiary/</guid>
+      <description>为了做windows内存取证的题，捣鼓了一下volatility，中途碰到乱七八糟的问题，这里稍微记录一下(●&amp;rsquo;◡&amp;rsquo;</description>
+    </item>
+    
+  </channel>
+</rss>

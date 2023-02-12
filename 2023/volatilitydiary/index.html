@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='为了做windows内存取证的题，捣鼓了一下volatility，中途碰到乱七八糟的问题，这里稍微记录一下(●&amp;rsquo;◡&amp;rsquo;'><title>Volatility踩坑日记</title>
+
+<link rel='canonical' href='https://koali-www.github.io/2023/volatilitydiary/'>
+
+<link rel="stylesheet" href="/scss/style.min.9386c8bee911c8cc9f9c4df385b91100cfdaf1122a331583f740062d4eae78a6.css"><meta property='og:title' content='Volatility踩坑日记'>
+<meta property='og:description' content='为了做windows内存取证的题，捣鼓了一下volatility，中途碰到乱七八糟的问题，这里稍微记录一下(●&amp;rsquo;◡&amp;rsquo;'>
+<meta property='og:url' content='https://koali-www.github.io/2023/volatilitydiary/'>
+<meta property='og:site_name' content='k0a1i'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='内存取证' /><meta property='article:published_time' content='2023-02-12T21:32:29&#43;08:00'/><meta property='article:modified_time' content='2023-02-12T21:43:24&#43;08:00'/>
+<meta name="twitter:title" content="Volatility踩坑日记">
+<meta name="twitter:description" content="为了做windows内存取证的题，捣鼓了一下volatility，中途碰到乱七八糟的问题，这里稍微记录一下(●&amp;rsquo;◡&amp;rsquo;"><style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://koali-www.github.io" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu84895f112c8e6c0fe80c5eecd5e543f0_258028_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">k0a1i</a></h1>
+        <h2 class="site-description">流水不争先,争的是滔滔不绝</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页/Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于/About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接/Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档/Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索/Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ctf/" style="background-color: #80aba9; color: #fff;">
+                CTF | 端茶送水web手
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2023/volatilitydiary/">Volatility踩坑日记</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Feb 12, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-words">
+                    1194字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>为了做windows内存取证的题，捣鼓了一下volatility，中途碰到乱七八糟的问题，这里稍微记录一下(●&rsquo;◡&rsquo;●)</p>
+<h2 id="使用安装volatility出现的一些问题">使用&amp;安装volatility出现的一些问题</h2>
+<ol>
+<li>
+<p>打包好的.exe文件在windows上运行时会报错：<code>Please install PIL</code>，但我的python2是装好pillow包了的。但其实如果不用到PIL相关的插件，使用上没有太大问题。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 1672; 
+			flex-basis: 4014px"
+	>
+	<a href="/2023/volatilitydiary/image-20230212210040516.png" data-size="1522x91">
+		<img src="/2023/volatilitydiary/image-20230212210040516.png"
+			width="1522"
+			height="91"
+			srcset="/2023/volatilitydiary/image-20230212210040516_hua83532ef323b5bbeec26a384bc24de4c_14317_480x0_resize_box_3.png 480w, /2023/volatilitydiary/image-20230212210040516_hua83532ef323b5bbeec26a384bc24de4c_14317_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230212210040516">
+	</a>
+	
+	<figcaption>image-20230212210040516</figcaption>
+	
+</figure></p>
+</li>
+<li>
+<p>在windows上直接使用源码，会导致奇奇怪怪的问题出现，比如已经装好了Crpto包但是告诉我没有这个包。</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 216; 
+			flex-basis: 519px"
+	>
+	<a href="/2023/volatilitydiary/image-20230212205730131.png" data-size="1391x643">
+		<img src="/2023/volatilitydiary/image-20230212205730131.png"
+			width="1391"
+			height="643"
+			srcset="/2023/volatilitydiary/image-20230212205730131_hu43ba26e55bc713374146b21008f30042_131570_480x0_resize_box_3.png 480w, /2023/volatilitydiary/image-20230212205730131_hu43ba26e55bc713374146b21008f30042_131570_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230212205730131">
+	</a>
+	
+	<figcaption>image-20230212205730131</figcaption>
+	
+</figure></p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 1801; 
+			flex-basis: 4323px"
+	>
+	<a href="/2023/volatilitydiary/image-20230212205916461.png" data-size="1189x66">
+		<img src="/2023/volatilitydiary/image-20230212205916461.png"
+			width="1189"
+			height="66"
+			srcset="/2023/volatilitydiary/image-20230212205916461_hu3f478553cb322e0ee1360f7cf2301021_10373_480x0_resize_box_3.png 480w, /2023/volatilitydiary/image-20230212205916461_hu3f478553cb322e0ee1360f7cf2301021_10373_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230212205916461">
+	</a>
+	
+	<figcaption>image-20230212205916461</figcaption>
+	
+</figure></p>
+</li>
+<li>
+<p>debian里直接用apt装volatility失败</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 822; 
+			flex-basis: 1973px"
+	>
+	<a href="/2023/volatilitydiary/image-20230212210234444.png" data-size="1283x156">
+		<img src="/2023/volatilitydiary/image-20230212210234444.png"
+			width="1283"
+			height="156"
+			srcset="/2023/volatilitydiary/image-20230212210234444_hu5bfff2a081ceb34d0a2d50499e7e0fd9_19512_480x0_resize_box_3.png 480w, /2023/volatilitydiary/image-20230212210234444_hu5bfff2a081ceb34d0a2d50499e7e0fd9_19512_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230212210234444">
+	</a>
+	
+	<figcaption>image-20230212210234444</figcaption>
+	
+</figure></p>
+<p>后来发现volatility2.6只支持2.6.11到5.5的linux内核（人家写readme了是我没看呜呜）</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 537; 
+			flex-basis: 1290px"
+	>
+	<a href="/2023/volatilitydiary/image-20230212210527864.png" data-size="613x114">
+		<img src="/2023/volatilitydiary/image-20230212210527864.png"
+			width="613"
+			height="114"
+			srcset="/2023/volatilitydiary/image-20230212210527864_hufdc7373d3cfc4bf00c7045282541240c_7280_480x0_resize_box_3.png 480w, /2023/volatilitydiary/image-20230212210527864_hufdc7373d3cfc4bf00c7045282541240c_7280_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230212210527864">
+	</a>
+	
+	<figcaption>image-20230212210527864</figcaption>
+	
+</figure></p>
+</li>
+</ol>
+<p>总结是：<strong>绝对不要在windows上玩volatility</strong></p>
+<h2 id="从安装python2到volatility26">从安装python2到volatility2.6</h2>
+<h3 id="1debian安装python2">1.debian安装python2</h3>
+<p>本地装在debian11里面，因为debian11已经找不到pip2这个包了，所以要另外装orz</p>
+<p>如果是其他发行版linux，自行上网找教程叭( •̀ ω •́ )✧</p>
+<pre><code class="language-bash">sed -i &quot;s@http://[^/]*@http://mirrors.tuna.tsinghua.edu.cn@g&quot; /etc/apt/sources.list #换源，如果换过了就跳过
+sudo apt-get install python2 #装python2
+python2 -V #测试python2是不是装好了
+
+curl -o get-pip.py https://bootstrap.pypa.io/pip/2.7/get-pip.py
+python2 get-pip.py #没有报错的话应该是装好了
+pip2 -V #测试pip2是不是装好了
+</code></pre>
+<h3 id="2安装volatility">2.安装volatility</h3>
+<p>这里会涉及到python2几个包的安装，如果已经有了可以跳过</p>
+<pre><code class="language-bash"># 安装Crypto包，注意不要直接装Crypto!!!!!
+pip2 install pycryptodome 
+
+# 装distorm3的时候如果报'Python.h: No such file or directory',是环境里没有这个头文件，所以我们装一下。
+sudo apt-get install python-dev
+pip2 install distorm3 
+
+# 插件里会需要PIL包,但这个包已经改名字了,稍微注意一下
+pip2 install pillow
+</code></pre>
+<p>需要的依赖都安装完以后，去官网把源码拿下来</p>
+<pre><code class="language-bash">git clone git@github.com:volatilityfoundation/volatility.git
+cd volatility
+python2 vol.py -h # 如果不报任何错的话应该是可以用了
+</code></pre>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 195; 
+			flex-basis: 468px"
+	>
+	<a href="/2023/volatilitydiary/image-20230212150412325.png" data-size="1379x706">
+		<img src="/2023/volatilitydiary/image-20230212150412325.png"
+			width="1379"
+			height="706"
+			srcset="/2023/volatilitydiary/image-20230212150412325_hubc3fc14d8d16d3c3ceb0466912381e1a_92716_480x0_resize_box_3.png 480w, /2023/volatilitydiary/image-20230212150412325_hubc3fc14d8d16d3c3ceb0466912381e1a_92716_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230212150412325">
+	</a>
+	
+	<figcaption>image-20230212150412325</figcaption>
+	
+</figure></p>
+<h3 id="3volatility的简单使用针对windows内存取证分析">3.volatility的简单使用（针对windows内存取证分析）</h3>
+<pre><code class="language-bash">python2 vol.py -h # 查看help
+python2 vol.py -f memory.mem imageinfo # -f指定镜像文件，imageinfo参数查看该镜像的概况
+python2 vol.py -f memory.mem --profile=Win7SP1x64 # 指定镜像版本，方便后续分析
+</code></pre>
+<p>在此基础上，列出常用参数——</p>
+<h4 id="0x01-列出进程">0x01 列出进程</h4>
+<p>如果指定版本是正确的，使用<code>pslist</code>会列出当前镜像的进程</p>
+<pre><code>python2 vol.py -f memory.mem --profile=Win7SP1x64 pslist
+</code></pre>
+<p>同时可以使用<code>pstree</code>识别子进程和父进程。</p>
+<p>之后可以使用<code>memdump</code>进行进程提取，-p指定PID，-D指定文件保存路径</p>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 memdump -p233 -D ./
+</code></pre>
+<h4 id="0x02-扫描历史cmd命令">0x02 扫描历史cmd命令</h4>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 cmdscan
+</code></pre>
+<h4 id="0x03-扫描文件">0x03 扫描文件</h4>
+<p>扫描镜像中存在的文件，一般配合grep使用</p>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 filescan | grep flag
+</code></pre>
+<p>扫描到之后会列出文件地址，此时可以通过<code>dumpfiles</code>提取</p>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 dumpfiles -Q [文件地址] -D ./
+</code></pre>
+<h4 id="0x04-获取用户信息及密码">0x04 获取用户信息及密码</h4>
+<p>获取机器上存在的用户</p>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 printkey -K &quot;SAM\Domains\Account\Users\Names&quot;
+</code></pre>
+<p>最后登录系统的用户</p>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 printkey -K &quot;SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon&quot;
+</code></pre>
+<p>可以直接拿到镜像的密码hash</p>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 hashdump
+</code></pre>
+<h4 id="0x05-调取shell">0x05 调取shell</h4>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x64 volshell
+</code></pre>
+<h4 id="0x06-屏幕截图">0x06 屏幕截图</h4>
+<pre><code class="language-bash">python2 vol.py -f memory.mem --profile=Win7SP1x86 screenshot -D ./
+</code></pre>
+<p>但是有点鸡肋（）</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/">内存取证</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Feb 12, 2023 21:43 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">蓝帽杯2022</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/dasctfxsuctf-web-writeup/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">DASCTFxSUCTF-web-writeup</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从一道题学ReDos及SQL盲注</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script>
+    (function (u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function () {
+      pangu.spacingPage();
+    });
+  </script>
+
+  <section class="copyright">
+    &copy;
+    
+    2020 -
+    
+    2023 <a href="">k0a1i</a>·<i class="fas fa-bell"></i>
+    <a id="days">0</a>Days<br>
+    共叨叨了10696字的废话໒・ﻌ・७</br><span>
+      
+      <p>
+  </section>
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+    Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+        data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+    
+  </section>
+
+  <script>
+    var s1 = '2023-02-09';
+    s1 = new Date(s1.replace(/-/g, "/"));
+    s2 = new Date();
+    var days = s2.getTime() - s1.getTime();
+    var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+    document.getElementById('days').innerHTML = number_of_days;
+  </script>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#使用安装volatility出现的一些问题">使用&amp;安装volatility出现的一些问题</a></li>
+    <li><a href="#从安装python2到volatility26">从安装python2到volatility2.6</a>
+      <ol>
+        <li><a href="#1debian安装python2">1.debian安装python2</a></li>
+        <li><a href="#2安装volatility">2.安装volatility</a></li>
+        <li><a href="#3volatility的简单使用针对windows内存取证分析">3.volatility的简单使用（针对windows内存取证分析）</a>
+          <ol>
+            <li><a href="#0x01-列出进程">0x01 列出进程</a></li>
+            <li><a href="#0x02-扫描历史cmd命令">0x02 扫描历史cmd命令</a></li>
+            <li><a href="#0x03-扫描文件">0x03 扫描文件</a></li>
+            <li><a href="#0x04-获取用户信息及密码">0x04 获取用户信息及密码</a></li>
+            <li><a href="#0x05-调取shell">0x05 调取shell</a></li>
+            <li><a href="#0x06-屏幕截图">0x06 屏幕截图</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget categories">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+        <div class="widget">
+            <h3 class="widget-title"> </h3>
+            <div class="widget-body">
+                <div class="category-list">
+                    <div class="category-list-item"><a href="https://koali-www.github.io/categories/ctf/" class="category-list-link">ctf<span class="category-list-count">5</a>
+                        </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">2</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">4</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/web/" class="font_size_4">
+                web
+            </a>
+        
+            <a href="/tags/java/" class="font_size_2">
+                java
+            </a>
+        
+            <a href="/tags/fastjson/" class="font_size_1">
+                fastjson
+            </a>
+        
+            <a href="/tags/hugo/" class="font_size_1">
+                Hugo
+            </a>
+        
+            <a href="/tags/jndi/" class="font_size_1">
+                jndi
+            </a>
+        
+            <a href="/tags/php/" class="font_size_1">
+                php
+            </a>
+        
+            <a href="/tags/python/" class="font_size_1">
+                python
+            </a>
+        
+            <a href="/tags/sql/" class="font_size_1">
+                SQL
+            </a>
+        
+            <a href="/tags/%E5%86%85%E5%AD%98%E5%8F%96%E8%AF%81/" class="font_size_1">
+                内存取证
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
