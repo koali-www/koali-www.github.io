@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='关于Unity踩过的那些坑&amp;hellip; 0x01 Unity连接MySQL 花了一个下午&#43;一个晚上都没有连上数据库，第二天一早换了个版本的.dll文'><title>Unity踩坑日记</title>
+
+<link rel='canonical' href='https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.9386c8bee911c8cc9f9c4df385b91100cfdaf1122a331583f740062d4eae78a6.css"><meta property='og:title' content='Unity踩坑日记'>
+<meta property='og:description' content='关于Unity踩过的那些坑&amp;hellip; 0x01 Unity连接MySQL 花了一个下午&#43;一个晚上都没有连上数据库，第二天一早换了个版本的.dll文'>
+<meta property='og:url' content='https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/'>
+<meta property='og:site_name' content='k0a1i'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='ErrorDiary' /><meta property='article:published_time' content='2023-03-09T10:06:20&#43;08:00'/><meta property='article:modified_time' content='2023-03-09T11:09:33&#43;08:00'/>
+<meta name="twitter:title" content="Unity踩坑日记">
+<meta name="twitter:description" content="关于Unity踩过的那些坑&amp;hellip; 0x01 Unity连接MySQL 花了一个下午&#43;一个晚上都没有连上数据库，第二天一早换了个版本的.dll文"><style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://koali-www.github.io/" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu84895f112c8e6c0fe80c5eecd5e543f0_258028_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">k0a1i</a></h1>
+        <h2 class="site-description">流水不争先,争的是滔滔不绝</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页/Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于/About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接/Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档/Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索/Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/unity/" style="background-color: #DDC4DD; color: #fff;">
+                Unity | 门外汉
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/">Unity踩坑日记</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 09, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-words">
+                    1029字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>关于Unity踩过的那些坑&hellip;</p>
+<h2 id="0x01-unity连接mysql">0x01 Unity连接MySQL</h2>
+<p>花了一个下午+一个晚上都没有连上数据库，第二天一早换了个版本的.dll文件突然就连上了&hellip;其实干的很多事情最终都是在换这个.dll的版本，这里稍微记录一下做过的尝试</p>
+<h3 id="版本详情">版本详情</h3>
+<pre><code>mysql  Ver 8.0.26 for Win64 on x86_64 (MySQL Community Server - GPL)
+unity  2021.3.16f1
+</code></pre>
+<p>在调试前最好将配置内的Api兼容级别更改为<code>.NET Framework</code>（项目设置-玩家-其他设置-配置）</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 394; 
+			flex-basis: 946px"
+	>
+	<a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286.png" data-size="777x197">
+		<img src="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286.png"
+			width="777"
+			height="197"
+			srcset="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286_hu5438091bd1ce6982468e40954d77cbd1_26242_480x0_resize_box_3.png 480w, /2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286_hu5438091bd1ce6982468e40954d77cbd1_26242_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230309102006286">
+	</a>
+	
+	<figcaption>image-20230309102006286</figcaption>
+	
+</figure></p>
+<h3 id="遇到的错误">遇到的错误</h3>
+<p>过程中主要遇到以下两个比较常见的问题，但是最后都回到MySql与项目的版本兼容问题。</p>
+<ul>
+<li>
+<p>明确说MySql的版本有问题</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 1343; 
+			flex-basis: 3225px"
+	>
+	<a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171.png" data-size="1438x107">
+		<img src="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171.png"
+			width="1438"
+			height="107"
+			srcset="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171_hu440614f0cdf5dbd1b1343bedd4b09a66_24548_480x0_resize_box_3.png 480w, /2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171_hu440614f0cdf5dbd1b1343bedd4b09a66_24548_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230309103701171">
+	</a>
+	
+	<figcaption>image-20230309103701171</figcaption>
+	
+</figure></p>
+</li>
+<li>
+<p>报MySql引用找不到</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 1588; 
+			flex-basis: 3811px"
+	>
+	<a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698.png" data-size="1461x92">
+		<img src="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698.png"
+			width="1461"
+			height="92"
+			srcset="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698_hu740a24dda62d22b3211d44d040f311de_24742_480x0_resize_box_3.png 480w, /2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698_hu740a24dda62d22b3211d44d040f311de_24742_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230309103801698">
+	</a>
+	
+	<figcaption>image-20230309103801698</figcaption>
+	
+</figure></p>
+</li>
+</ul>
+<h3 id="从vs导出的release里获取dll">从VS导出的release里获取dll</h3>
+<p><em>看到有博客上说可以用vs打开Unity项目脚本，再从VS的NuGet管理器里下载MySQL.Data包。但是尝试后仍然报错。感觉VS和Unity的包管理有点割裂，它们不是共通的。</em></p>
+<p>首先新建一个.net framework 项目，进入NuGet包管理器安装MySQL</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 323; 
+			flex-basis: 775px"
+	>
+	<a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170.png" data-size="1864x577">
+		<img src="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170.png"
+			width="1864"
+			height="577"
+			srcset="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170_huc277f8255ba15f727bd5f752dc39f420_83690_480x0_resize_box_3.png 480w, /2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170_huc277f8255ba15f727bd5f752dc39f420_83690_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230309101523170">
+	</a>
+	
+	<figcaption>image-20230309101523170</figcaption>
+	
+</figure></p>
+<p><em>这里可以选择对应的版本，有的时候可能会因为版本太高而导致不兼容，所以可以适当降低版本</em></p>
+<p>之后写连接MySQL的代码进行测试(主要是测试MySql.Data这个引用成不成功)</p>
+<pre><code class="language-C#">using System;
+using System.Data;
+using MySql.Data.MySqlClient;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        //建立连接
+        public static MySqlConnection mycon;
+        static void Main(string[] args)
+        {
+            string constr = &quot;server=127.0.0.1;User Id=xxx;password=xxx;Database=xxx;charset=utf8&quot;;
+
+            //建立连接
+            mycon = new MySqlConnection(constr);
+            //打开连接
+            mycon.Open();
+
+            bool isOK = mycon.Ping();
+            if (isOK)
+            {
+                Console.WriteLine(&quot;连上了连上了!!!!!!!&quot;);
+            }
+            else
+            {
+                Console.WriteLine(&quot;阿哦,连接失败了耶&quot;);
+            }
+            
+            Console.ReadKey();
+        }
+    }
+}
+</code></pre>
+<p>运行之后如果能成功连接数据库，就进入下一步</p>
+<p>将解决方案配置改成release，之后重新生成解决方案（Ctrl+Shift+B）</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 169; 
+			flex-basis: 406px"
+	>
+	<a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496.png" data-size="188x111">
+		<img src="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496.png"
+			width="188"
+			height="111"
+			srcset="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496_hu4aee49a0c6544a893c1f6dcc80716b1b_5035_480x0_resize_box_3.png 480w, /2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496_hu4aee49a0c6544a893c1f6dcc80716b1b_5035_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230309103029496">
+	</a>
+	
+	<figcaption>image-20230309103029496</figcaption>
+	
+</figure></p>
+<p>在项目的bin文件中找到release，将其中的dll文件导入Unity（看别人的博客有说是全部导入，但是这里其实很多包在Unity里面已经内置了，所以其实只导入MySql.Data.dll就可以）</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 191; 
+			flex-basis: 458px"
+	>
+	<a href="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379.png" data-size="841x440">
+		<img src="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379.png"
+			width="841"
+			height="440"
+			srcset="/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379_hu6480d271eff8108dd248a893902969ed_46524_480x0_resize_box_3.png 480w, /2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379_hu6480d271eff8108dd248a893902969ed_46524_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230309103358379">
+	</a>
+	
+	<figcaption>image-20230309103358379</figcaption>
+	
+</figure></p>
+<p>回到Unity中测试连接</p>
+<h3 id="通过下载获取dll">通过下载获取dll</h3>
+<p>直接去<a class="link" href="https://www.dll-files.com/mysql.data.dll.html"  target="_blank" rel="noopener"
+    >dll-file.com</a>获取对应的dll文件，但是也可能会出现版本不兼容问题，需要多尝试几个</p>
+<p><em>最后还是通过重启 +更换版本解决了，果然重启解决99%的问题吧&hellip;</em></p>
+<h3 id="使用nugetforunity">使用NuGetForUnity</h3>
+<p>xyy找到了一个可行的解决办法，详见<a class="link" href="https://github.com/GlitchEnzo/NuGetForUnity/releases"  target="_blank" rel="noopener"
+    >github</a>，但导入Unity后会导致项目比较大</p>
+<h2 id="0xff-一些注意事项的罗列">0xFF 一些注意事项的罗列</h2>
+<ul>
+<li>千万不要在Unity运行的时候更改脚本代码</li>
+<li>千万不要随便换编译器版本</li>
+</ul>
+<h2 id="写在后面">写在后面</h2>
+<p>Unity真难啊(=^=)</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/errordiary/">ErrorDiary</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Mar 09, 2023 11:09 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script>
+    (function (u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function () {
+      pangu.spacingPage();
+    });
+  </script>
+
+  <section class="copyright">
+    &copy;
+    
+    2020 -
+    
+    2023 <a href="">k0a1i</a>·<i class="fas fa-bell"></i>
+    <a id="days">0</a>Days<br>
+    共叨叨了14865字的废话໒・ﻌ・७</br><span>
+      
+      <p>
+  </section>
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+    Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+        data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+    
+  </section>
+
+  <script>
+    var s1 = '2023-02-09';
+    s1 = new Date(s1.replace(/-/g, "/"));
+    s2 = new Date();
+    var days = s2.getTime() - s1.getTime();
+    var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+    document.getElementById('days').innerHTML = number_of_days;
+  </script>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x01-unity连接mysql">0x01 Unity连接MySQL</a>
+      <ul>
+        <li><a href="#版本详情">版本详情</a></li>
+        <li><a href="#遇到的错误">遇到的错误</a></li>
+        <li><a href="#从vs导出的release里获取dll">从VS导出的release里获取dll</a></li>
+        <li><a href="#通过下载获取dll">通过下载获取dll</a></li>
+        <li><a href="#使用nugetforunity">使用NuGetForUnity</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xff-一些注意事项的罗列">0xFF 一些注意事项的罗列</a></li>
+    <li><a href="#写在后面">写在后面</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget categories">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+        <div class="widget">
+            <h3 class="widget-title"> </h3>
+            <div class="widget-body">
+                <div class="category-list">
+                    <div class="category-list-item"><a href="https://koali-www.github.io/categories/ctf/" class="category-list-link">ctf<span class="category-list-count">7</a>
+                        </span></div>
+                    <div class="category-list-item"><a href="https://koali-www.github.io/categories/unity/" class="category-list-link">unity<span class="category-list-count">1</a>
+                        </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">5</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">4</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/web/" class="font_size_6">
+                web
+            </a>
+        
+            <a href="/tags/java/" class="font_size_2">
+                java
+            </a>
+        
+            <a href="/tags/ejs/" class="font_size_1">
+                EJS
+            </a>
+        
+            <a href="/tags/errordiary/" class="font_size_1">
+                ErrorDiary
+            </a>
+        
+            <a href="/tags/express/" class="font_size_1">
+                express
+            </a>
+        
+            <a href="/tags/fastjson/" class="font_size_1">
+                fastjson
+            </a>
+        
+            <a href="/tags/go/" class="font_size_1">
+                Go
+            </a>
+        
+            <a href="/tags/hugo/" class="font_size_1">
+                Hugo
+            </a>
+        
+            <a href="/tags/jndi/" class="font_size_1">
+                jndi
+            </a>
+        
+            <a href="/tags/php/" class="font_size_1">
+                php
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

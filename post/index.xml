@@ -6,7 +6,25 @@
     <description>Recent content in Posts on k0a1i</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 01 Mar 2023 13:34:39 +0800</lastBuildDate><atom:link href="https://koali-www.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Mar 2023 16:17:19 +0800</lastBuildDate><atom:link href="https://koali-www.github.io/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HxpCTF2022-Web</title>
+      <link>https://koali-www.github.io/2023/hxpctf2022-web/</link>
+      <pubDate>Tue, 14 Mar 2023 16:17:19 +0800</pubDate>
+      
+      <guid>https://koali-www.github.io/2023/hxpctf2022-web/</guid>
+      <description>太菜了，哭哭 valentine 源码审计。一个简单的JS var express = require(&#39;express&#39;); var bodyParser = require(&#39;body-parser&#39;) const crypto = require(&amp;quot;crypto&amp;quot;); var path = require(&#39;path&#39;); const fs = require(&#39;fs&#39;); var app = express(); viewsFolder = path.join(__dirname, &#39;views&#39;); if (!fs.existsSync(viewsFolder)) { fs.mkdirSync(viewsFolder); } app.set(&#39;views&#39;, viewsFolder); app.set(&#39;view engine&#39;, &#39;ejs&#39;); app.use(bodyParser.urlencoded({ extended: false })) app.post(&#39;/template&#39;, function (req, res) { let tmpl = req.body.tmpl;</description>
+    </item>
+    
+    <item>
+      <title>Unity踩坑日记</title>
+      <link>https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/</link>
+      <pubDate>Thu, 09 Mar 2023 10:06:20 +0800</pubDate>
+      
+      <guid>https://koali-www.github.io/2023/unity%E8%B8%A9%E5%9D%91%E6%97%A5%E8%AE%B0/</guid>
+      <description>关于Unity踩过的那些坑&amp;hellip; 0x01 Unity连接MySQL 花了一个下午+一个晚上都没有连上数据库，第二天一早换了个版本的.dll文</description>
+    </item>
+    
     <item>
       <title>VNCTF2023-Web</title>
       <link>https://koali-www.github.io/2023/vnctf2023web/</link>

